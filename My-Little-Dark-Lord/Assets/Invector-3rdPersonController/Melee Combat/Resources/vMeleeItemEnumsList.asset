@@ -1,20 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68fa35b27a7967c4a94bcc4596c2aef1, type: 3}
-  m_Name: vMeleeItemEnumsList
-  m_EditorClassIdentifier: 
-  itemTypeEnumValues:
-  - MeleeWeapon
-  itemAttributesEnumValues:
-  - Damage
-  - StaminaCost
-  - DefenseRate
-  - DefenseRange
+version https://git-lfs.github.com/spec/v1
+oid sha256:03c1876b29c11d34670dc8ad487cc05cc46320120ee42a4011190d197422fe8b
+size 518
