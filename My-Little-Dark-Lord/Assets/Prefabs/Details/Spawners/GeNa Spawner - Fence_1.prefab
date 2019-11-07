@@ -1,0 +1,334 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1593137817216598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4317825165625170}
+  - component: {fileID: 114379956236815706}
+  - component: {fileID: -3248707748785010751}
+  m_Layer: 0
+  m_Name: GeNa Spawner - Fence_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4317825165625170
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593137817216598}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114379956236815706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593137817216598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5efcd4511085ba6459896bd80edeeb0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_majorVersion: 2
+  m_minorVersion: 5
+  m_patchVersion: 0
+  m_isCache: 0
+  m_isLinked: 0
+  m_type: 0
+  m_childSpawnMode: 0
+  m_spawnMode: 0
+  m_flowDistanceSqr: 900
+  m_parentName: Fence_1
+  m_mergeSpawns: 1
+  m_spawnToTarget: 0
+  m_sortPrototypes: 0
+  m_spawnPrototypes:
+  - m_spawner: {fileID: 0}
+    m_id: 0
+    m_name: SM_POLYGON_Fence_01_Synty
+    m_active: 1
+    m_size: {x: 3.2560081, y: 2.490499, z: 0.39840454}
+    m_extents: {x: 1.6280041, y: 1.2452495, z: 0.19920227}
+    m_boundsBorder: 0
+    m_constrainWithinMaskedBounds: 0
+    m_invertMaskedAlpha: 0
+    m_scaleOnMaskedAlpha: 0
+    m_scaleOnMaskedAlphaMin: 0.5
+    m_scaleOnMaskedAlphaMax: 1
+    m_successOnMaskedAlpha: 0
+    m_forwardRotation: -90
+    m_resources: []
+    m_resourceType: 0
+    m_hasColliders: 1
+    m_hasMeshes: 1
+    m_hasRigidBody: 0
+    m_instancesSpawned: 0
+    m_imageFilterColour: {r: 1, g: 1, b: 1, a: 1}
+    m_imageFilterFuzzyMatch: 0.8
+    m_displayedInEditor: 0
+    m_showAdvancedOptions: 0
+    m_hasLinkedSpawner: 0
+    ShowSpawnCriteriaOverrides: 0
+    m_anyCritOverrideApplies: 0
+    m_overrideCritVirginCheckType: 0
+    m_overrideCritSpawnCollisionLayers: 0
+    m_overrideCritBoundsBorder: 0
+    m_overrideCritCheckHeight: 0
+    m_overrideCritMinSpawnHeight: 0
+    m_overrideCritMaxSpawnHeight: 0
+    m_overrideCritHeightVariance: 0
+    m_overrideCritMinSpawnSlope: 0
+    m_overrideCritMaxSpawnSlope: 0
+    m_overrideCritCheckSlope: 0
+    m_overrideCritSlopeVariance: 0
+    m_overrideCritCheckTextures: 0
+    m_overrideCritTextureStrength: 0
+    m_overrideCritTextureVariance: 0
+    m_overrideCritMaskInvert: 0
+    m_critVirginCheckType: 2
+    m_critSpawnCollisionLayers:
+      serializedVersion: 2
+      m_Bits: 1
+    m_critBoundsBorder: 0
+    m_critCheckHeightType: 3
+    m_critCheckHeight: 0
+    m_critMinSpawnHeight: 50
+    m_critMaxSpawnHeight: 5000
+    m_critHeightVariance: 30
+    m_critCheckSlopeType: 1
+    m_critCheckSlope: 0
+    m_critMinSpawnSlope: 0
+    m_critMaxSpawnSlope: 90
+    m_critSlopeVariance: 30
+    m_critCheckTextures: 0
+    m_critTextureStrength: 0
+    m_critTextureVariance: 0.1
+    m_disableCritCheckMask: 0
+    m_critMaskInvert: 0
+    m_critMinHeight: 0
+    m_critMaxHeight: 0
+    m_critMinSlope: 0
+    m_critMaxSlope: 0
+    m_critMinTextureStrength: 0
+    m_critMaxTextureStrength: 0
+    m_critMaskFractalMin: 0
+    m_critMaskFractalMax: 0
+    m_hasExtensions: 0
+    _allResources:
+    - m_spawner: {fileID: 0}
+      m_name: SM_POLYGON_Fence_01_Synty
+      m_resourceType: 0
+      ContainerOnly: 0
+      m_prefab: {fileID: 1176577660436094, guid: 082ada77a76e4ff45a48fb6c36d12fe7,
+        type: 3}
+      m_assetID: 
+      m_assetName: 
+      m_static: 0
+      m_successRate: 1
+      m_conformToSlope: 1
+      m_minOffset: {x: 0, y: 0, z: 0}
+      m_maxOffset: {x: 0, y: 0, z: 0}
+      m_minRotation: {x: -0, y: 0, z: 0}
+      m_maxRotation: {x: -0, y: 0, z: 0}
+      m_sameScale: 1
+      m_minScale: {x: 1, y: 1, z: 1}
+      m_maxScale: {x: 1, y: 1, z: 1}
+      m_brushTextures: []
+      m_brushTXIndex: 0
+      m_baseBrush:
+        m_size: 0
+        m_strength: []
+        m_brush: {fileID: 0}
+      m_opacity: 0
+      m_targetStrength: 0
+      m_terrainProtoIdx: 0
+      m_hasColliders: 1
+      m_hasRootCollider: 1
+      m_hasMeshes: 1
+      m_hasRigidBody: 0
+      m_flagLightmapStatic: 0
+      m_flagBatchingStatic: 1
+      m_flagOccludeeStatic: 1
+      m_flagOccluderStatic: 1
+      m_flagNavigationStatic: 1
+      m_flagOffMeshLinkGeneration: 1
+      m_flagReflectionProbeStatic: 1
+      m_flagMovingObject: 0
+      m_flagCanBeOptimised: 1
+      m_flagForceOptimise: 0
+      m_flagIsOutdoorObject: 1
+      m_useColliderBounds: 0
+      m_basePosition: {x: 0, y: 0, z: 0}
+      m_baseRotation: {x: 0, y: 0, z: 0}
+      m_baseScale: {x: 1, y: 1, z: 1}
+      m_baseSize: {x: 3.2560081, y: 2.490499, z: 0.39840454}
+      m_boundsCenter: {x: 0, y: 0, z: 0}
+      m_baseColliderCenter: {x: 0, y: 1.2452495, z: 0}
+      m_baseColliderUseConstScale: 1
+      m_baseColliderConstScaleAmount: 0.75
+      m_baseColliderScale: {x: 3.2560081, y: 2.490499, z: 0.39840454}
+      m_instancesSpawned: 0
+      m_avsID: 
+      m_avsVegetationType: 0
+      m_displayedInEditor: 0
+      OpenedInGuiHierarchy: 0
+      _parentIx: -1
+      m_linkedSpawners: 
+      _extensions: []
+      _hasStatefulExtensions: 0
+      _statelessExtensions: []
+  m_hasActiveHeightProtos: 0
+  m_hasActiveTreeProtos: 0
+  m_hasActiveGrassProtos: 0
+  m_hasActiveTextureProtos: 0
+  m_hasChildWithActiveHeightProtos: 0
+  m_hasChildWithActiveTreeProtos: 0
+  m_hasChildWithActiveGrassProtos: 0
+  m_hasChildWithActiveTextureProtos: 0
+  m_spawnOriginLocation: {x: -1964.4425, y: -0.02, z: -2076.6643}
+  m_spawnOriginNormal: {x: 0, y: 1, z: 1.1102228e-18}
+  m_spawnOriginObjectID: 540992
+  m_spawnOriginIsTerrain: 0
+  m_spawnOriginBounds:
+    m_Center: {x: -1964.4425, y: -0.02, z: -2076.6643}
+    m_Extent: {x: 1.8, y: 2500, z: 1.8}
+  m_spawnOriginGroundTransform: {fileID: 0}
+  m_spawnAlgorithm: 0
+  m_globalSpawnJitterPct: 0.75
+  m_minInstances: 1
+  m_maxInstances: 1
+  m_instancesSpawned: 0
+  m_seedThrowRange: 0.5
+  m_seedThrowJitter: 1
+  m_maxSpawnRange: 3.6
+  m_spawnRangeShape: 0
+  m_critVirginCheckType: 2
+  m_critSpawnCollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_critBoundsBorder: 0
+  m_critCheckHeightType: 3
+  m_critCheckHeight: 0
+  m_critMinSpawnHeight: 50
+  m_critMaxSpawnHeight: 5000
+  m_critHeightVariance: 30
+  m_terrainYPos: NaN
+  m_terrainHeight: NaN
+  m_bottomBoundary: -20
+  m_topBoundary: 5000
+  m_critCheckSlopeType: 1
+  m_critCheckSlope: 0
+  m_critMinSpawnSlope: 0
+  m_critMaxSpawnSlope: 90
+  m_critSlopeVariance: 30
+  m_critCheckTextures: 0
+  m_critTextureStrength: 0
+  m_critTextureVariance: 0.1
+  m_critSelectedTextureIdx: 0
+  m_critSelectedTextureName: 
+  m_critMaxSelectedTexture: 1
+  m_critCheckMask: 0
+  m_critMaskType: 0
+  m_critMaskFractal:
+    m_seed: 0
+    m_octaves: 8
+    m_persistence: 0.65
+    m_frequency: 0.05
+    m_lacunarity: 1.5
+    m_XOffset: 0
+    m_ZOffset: 0
+    m_YOffset: 0
+  m_critMaskFractalMidpoint: 0.5
+  m_critMaskFractalRange: 0.5
+  m_critMaskImage: {fileID: 0}
+  m_critMaskInvert: 0
+  m_rangesOriginLocation: {x: 0, y: 0, z: 0}
+  m_rangesOriginNormal: {x: 0, y: 1, z: 0}
+  m_critMinHeight: 0
+  m_critMaxHeight: 10000
+  m_critMinSlope: 0
+  m_critMaxSlope: 90
+  m_rotationAlgorithm: 2
+  m_minRotationY: 0
+  m_maxRotationY: 360
+  m_sameScale: 1
+  m_scaleToNearestInt: 1
+  m_minScaleX: 1
+  m_maxScaleX: 1
+  m_minScaleY: 1
+  m_maxScaleY: 1
+  m_minScaleZ: 1
+  m_maxScaleZ: 1
+  m_useGravity: 0
+  m_enableRotationDragUpdate: 0
+  m_autoOptimise: 0
+  m_maxSizeToOptimise: 10
+  m_minProbeGroupDistance: 100
+  m_minProbeDistance: 15
+  m_autoProbe: 1
+  m_gravity: {fileID: 0}
+  m_advUseLargeRanges: 0
+  m_advShowMouseOverHelp: 1
+  m_advShowDetailedHelp: 1
+  m_advForcePlaceAtClickLocation: 1
+  m_advAddColliderToSpawnedPrefabs: 0
+  m_advSpawnCheckOffset: 2000
+  m_showOverview: 1
+  m_showSpawnCriteria: 0
+  m_showPlacementCriteria: 0
+  m_showPrototypes: 0
+  m_showGizmos: 1
+  m_showAdvancedSettings: 0
+  m_showCritMinSpawnHeight: 0
+  m_showCritMaxSpawnHeight: 0
+  m_visualizationLocation: {x: 0, y: 0, z: 0}
+  m_needsVisualisationUpdate: 0
+  m_maxVisualisationDimensions: 50
+  m_visProcessLimit: 0.5
+  m_metersPerScan: 1
+  m_metersPerScanVisualisation: 4
+  m_lastSpawnedObject: {fileID: 0}
+  m_prefabUndoList: []
+  m_parentsUndoList: []
+  m_probeUndoList: []
+  _linkedSpawnersIx: 
+  _linkedSpawnersCount: 
+  m_defaults: {fileID: 11400000, guid: 6fe71ac9b3ec00542a83797ce00ac22e, type: 2}
+  m_defaultsSet: 1
+  m_randomSeed: 778926
+  m_spawnToAVS: 0
+  m_ingestionGroundLevel: NaN
+  m_nextProtoId: 0
+--- !u!114 &-3248707748785010751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593137817216598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dc9fc7d5370ef34c88124411d158384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_undoStack:
+    m_topIndex: 0
+    m_count: 0
+    _nullableType: 1
+    _capacity: 50
+    _activeItems: []
