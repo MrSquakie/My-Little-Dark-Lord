@@ -1,0 +1,72 @@
+﻿using UnityEngine;
+using GeNa;
+
+public class GenaSampleExtension : IGeNaExtension
+{
+	/// <summary>
+	/// The name to identify the Extension; Recommended naming: Stateless: "GetType().Name";
+	/// Stateful: "string.Format("{0}.{1}", name, GetType().Name)".
+	/// </summary>
+	public string Name { get { return GetType().Name; } }
+
+	/// <summary>
+	/// This is automatically used by stateful extensions. Stateless extensions (like this one) 
+	/// should just return null.
+	/// </summary>
+	public GameObject gameObject { get; }
+
+	/// <summary>
+	/// Whether or not this extension impacts Terrain heights.
+	/// GeNa will handle undoing these actions to avoid undo conflicts.
+	/// </summary>
+	public bool AffectsHeights { get { return false; } }
+
+	/// <summary>
+	/// Whether or not this extension impacts Terrain textures.
+	/// GeNa will handle undoing these actions to avoid undo conflicts.
+	/// </summary>
+	public bool AffectsTextures { get { return false; } }
+
+	/// <summary>
+	/// Whether or not this extension impacts Terrain details.
+	/// GeNa will handle undoing these actions to avoid undo conflicts.
+	/// </summary>
+	public bool AffectsDetails { get { return false; } }
+
+	/// <summary>
+	/// Whether or not this extension impacts Terrain trees.
+	/// GeNa will handle undoing these actions to avoid undo conflicts.
+	/// </summary>
+	public bool AffectsTrees { get { return false; } }
+
+	/// <summary>
+	/// Initialise the extension - To avoid some actions to happen at every instance of this 
+	/// Extension spawning.
+	/// </summary>
+	public void Init(Spawner spawner)
+	{
+		Debug.LogFormat("{0} is initialised.", Name);
+	}
+
+	/// <summary>
+	/// This will be called with details when spawning.
+	/// </summary>
+	/// <param name="spawner">The spawner that is spawning this.</param>
+	/// <param name="resource">The resource that is spawning this.</param>
+	/// <param name="spawnDetails">Spawn details of the spawn.</param>
+	public void Spawn(Spawner spawner, Resource resource, SpawnDetails spawnDetails)
+    {
+        Debug.LogFormat("{0} Spawning:\n" +
+			"Spawner: {1}\n" +
+			"Resource: {2}\n" +
+			"Details: {3}", Name, spawner.name, resource.m_name, spawnDetails);
+    }
+
+	/// <summary>
+	/// This will be called when the Spawner is doing undo.
+	/// </summary>
+	public void Undo()
+    {
+		Debug.LogFormat("{0} processed its own Undo.", Name);
+	}
+}
