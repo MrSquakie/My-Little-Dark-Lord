@@ -1,34 +1,9 @@
 fileFormatVersion: 2
-guid: 2ce643035b625ae4b937dd70f7411e95
+guid: be249674936915f48af55221c39c7195
 ModelImporter:
-  serializedVersion: 25
+  serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Snowdrop Green Petal
-    second: {fileID: 2100000, guid: b44c6d6b03be99b4883ae78f9800b6fc, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Snowdrop Leaf+Upper
-    second: {fileID: 2100000, guid: 587f82449660e58449d58d814037503f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Snowdrop Stalk
-    second: {fileID: 2100000, guid: 22b5df15559304a4787a9e8e61150e3c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Snowdrop White Petal
-    second: {fileID: 2100000, guid: c4924a1fbb737584693d13a2433e0644, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Snowdrop upper Stalk
-    second: {fileID: 2100000, guid: 030ce4bc04b6d094d8af7f1946a5f25a, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -63,12 +38,13 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -77,7 +53,7 @@ ModelImporter:
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     meshOptimizationFlags: -1
-    indexFormat: 1
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88

@@ -1,24 +1,9 @@
 fileFormatVersion: 2
-guid: a3d0a00c8d07a3240a3d070193382a6e
+guid: 056f2bd5a5b0499469c1251d1df930cf
 ModelImporter:
-  serializedVersion: 25
+  serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BB_mat0
-    second: {fileID: 2100000, guid: b84a23bdfc6fc45478aa50b278c45fc0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BB_mat1
-    second: {fileID: 2100000, guid: a141afbe9d68c4749a156c0c5cb187ab, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BB_mat2
-    second: {fileID: 2100000, guid: 1b184f04db9bc0547ad594e5b83aafb1, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -53,6 +38,7 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

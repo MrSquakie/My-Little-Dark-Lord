@@ -1,54 +1,9 @@
 fileFormatVersion: 2
-guid: 6e5917c47b03c544ab68d39c443f1a84
+guid: c190b2271ccfb104187d47afc3cea1c1
 ModelImporter:
-  serializedVersion: 25
+  serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Dead Tulip
-    second: {fileID: 2100000, guid: f1db11edd598ce14ca9fa36e8b17d45b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Orange Tulip
-    second: {fileID: 2100000, guid: 27184911e642f6548b79cb0b8fa5725e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Purple Tulip
-    second: {fileID: 2100000, guid: cbaaa1351e85c9c4ba1b6d154b8b864d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Red Tulip
-    second: {fileID: 2100000, guid: 14b068a7291ce1b4c8397ba6e1f39430, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Stamp
-    second: {fileID: 2100000, guid: e04bb9447dd82a741b3ae7436d0e2231, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Stem
-    second: {fileID: 2100000, guid: 303c743311162c040b0b8fc987c7a88d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Tulip Leaf
-    second: {fileID: 2100000, guid: ae22fb999f1639a469f2ee03b3060c2f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: White Tulip
-    second: {fileID: 2100000, guid: d1005dfe83133fd4a8cc3adc4afa48db, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: White and red tulip
-    second: {fileID: 2100000, guid: e7ddc770a5a39144795b4264073b0bf5, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -83,12 +38,13 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -97,7 +53,7 @@ ModelImporter:
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     meshOptimizationFlags: -1
-    indexFormat: 1
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
