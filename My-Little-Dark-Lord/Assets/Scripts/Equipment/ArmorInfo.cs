@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "New Armor Info", menuName = "equipment/ArmorInfo")]
 public class ArmorInfo : ScriptableObject
 {
     public float armorRating;
