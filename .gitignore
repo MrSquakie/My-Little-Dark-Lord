@@ -2,13 +2,13 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-[Ll]ibrary/
-[Tt]emp/
-[Oo]bj/
-[Bb]uild/
-[Bb]uilds/
-[Ll]ogs/
-[Mm]emoryCaptures/
+My-Little-Dark-Lord/[Ll]ibrary/
+My-Little-Dark-Lord/[Tt]emp/
+My-Little-Dark-Lord/[Oo]bj/
+My-Little-Dark-Lord/[Bb]uild/
+My-Little-Dark-Lord/[Bb]uilds/
+My-Little-Dark-Lord/[Ll]ogs/
+My-Little-Dark-Lord/[Mm]emoryCaptures/
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
