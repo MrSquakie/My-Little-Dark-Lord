@@ -139,7 +139,9 @@ namespace Invector.vCharacterController
             }
             var layer = LayerMask.NameToLayer("HeadTrack");
             sensor.transform.parent = transform;
+            print(layer);
             sensor.gameObject.layer = layer;
+            print(sensor.gameObject.layer);
             sensor.gameObject.tag = transform.tag;
             spine.Reverse();
             GetLookPoint();
