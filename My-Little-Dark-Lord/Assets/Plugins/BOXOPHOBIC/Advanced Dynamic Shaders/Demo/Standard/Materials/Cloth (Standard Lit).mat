@@ -1,0 +1,285 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Cloth (Standard Lit)
+  m_Shader: {fileID: 4800000, guid: a6f98e0bfaa3e474cb16d3771d0eb498, type: 3}
+  m_ShaderKeywords: _ALPHAFROM_MAIN _MOTIONSPACE_WORLD _NORMALINVERTONBACKFACE_ON
+    _RENDERTYPEKEY_TRANSPARENT _RENDERTYPE_TRANSPARENT
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlbedoTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlphaTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 56bc6b56dc794b94986afe37a535caff, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 0.59, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: 56bc6b56dc794b94986afe37a535caff, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTexture:
+        m_Texture: {fileID: 2800000, guid: df3a398213dacbc46bc2da420a0eef1c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SignTexture:
+        m_Texture: {fileID: 2800000, guid: e314ec29dc8687b4c984b93b4013796f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SmoothnessTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SurfaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SymbolTexture:
+        m_Texture: {fileID: 2800000, guid: 2ca55ae3bc3f3174b8cc78a75891f90b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: e9742c575b8f4644fb9379e7347ff62e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex3coord4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ADSSimpleLitCloth: 1
+    - _ADSStandardLitCloth: 1
+    - _ADVANCEDD: 0
+    - _ALPHAA: 0
+    - _Advanced: 0
+    - _Alpha: 0
+    - _AlphaBlend: 0
+    - _AlphaBlendON: 1
+    - _AlphaFade: 0.106
+    - _AlphaFade2: 0
+    - _AlphaFrom: 0
+    - _AlphaFromm: 0
+    - _Angle: 0
+    - _BackFace: 0
+    - _BackLight: 0
+    - _BackType: 0
+    - _BatchingInfo: 0
+    - _BlackRemap: 0
+    - _BlendMode: 1
+    - _BumpScale: 1.76
+    - _CLOTHH: 0
+    - _CLOTHMOTIONN: 0
+    - _CullMode: 0
+    - _CullType: 0
+    - _CustomAxis: 1
+    - _Cutoff: 0.1
+    - _Cutoff2: 0
+    - _Cutout: 0
+    - _Deprecatedd: 0
+    - _DepthWrite: 0
+    - _DetailNormalMapScale: 1
+    - _DoubleSided: 0
+    - _DstBlend: 10
+    - _EnableDebug: 0
+    - _EnableGlobalMotion: 1
+    - _EnableLocalMotion: 0
+    - _EnableNormal: 1
+    - _EnableSign: 1
+    - _EnableSymbol: 1
+    - _EnableWind: 1
+    - _EnableWindMotion: 1
+    - _Float0: 2
+    - _Float11: 1.92
+    - _Float2: 0.425
+    - _Float3: 2.34
+    - _Float4: 6.85
+    - _GLOBALSS: 0
+    - _GlobalTurbulence: 1
+    - _GlossMapScale: 1
+    - _Glossiness: 0.8
+    - _GlossyReflections: 1
+    - _GrassTint: 1
+    - _Internal_ADS: 1
+    - _Internal_DebugMask: 1
+    - _Internal_DebugVariation: 1
+    - _Internal_LitSimple: 1
+    - _Internal_LitStandard: 1
+    - _Internal_TypeCloth: 1
+    - _Internal_UnityToBoxophobic: 1
+    - _Internal_Version: 220
+    - _LocalAmplitude: 0
+    - _LocalFrequency: 0
+    - _LocalScale: 0
+    - _LocalSpeed: 0
+    - _MAINN: 0
+    - _MOTIONCLOTHH: 0
+    - _MOTIONDETAILL: 0
+    - _MOTIONN: 0
+    - _Main: 0
+    - _MaskAxis: 0
+    - _MaskMax: 1
+    - _MaskMin: 0
+    - _MaskType: 0
+    - _MaskTypee: 0
+    - _MaskTypeeEnd: 0
+    - _Material: 2
+    - _Metallic: 0
+    - _Mode: 3
+    - _Modee: 0
+    - _Motion: 0
+    - _MotionAmplitude: 0.05
+    - _MotionAmplitude2: 0
+    - _MotionMask: 0
+    - _MotionNoise: 1
+    - _MotionScale: 3
+    - _MotionScale2: 0
+    - _MotionSpace: 0
+    - _MotionSpacee: 0
+    - _MotionSpaceeEnd: 0
+    - _MotionSpaceee: 0
+    - _MotionSpaceeeEnd: 0
+    - _MotionSpeed: 5
+    - _MotionSpeed2: 0
+    - _MotionVariation: 0
+    - _MotionVariation2: 0
+    - _NoiseScale: 0.5
+    - _NormalInvertOnBackface: 1
+    - _NormalScale: 1
+    - _ObjectBounciness: 0
+    - _ObjectStiffness: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _PlantMotionParameters: 0
+    - _PolyversePropAxis: 1
+    - _PolyversePropDynamicPosition: 0
+    - _PolyversePropStaticPosition: 1
+    - _QuickMaskk: 0
+    - _RENDERINGG: 0
+    - _RenderFaces: 0
+    - _RenderMode: 0
+    - _RenderType: 3
+    - _RenderTypee: 0
+    - _Rendering: 0
+    - _SETTINGS: 0
+    - _SETTINGSS: 0
+    - _SURFACEE: 0
+    - _SYMBOLL: 0
+    - _Settings: 0
+    - _Shininess: 0.676
+    - _ShowMask: 0
+    - _ShowMotionDebug: 0
+    - _Show_ADSMask: 1
+    - _Show_MaskGeneric: 1
+    - _Show_MotionNoise: 1
+    - _SignHeight: 0.71
+    - _SignMode: 2
+    - _SignWidth: 0.877
+    - _Smoothness: 0.8
+    - _SmoothnessOffset: 0.51
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _Surafce: 0
+    - _Symbol: 0
+    - _SymbolMode: 0
+    - _SymbolMultiplied: 0
+    - _SymbolRotation: 0
+    - _SymbolSign: 0
+    - _SymbolisSticker: 0
+    - _TexCoordAxis: 1
+    - _TexCoordDynamicPosition: 1
+    - _TexCoordStaticPosition: 0
+    - _Thickness: 0
+    - _Translucency: 0.12
+    - _Transparency: 0.2
+    - _UVSec: 0
+    - _VertexPosAxis: 1
+    - _WhiteRemap: 1
+    - _WindMask: 2
+    - _WindMode: 0
+    - _WindMode2: 0
+    - _WindMultiplier: 0.3
+    - _ZWrite: 0
+    - __dirty: 1
+    - _aaa: 0.22
+    m_Colors:
+    - _AlphaUV: {r: 0.5, g: 1, b: 0, a: 0}
+    - _AlphaUVs: {r: 1, g: 1, b: 0, a: 0}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseUV: {r: 2, g: 1, b: 0, a: 0}
+    - _Color: {r: 0, g: 0, b: 0, a: 0.747}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _LocalDirection: {r: 1, g: 0, b: 0, a: 0}
+    - _MainUVs: {r: 2, g: 2, b: 0, a: 0}
+    - _MotionDirection: {r: 0, g: 0, b: 0, a: 0}
+    - _MotionOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _NormalUV: {r: 2, g: 1, b: 0, a: 0}
+    - _SignColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SignUV: {r: 1, g: 2, b: 1, a: 0}
+    - _SmoothnessUV: {r: 1, g: 1, b: 0, a: 0}
+    - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecularColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SymbolColor: {r: 1, g: 0.80689657, b: 0, a: 1}
+    - _SymbolUV: {r: 1, g: 2, b: 1, a: 0}
+    - _SymbolUVs: {r: -1, g: -1, b: 0, a: 0}
+    - _UVOne: {r: 2, g: 2, b: 0, a: 0}
+    - _UVZero: {r: 2, g: 2, b: 0, a: 0}
+    - _Vector0: {r: 0, g: 0, b: 0, a: 0}

@@ -1,0 +1,201 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sword Fern (Standard Lit)
+  m_Shader: {fileID: 4800000, guid: 0c21c555d14ac0a42b1c06a7f6abff6d, type: 3}
+  m_ShaderKeywords: _ALPHATEST_ON _FOLIAGETINT_ON _METALLICGLOSSMAP _MOTIONNOISE_ON
+    _MOTIONSPACE_WORLD _MOTIONTYPEKEY_MOTION_MOTION2 _NORMALINVERTONBACKFACE_ON _NORMALMAP
+    _RENDERTYPEKEY_OPAQUE
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Albedo:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlbedoTex:
+        m_Texture: {fileID: 2800000, guid: 46a552a4228b5574ab6f74c1ae1b7bc4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 30eb2fe5102e0b94a873f214fbce259f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 46a552a4228b5574ab6f74c1ae1b7bc4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 2800000, guid: ecc388f65f754b546bf605495f3d9e70, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: 57d5613df40dfb3479822b8c5f92bf08, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Occlusion:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Specular:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SurfaceTex:
+        m_Texture: {fileID: 2800000, guid: ecc388f65f754b546bf605495f3d9e70, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex4coord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ADSAdvancedLitFoliage: 1
+    - _ADSAdvancedLitGrass: 220
+    - _ADSAdvancedLitPlant: 1
+    - _ADSSimpleLitPlant: 1
+    - _ADSStandardLitPlant: 1
+    - _ADVANCEDD: 0
+    - _ASEOutlineWidth: 0.05
+    - _BackType: 1
+    - _BatchingInfo: 0
+    - _BumpScale: 0
+    - _CullMode: 0
+    - _CullType: 0
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EndDitheringFade: 1
+    - _Float0: 0.19
+    - _Float4: 1.2
+    - _FoliageSize: 0
+    - _FoliageTint: 1
+    - _GRASSMOTIONN: 0
+    - _GlobalDetailSize: 0
+    - _GlobalDetailTint: 1
+    - _GlobalSettingsInstancing: 0
+    - _GlobalSize: 0
+    - _GlobalTint: 1
+    - _GlobalTurbulence: 1
+    - _GlobalWorldMotion: 1
+    - _GlobalWorldSize: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Internal_ADS: 1
+    - _Internal_DebugMask: 1
+    - _Internal_DebugMask2: 1
+    - _Internal_DebugVariation: 1
+    - _Internal_LitAdvanced: 1
+    - _Internal_LitSimple: 1
+    - _Internal_LitStandard: 1
+    - _Internal_SetByScript: 0
+    - _Internal_TypeFoliage: 1
+    - _Internal_TypeGrass: 1
+    - _Internal_TypePlant: 1
+    - _Internal_UnityToBoxophobic: 1
+    - _Internal_Version: 220
+    - _LEAFMOTIONN: 0
+    - _LeafMotionParameters: 0
+    - _MAINN: 0
+    - _MOTIONLEAFF: 0
+    - _MOTIONPLANTT: 0
+    - _Metallic: 0
+    - _Mode: 1
+    - _MotionAmplitude: 0.2
+    - _MotionAmplitude2: 0.02
+    - _MotionAmplitude3: 0.01
+    - _MotionNoise: 1
+    - _MotionScale: 1
+    - _MotionScale2: 50
+    - _MotionScale3: 100
+    - _MotionSpace: 0
+    - _MotionSpacee: 0
+    - _MotionSpaceeEnd: 0
+    - _MotionSpaceee: 0
+    - _MotionSpaceeeEnd: 0
+    - _MotionSpeed: 2
+    - _MotionSpeed2: 10
+    - _MotionSpeed3: 8
+    - _MotionTopDown: 5.33
+    - _MotionType: 1
+    - _MotionTypee: 0
+    - _MotionVariation: 1
+    - _MotionVariation2: 10
+    - _MotionVertical: 0.2
+    - _MotionVertical2: 1
+    - _NormalInvertOnBackface: 1
+    - _NormalScale: 2
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _PlantMotionParameters: 0
+    - _RENDERINGG: 0
+    - _RenderFaces: 0
+    - _SETTINGS: 0
+    - _Smoothness: 0.513
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _StartDitheringFade: 0
+    - _UVSec: 0
+    - _ZWrite: 1
+    - __dirty: 0
+    - _speed: 4
+    - _variation: 8.3
+    - _width: 0.04
+    m_Colors:
+    - _ASEOutlineColor: {r: 0, g: 0.25517228, b: 1, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color0: {r: 0.4705882, g: 0.4705882, b: 0.4705882, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _LocalDirection: {r: 0, g: 0, b: 1, a: 0}
+    - _MainUVs: {r: 1, g: 1, b: 0, a: 0}
+    - _MotionOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _Subsurface: {r: 1, g: 1, b: 1, a: 1}
+    - _SubsurfaceColor: {r: 0.99264705, g: 0.8262327, b: 0.57661116, a: 1}
+    - _TransmissionColor: {r: 0.7210954, g: 0.75, b: 0.22610293, a: 1}
+    - _normalcolor: {r: 0.4705882, g: 0.4705882, b: 0.4705882, a: 1}
+    - _outline: {r: 0.47794116, g: 0.47794116, b: 0.47794116, a: 1}

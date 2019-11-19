@@ -1,0 +1,204 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: TinCan (Standard Lit)
+  m_Shader: {fileID: 4800000, guid: b5a58a90e30c18149becfacd9d11ab24, type: 3}
+  m_ShaderKeywords: _EMISSION _METALLICGLOSSMAP _MOTIONNOISE_ON _MOTIONSPACE_WORLD
+    _NORMALINVERTONBACKFACE_ON _NORMALMAP _RENDERTYPEKEY_OPAQUE _RENDERTYPE_OPAQUE
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlbedoTex:
+        m_Texture: {fileID: 2800000, guid: 2c1837f871a679b46bb2e22ea22edc3f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlphaTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 0489d23f742d6bc46ad95c4601e459aa, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 2c1837f871a679b46bb2e22ea22edc3f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 2800000, guid: 6bab7b3322ddcc644b9c49c111341011, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: 0489d23f742d6bc46ad95c4601e459aa, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 2800000, guid: 6bab7b3322ddcc644b9c49c111341011, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SurfaceTex:
+        m_Texture: {fileID: 2800000, guid: 6bab7b3322ddcc644b9c49c111341011, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SymbolTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex3coord2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex3coord3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex3coord4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ADSSimpleLitGeneric: 1
+    - _ADSStandardLitGeneric: 1
+    - _ADVANCEDD: 0
+    - _AlphaFade: 0
+    - _AlphaFrom: 0
+    - _BackFace: 0
+    - _BackLight: 0
+    - _BackType: 1
+    - _BatchingInfo: 0
+    - _BlackRemap: 0
+    - _BumpScale: 1
+    - _CullMode: 2
+    - _CullType: 2
+    - _Cutoff: 0.5
+    - _Deprecatedd: 0
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EdgeLength: 15
+    - _EnableSymbol: 0
+    - _EnableWind: 1
+    - _EnableWindMotion: 1
+    - _GLOBALSS: 0
+    - _GlobalTurbulence: 1
+    - _GlossMapScale: 0.551
+    - _Glossiness: 0.8
+    - _GlossyReflections: 1
+    - _Internal_ADS: 1
+    - _Internal_DebugMask: 1
+    - _Internal_DebugVariation: 1
+    - _Internal_LitSimple: 1
+    - _Internal_LitStandard: 1
+    - _Internal_TypeGeneric: 1
+    - _Internal_UnityToBoxophobic: 1
+    - _Internal_Version: 232
+    - _LocalAmplitude: 0.1
+    - _LocalDirectionSet: 1
+    - _LocalFrequency: 0.2
+    - _LocalScale: 0
+    - _LocalSpeed: 3
+    - _MAINN: 0
+    - _MOTIONN: 0
+    - _MaskAxis: 1
+    - _MaskMax: 1
+    - _MaskMin: 0
+    - _MaskType: 0
+    - _MaskTypee: 0
+    - _MaskTypeeEnd: 0
+    - _Metallic: 1
+    - _Mode: 0
+    - _Modee: 0
+    - _MotionAmplitude: 0.05
+    - _MotionNoise: 1
+    - _MotionScale: 0
+    - _MotionSpace: 0
+    - _MotionSpacee: 0
+    - _MotionSpaceeEnd: 0
+    - _MotionSpacee_ON: 0
+    - _MotionSpaceee: 0
+    - _MotionSpaceeeEnd: 0
+    - _MotionSpeed: 2.5
+    - _MotionVariation: 2
+    - _NormalInvertOnBackface: 1
+    - _NormalScale: 1
+    - _ObjectBounciness: 1
+    - _ObjectStiffness: 1
+    - _ObjectWeight: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _QuickMaskk: 0
+    - _RENDERINGG: 0
+    - _RenderFaces: 0
+    - _RenderType: 0
+    - _RenderTypee: 0
+    - _SETTINGS: 0
+    - _SETTINGSS: 0
+    - _SURFACEE: 0
+    - _Shininess: 1
+    - _ShowMask: 0
+    - _Show_ADSMask: 1
+    - _Show_MaskGeneric: 1
+    - _Show_MotionNoise: 1
+    - _Smoothness: 0.8
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _SymbolMode: 0
+    - _UVSec: 0
+    - _WhiteRemap: -3
+    - _WindMask: 1
+    - _WindMode: 2
+    - _WindMultiplier: 1
+    - _ZWrite: 1
+    - __dirty: 1
+    m_Colors:
+    - _AlphaUVs: {r: 1, g: 1, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _LocalDirection: {r: 0, g: 0, b: 0, a: 0}
+    - _MainUVs: {r: 1, g: 1, b: 0, a: 0}
+    - _MotionLocalDirection: {r: 0, g: 0, b: 0, a: 0}
+    - _MotionOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 0}
+    - _SymbolColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SymbolUVs: {r: 1, g: 1, b: 1, a: 0}
+    - _UVOne: {r: 1, g: 1, b: 0, a: 0}
+    - _UVZero: {r: 1, g: 1, b: 0, a: 0}
