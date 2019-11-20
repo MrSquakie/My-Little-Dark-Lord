@@ -1,1 +1,0 @@
-!Please do not move or rename this file as it is used to determine the Gaia Root Directory!
