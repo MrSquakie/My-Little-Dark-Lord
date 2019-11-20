@@ -19,6 +19,8 @@ using Mewlist;
 #if HDPipeline
 using UnityEngine.Experimental.Rendering.HDPipeline;
 #endif
+#if GAIA_PRESENT
+#endif
 
 namespace AmbientSkies
 {

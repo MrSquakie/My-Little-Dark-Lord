@@ -14,7 +14,6 @@ using UnityEngine.Experimental.Rendering.LightweightPipeline;
 #endif
 using UnityEditor.SceneManagement;
 #if GAIA_PRESENT
-
 using System.Collections.Generic;
 #endif
 
@@ -963,16 +962,20 @@ namespace AmbientSkies
                 if (cameraComponents != null)
                 {
                     foreach (Component component in cameraComponents)
-                    {                        
-                        if (component.GetType().ToString().Contains("LWRPAdditionalCameraData"))
+                    {
+                        if (component != null)
                         {
-                            if (skyProfiles.m_showDebug)
+                            if (component.GetType().ToString().Contains("LWRPAdditionalCameraData"))
                             {
-                                Debug.Log("LWRPAdditionalCameraData on camera it has now been removed");
-                            }
+                                if (skyProfiles.m_showDebug)
+                                {
+                                    Debug.Log("LWRPAdditionalCameraData on camera it has now been removed");
+                                }
 
-                            Object.DestroyImmediate(component);
+                                Object.DestroyImmediate(component);
+                            }
                         }
+                       
                     }
                 }
 
@@ -981,14 +984,17 @@ namespace AmbientSkies
                 {
                     foreach (Component component in lightComponenets)
                     {
-                        if (component.GetType().ToString().Contains("LWRPAdditionalLightData"))
+                        if (component != null)
                         {
-                            if (skyProfiles.m_showDebug)
+                            if (component.GetType().ToString().Contains("LWRPAdditionalLightData"))
                             {
-                                Debug.Log("LWRPAdditionalLightData on light it has now been removed");
-                            }
+                                if (skyProfiles.m_showDebug)
+                                {
+                                    Debug.Log("LWRPAdditionalLightData on light it has now been removed");
+                                }
 
-                            Object.DestroyImmediate(component);
+                                Object.DestroyImmediate(component);
+                            }
                         }
                     }
                 }
@@ -2738,7 +2744,6 @@ namespace AmbientSkies
             highestPoint = float.MinValue;
 
 #if GAIA_PRESENT
-            //Get session manager
             
 #endif
             //Get the active terrain

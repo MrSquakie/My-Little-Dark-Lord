@@ -208,6 +208,7 @@ namespace AmbientSkies
 
 #if GAIA_PRESENT
 
+                    
 #else
 
                     seaLevel = profile.seaLevel;
