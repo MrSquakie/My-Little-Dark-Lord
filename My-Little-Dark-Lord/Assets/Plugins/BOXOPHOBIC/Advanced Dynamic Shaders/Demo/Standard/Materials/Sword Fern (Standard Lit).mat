@@ -4,8 +4,9 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Sword Fern (Standard Lit)
   m_Shader: {fileID: 4800000, guid: 0c21c555d14ac0a42b1c06a7f6abff6d, type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _FOLIAGETINT_ON _METALLICGLOSSMAP _MOTIONNOISE_ON

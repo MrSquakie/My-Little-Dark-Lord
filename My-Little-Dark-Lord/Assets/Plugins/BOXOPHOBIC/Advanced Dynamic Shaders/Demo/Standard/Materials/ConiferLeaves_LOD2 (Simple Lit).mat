@@ -4,10 +4,11 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: ConiferLeaves_LOD2 (Simple Lit)
-  m_Shader: {fileID: 4800000, guid: 495b24cfca232a441aa91131cbac9ee4, type: 3}
+  m_Shader: {fileID: 4800000, guid: a6130ea917f16494eb0b9764908e38f1, type: 3}
   m_ShaderKeywords: EFFECT_BUMP EFFECT_HUE_VARIATION GEOM_TYPE_LEAF _ENABLEWORLDPROJECTION_ON
     _FOLIAGESIZE_ON _FOLIAGETINT_ON _LEAVESAMOUNT_ON _LEAVESTINT_ON _MOTIONNOISE_ON
     _MOTIONTYPEKEY_MOTION _NORMALINVERTONBACKFACE_ON _RENDERTYPEKEY_CUT _RENDERTYPE_CUT

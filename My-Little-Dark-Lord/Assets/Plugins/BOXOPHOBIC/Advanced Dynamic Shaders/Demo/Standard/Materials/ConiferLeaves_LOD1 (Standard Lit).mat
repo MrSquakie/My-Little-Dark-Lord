@@ -4,8 +4,9 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: ConiferLeaves_LOD1 (Standard Lit)
   m_Shader: {fileID: 4800000, guid: a6130ea917f16494eb0b9764908e38f1, type: 3}
   m_ShaderKeywords: EFFECT_BUMP EFFECT_HUE_VARIATION GEOM_TYPE_LEAF _ENABLEWORLDPROJECTION_ON

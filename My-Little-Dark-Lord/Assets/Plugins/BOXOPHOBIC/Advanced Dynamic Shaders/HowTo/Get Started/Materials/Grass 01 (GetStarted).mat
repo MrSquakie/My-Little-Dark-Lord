@@ -8,14 +8,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Grass 01 (GetStarted)
-  m_Shader: {fileID: 4800000, guid: a43780c358ee50443b33046a1627bcad, type: 3}
+  m_Shader: {fileID: 4800000, guid: 2b29c2bbfcacd00439642c785108f90e, type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _RENDERTYPEKEY_CUT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
-  stringTagMap:
-    RenderType: TransparentCutout
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3

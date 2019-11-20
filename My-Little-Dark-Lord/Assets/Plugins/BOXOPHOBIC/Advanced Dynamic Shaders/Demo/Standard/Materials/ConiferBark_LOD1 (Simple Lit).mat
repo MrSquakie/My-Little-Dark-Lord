@@ -4,10 +4,11 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: ConiferBark_LOD1 (Simple Lit)
-  m_Shader: {fileID: 4800000, guid: aea5a65d2126d3b499a03cd767980b77, type: 3}
+  m_Shader: {fileID: 4800000, guid: 2ec9e6089bc30b1469befda4ee7a418c, type: 3}
   m_ShaderKeywords: EFFECT_BUMP EFFECT_HUE_VARIATION GEOM_TYPE_BRANCH _BARKVARIATION_ON
     _BLENDING_BASE _EMISSION _ENABLEBASEBLENDING_ON _ENABLEBASE_ON _ENABLETRUNKBLENDING_ON
     _MOTIONNOISE_ON _NORMALMAP _RENDERTYPEKEY_OPAQUE _RENDERTYPE_OPAQUE

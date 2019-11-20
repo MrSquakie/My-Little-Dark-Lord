@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -20690,9 +20690,41 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_IsSelectable: 1
-  m_SelectedFaces: 
-  m_SelectedEdges: []
-  m_SelectedVertices: 
+  m_SelectedFaces: 75010000b80000006a01000041000000
+  m_SelectedEdges:
+  - a: 1504
+    b: 1505
+  - a: 1507
+    b: 1504
+  - a: 1505
+    b: 1506
+  - a: 1506
+    b: 1507
+  - a: 748
+    b: 749
+  - a: 750
+    b: 748
+  - a: 749
+    b: 751
+  - a: 751
+    b: 750
+  - a: 1463
+    b: 1460
+  - a: 1460
+    b: 1461
+  - a: 1462
+    b: 1463
+  - a: 1461
+    b: 1462
+  - a: 264
+    b: 265
+  - a: 266
+    b: 264
+  - a: 265
+    b: 267
+  - a: 267
+    b: 266
+  m_SelectedVertices: e0050000e1050000e3050000e2050000ec020000ed020000ee020000ef020000b7050000b4050000b5050000b605000008010000090100000a0100000b010000
 --- !u!23 &410323130
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20710,7 +20742,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+  - {fileID: 2100000, guid: ff382de42f06cee4bb76dcdaae263dce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21163,7 +21195,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-98770380
+  m_Name: pb_Mesh13248668
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

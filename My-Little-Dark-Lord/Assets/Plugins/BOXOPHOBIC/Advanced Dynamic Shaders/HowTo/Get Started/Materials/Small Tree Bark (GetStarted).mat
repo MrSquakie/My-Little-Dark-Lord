@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Small Tree Bark (GetStarted)
-  m_Shader: {fileID: 4800000, guid: aea5a65d2126d3b499a03cd767980b77, type: 3}
+  m_Shader: {fileID: 4800000, guid: 2ec9e6089bc30b1469befda4ee7a418c, type: 3}
   m_ShaderKeywords: _NORMALMAP _RENDERTYPEKEY_OPAQUE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -71,6 +71,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SurfaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SurfaceTex3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _tex4coord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -85,11 +93,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _ADSSimpleLitTreeBark: 1
+    - _ADSStandardLitTreeBark: 1
     - _ADVANCEDD: 0
     - _BASEE: 0
     - _BRANCHMOTIONN: 0
     - _BaseBlendAmount: 0.1
     - _BaseBlendContrast: 0.9
+    - _BaseBlendNormals: 0
     - _BaseBlendVariation: 0.1
     - _BatchingInfo: 0
     - _BlendingBasee: 0
@@ -109,6 +119,7 @@ Material:
     - _Internal_DebugMask2: 1
     - _Internal_DebugVariation: 1
     - _Internal_LitSimple: 1
+    - _Internal_LitStandard: 1
     - _Internal_SetByScript: 0
     - _Internal_TypeTreeBark: 1
     - _Internal_UnityToBoxophobic: 1
@@ -126,10 +137,14 @@ Material:
     - _MotionVertical2: 0
     - _NormalScale: 1
     - _NormalScale3: 1
+    - _Occlusion: 0
+    - _Occlusion3: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _RenderCutt: 0
     - _SETTINGSS: 0
+    - _Smoothness: 0.5
+    - _Smoothness3: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

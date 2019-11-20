@@ -4,8 +4,9 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: TinCan (Standard Lit)
   m_Shader: {fileID: 4800000, guid: b5a58a90e30c18149becfacd9d11ab24, type: 3}
   m_ShaderKeywords: _EMISSION _METALLICGLOSSMAP _MOTIONNOISE_ON _MOTIONSPACE_WORLD
