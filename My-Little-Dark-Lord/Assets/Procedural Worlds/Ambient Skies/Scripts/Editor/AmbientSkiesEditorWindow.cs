@@ -19,9 +19,7 @@ using Mewlist;
 #if HDPipeline
 using UnityEngine.Experimental.Rendering.HDPipeline;
 #endif
-#if GAIA_PRESENT
-using Gaia;
-#endif
+
 
 namespace AmbientSkies
 {
@@ -11244,43 +11242,7 @@ namespace AmbientSkies
             {
                 m_editorUtils.Label("Probe Size Settings");
                 EditorGUI.indentLevel++;
-#if GAIA_PRESENT
-                GaiaSessionManager sessionManager = FindObjectOfType<GaiaSessionManager>();
-                if (sessionManager != null)
-                {
-                    seaLevel = m_editorUtils.FloatField("CurrentSeaLevel", seaLevel, helpEnabled);
-                    if (seaLevel < 0)
-                    {
-                        seaLevel = 0f;
-                        m_selectedLightingProfile.seaLevel = 0f;
-                    }
 
-                    float gaiaSeaLevel = sessionManager.GetSeaLevel();
-                    if (seaLevel != gaiaSeaLevel)
-                    {
-                        if (m_editorUtils.Button("MatchSeaLevelToGaia"))
-                        {
-                            seaLevel = sessionManager.GetSeaLevel();
-                            m_selectedLightingProfile.seaLevel = seaLevel;
-                        }
-
-                        if (m_editorUtils.Button("SetSeaLevelInGaia"))
-                        {
-                            bool sessionLocked = sessionManager.IsLocked();
-                            if (sessionLocked)
-                            {
-                                sessionManager.UnLockSession();
-                                sessionManager.SetSeaLevel(seaLevel);
-                                sessionManager.LockSession();
-                            }
-                            else
-                            {
-                                sessionManager.SetSeaLevel(seaLevel);
-                            }
-                        }
-                    }
-                }
-#endif
                 reflectionProbesPerRow = m_editorUtils.IntField("ReflectionProbesPerRow", reflectionProbesPerRow, helpEnabled);
                 reflectionProbeOffset = m_editorUtils.FloatField("ReflectionProbeOffset", reflectionProbeOffset, helpEnabled);
                 Terrain t = Terrain.activeTerrain;
@@ -11408,45 +11370,7 @@ namespace AmbientSkies
             lightProbeSpawnType = (AmbientSkiesConsts.LightProbeSpawnType)m_editorUtils.EnumPopup("LightProbeSpawnType", lightProbeSpawnType, helpEnabled);
             if (lightProbeSpawnType == AmbientSkiesConsts.LightProbeSpawnType.AutomaticallyGenerated || lightProbeSpawnType == AmbientSkiesConsts.LightProbeSpawnType.MinDefaultHeight)
             {
-#if GAIA_PRESENT
-                GaiaSessionManager sessionManager = FindObjectOfType<GaiaSessionManager>();
-                if (sessionManager != null)
-                {
-                    seaLevel = m_editorUtils.FloatField("CurrentSeaLevel", seaLevel, helpEnabled);
-                    if (seaLevel < 0)
-                    {
-                        seaLevel = 0f;
-                        m_selectedLightingProfile.seaLevel = 0f;
-                    }
 
-                    float gaiaSeaLevel = sessionManager.GetSeaLevel();
-                    if (seaLevel != gaiaSeaLevel)
-                    {
-                        if (m_editorUtils.Button("MatchSeaLevelToGaia"))
-                        {
-                            seaLevel = sessionManager.GetSeaLevel();
-                            m_selectedLightingProfile.seaLevel = seaLevel;
-                        }
-
-                        if (m_editorUtils.Button("SetSeaLevelInGaia"))
-                        {
-                            bool sessionLocked = sessionManager.IsLocked();
-                            if (sessionLocked)
-                            {
-                                sessionManager.UnLockSession();
-                                sessionManager.SetSeaLevel(seaLevel);
-                                sessionManager.LockSession();
-                            }
-                            else
-                            {
-                                sessionManager.SetSeaLevel(seaLevel);
-                            }
-                        }
-                    }
-                }
-#else
-                seaLevel = m_editorUtils.FloatField("CurrentSeaLevel", seaLevel, helpEnabled);
-#endif
 
                 lightProbesPerRow = m_editorUtils.IntField("LightProbesPerRow", lightProbesPerRow, helpEnabled);
                 if (lightProbesPerRow < 2)

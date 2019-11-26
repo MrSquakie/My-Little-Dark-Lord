@@ -13,10 +13,7 @@ using UnityEngine.Rendering.LWRP;
 using UnityEngine.Experimental.Rendering.LightweightPipeline;
 #endif
 using UnityEditor.SceneManagement;
-#if GAIA_PRESENT
-using Gaia;
-using System.Collections.Generic;
-#endif
+
 
 namespace AmbientSkies
 {
@@ -2737,17 +2734,7 @@ namespace AmbientSkies
             lowestPoint = float.MaxValue;
             highestPoint = float.MinValue;
 
-#if GAIA_PRESENT
-            //Get session manager
-            GaiaSessionManager gaiaSession = Object.FindObjectOfType<GaiaSessionManager>();
 
-            //Check if it's present
-            if (gaiaSession != null)
-            {
-                lowestPoint = gaiaSession.GetSeaLevel();
-                highestPoint = lowestPoint + 50f;
-            }
-#endif
             //Get the active terrain
             Terrain terrain = Terrain.activeTerrain;
 
@@ -2809,13 +2796,6 @@ namespace AmbientSkies
             lowestPoint = Mathf.Round(lowestPoint);
             highestPoint = Mathf.Round(highestPoint);
 
-#if GAIA_PRESENT
-            //Update min level back to sea level
-            if (gaiaSession != null)
-            {
-                lowestPoint = gaiaSession.GetSeaLevel();
-            }
-#endif
 
             if (skyProfiles.m_showDebug)
             {
