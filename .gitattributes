@@ -14,3 +14,4 @@ My-Little-Dark-Lord/Assets/Scenes/Main.unity filter=lfs diff=lfs merge=lfs -text
 *.exr filter=lfs diff=lfs merge=lfs -text
 My-Little-Dark-Lord/My-Little-Dark-Lord/Assets/Scenes/Main.unity filter=lfs diff=lfs merge=lfs -text
 MainMenu.unity filter=lfs diff=lfs merge=lfs -text
+dungeon.unity filter=lfs diff=lfs merge=lfs -text
