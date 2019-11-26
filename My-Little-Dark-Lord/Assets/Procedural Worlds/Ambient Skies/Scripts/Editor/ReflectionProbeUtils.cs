@@ -162,12 +162,7 @@ namespace AmbientSkies
 
 #if GAIA_PRESENT
 
-                    Gaia.GaiaSessionManager gaiaSession = Object.FindObjectOfType<Gaia.GaiaSessionManager>();
-                    if (gaiaSession != null)
-                    {
-                        seaLevel = profile.seaLevel;
-                        seaLevelActive = true;
-                    }
+                    
 #else
 
                     seaLevel = profile.seaLevel;

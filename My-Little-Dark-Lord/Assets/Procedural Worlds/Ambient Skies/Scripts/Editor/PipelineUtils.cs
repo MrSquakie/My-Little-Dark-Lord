@@ -21,7 +21,6 @@ using UnityEngine.Experimental.Rendering.LightweightPipeline;
 using CTS;
 #endif
 #if GAIA_PRESENT
-using Gaia;
 #endif
 
 namespace AmbientSkies
