@@ -19,7 +19,8 @@ using Mewlist;
 #if HDPipeline
 using UnityEngine.Experimental.Rendering.HDPipeline;
 #endif
-
+#if GAIA_PRESENT
+#endif
 
 namespace AmbientSkies
 {
@@ -11242,7 +11243,9 @@ namespace AmbientSkies
             {
                 m_editorUtils.Label("Probe Size Settings");
                 EditorGUI.indentLevel++;
-
+#if GAIA_PRESENT
+                
+#endif
                 reflectionProbesPerRow = m_editorUtils.IntField("ReflectionProbesPerRow", reflectionProbesPerRow, helpEnabled);
                 reflectionProbeOffset = m_editorUtils.FloatField("ReflectionProbeOffset", reflectionProbeOffset, helpEnabled);
                 Terrain t = Terrain.activeTerrain;
@@ -11370,7 +11373,11 @@ namespace AmbientSkies
             lightProbeSpawnType = (AmbientSkiesConsts.LightProbeSpawnType)m_editorUtils.EnumPopup("LightProbeSpawnType", lightProbeSpawnType, helpEnabled);
             if (lightProbeSpawnType == AmbientSkiesConsts.LightProbeSpawnType.AutomaticallyGenerated || lightProbeSpawnType == AmbientSkiesConsts.LightProbeSpawnType.MinDefaultHeight)
             {
-
+#if GAIA_PRESENT
+                
+#else
+                seaLevel = m_editorUtils.FloatField("CurrentSeaLevel", seaLevel, helpEnabled);
+#endif
 
                 lightProbesPerRow = m_editorUtils.IntField("LightProbesPerRow", lightProbesPerRow, helpEnabled);
                 if (lightProbesPerRow < 2)

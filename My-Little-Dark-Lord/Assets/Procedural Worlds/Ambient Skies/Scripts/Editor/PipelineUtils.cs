@@ -20,7 +20,8 @@ using UnityEngine.Experimental.Rendering.LightweightPipeline;
 #if CTS_PRESENT
 using CTS;
 #endif
-
+#if GAIA_PRESENT
+#endif
 
 namespace AmbientSkies
 {

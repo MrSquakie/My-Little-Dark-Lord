@@ -13,7 +13,9 @@ using UnityEngine.Rendering.LWRP;
 using UnityEngine.Experimental.Rendering.LightweightPipeline;
 #endif
 using UnityEditor.SceneManagement;
-
+#if GAIA_PRESENT
+using System.Collections.Generic;
+#endif
 
 namespace AmbientSkies
 {
@@ -2734,7 +2736,9 @@ namespace AmbientSkies
             lowestPoint = float.MaxValue;
             highestPoint = float.MinValue;
 
-
+#if GAIA_PRESENT
+            
+#endif
             //Get the active terrain
             Terrain terrain = Terrain.activeTerrain;
 
@@ -2796,6 +2800,9 @@ namespace AmbientSkies
             lowestPoint = Mathf.Round(lowestPoint);
             highestPoint = Mathf.Round(highestPoint);
 
+#if GAIA_PRESENT
+           
+#endif
 
             if (skyProfiles.m_showDebug)
             {

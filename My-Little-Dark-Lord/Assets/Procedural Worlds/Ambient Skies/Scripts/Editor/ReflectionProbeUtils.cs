@@ -160,7 +160,14 @@ namespace AmbientSkies
                     float seaLevel = 0f;
                     bool seaLevelActive = false;
 
+#if GAIA_PRESENT
 
+                    
+#else
+
+                    seaLevel = profile.seaLevel;
+
+#endif
 
                     for (int terrainIdx = 0; terrainIdx < numberTerrains; terrainIdx++)
                     {
