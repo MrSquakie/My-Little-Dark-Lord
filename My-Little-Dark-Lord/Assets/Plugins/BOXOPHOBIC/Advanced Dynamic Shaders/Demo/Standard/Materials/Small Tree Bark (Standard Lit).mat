@@ -1,0 +1,213 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Small Tree Bark (Standard Lit)
+  m_Shader: {fileID: 4800000, guid: 2ec9e6089bc30b1469befda4ee7a418c, type: 3}
+  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _BLENDING_OFF _MOTIONNOISE_ON _MOTIONSPACE_WORLD
+    _NORMALMAP _RENDERTYPEKEY_TRANSPARENT _RENDERTYPE_TRANSPARENT
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlbedoTex:
+        m_Texture: {fileID: 2800000, guid: be5c7a757cf26ae4299e57b722792589, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlbedoTex2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlbedoTex3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 97b9e28065e82c74cae9840a189972a5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: be5c7a757cf26ae4299e57b722792589, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: 490ffb05fca696d4bb19394299dda24d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SurfaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SurfaceTex3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex4coord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ADSSimpleLitGeneric: 1
+    - _ADSSimpleLitTreeBark: 1
+    - _ADSStandardLitTreeBark: 1
+    - _ADVANCEDD: 0
+    - _BASEE: 0
+    - _BRANCHH: 0
+    - _BRANCHMOTIONN: 0
+    - _BarkVariation: 0
+    - _BaseBlendAmount: 0.066
+    - _BaseBlendContrast: 0.9
+    - _BaseBlendNormals: 0
+    - _BaseBlendVariation: 0.1
+    - _BatchingInfo: 0
+    - _BlendingBasee: 0
+    - _BlendingBranchh: 0
+    - _BranchBlendContrast: 0.9
+    - _BranchBlendOffset: 5
+    - _BranchMotionParameters: 0
+    - _BumpScale: 1
+    - _CullMode: 1
+    - _CullType: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 10
+    - _EnableBase: 0
+    - _EnableBranch: 0
+    - _GLOBALSETTINGSS: 0
+    - _GLOBALSS: 0
+    - _GlobalTurbulence: 1
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Internal_ADS: 1
+    - _Internal_DebugMask: 1
+    - _Internal_DebugMask2: 1
+    - _Internal_DebugVariation: 1
+    - _Internal_LitSimple: 1
+    - _Internal_LitStandard: 1
+    - _Internal_SetByScript: 0
+    - _Internal_TypeTree: 1
+    - _Internal_TypeTreeBark: 1
+    - _Internal_UnityToBoxophobic: 1
+    - _Internal_Version: 220
+    - _MAINN: 0
+    - _MOTIONN: 0
+    - _MaskAxis: 1
+    - _MaskMax: 1
+    - _MaskMin: 0
+    - _MaskType: 0
+    - _MaskTypee: 0
+    - _MaskTypeeEnd: 0
+    - _Metallic: 0
+    - _Mode: 3
+    - _Modee: 0
+    - _MotionAmplitude: 3
+    - _MotionAmplitude2: 0.5
+    - _MotionNoise: 1
+    - _MotionScale: 0.1
+    - _MotionScale2: 1
+    - _MotionSpace: 0
+    - _MotionSpacee: 0
+    - _MotionSpaceeEnd: 0
+    - _MotionSpaceee: 0
+    - _MotionSpaceeeEnd: 0
+    - _MotionSpeed: 2.5
+    - _MotionSpeed2: 5
+    - _MotionVariation2: 1
+    - _MotionVertical2: 0.5
+    - _NormalScale: 1
+    - _NormalScale2: 1
+    - _NormalScale3: 1
+    - _Occlusion: 0
+    - _Occlusion3: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _RENDERINGG: 0
+    - _RenderCutt: 0
+    - _RenderType: 3
+    - _SETTINGSS: 0
+    - _Shininess: 0
+    - _Show_ADSMask: 1
+    - _Smoothness: 0
+    - _Smoothness3: 0.5
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _SurfaceAO: 0
+    - _TRUNKK: 0
+    - _TRUNKMOTIONN: 0
+    - _TrunkMotionParameters: 0
+    - _TrunkVariation: 1
+    - _UVSec: 0
+    - _VertexAO: 0
+    - _VertexOcclusion: 0
+    - _ZWrite: 0
+    - __dirty: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color2: {r: 1, g: 1, b: 1, a: 1}
+    - _Color3: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _LocalDirection: {r: 0, g: 0, b: 1, a: 0}
+    - _MainUVs: {r: 10, g: 5, b: 3, a: 2}
+    - _MotionOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UVOne: {r: 1, g: 1, b: 0, a: 0}
+    - _UVOne2: {r: 1, g: 1, b: 0, a: 0}
+    - _UVOne3: {r: 1, g: 1, b: 0, a: 0}
+    - _UVZero: {r: 1, g: 1, b: 0, a: 0}
+    - _UVZero2: {r: 1, g: 1, b: 0, a: 0}
+    - _UVZero3: {r: 1, g: 1, b: 0, a: 0}

@@ -1,0 +1,318 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Grass 01 (Standard Lit)
+  m_Shader: {fileID: 4800000, guid: 2b29c2bbfcacd00439642c785108f90e, type: 3}
+  m_ShaderKeywords: _FOLIAGESIZE_ON _FOLIAGETINT_ON _GRASSSIZE_ON _GRASSTINT_ON _INVERTNORMALONBACKFACE_ON
+    _MOTIONNOISE_ON _MOTIONSPACE_WORLD _MOTIONTYPEKEY_MOTION _RENDERTYPE_CUT
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - ADS_WorldTex:
+        m_Texture: {fileID: 2800000, guid: c9f5adb7bfbfc1f44b2257e8dac197dd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlbedoTex:
+        m_Texture: {fileID: 2800000, guid: c3a99bc198a17f345b882ffd532e8f86, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlphaTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 0f1e41185a66b4545ac50a990a888c39, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: c3a99bc198a17f345b882ffd532e8f86, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: 0f1e41185a66b4545ac50a990a888c39, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SubSurfaceTexture:
+        m_Texture: {fileID: 2800000, guid: f4fbc9afa50f4364a977935890d6d0a0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SurfaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SymbolTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: 1f367535fef84074ab35edd06dea3d67, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex3coord4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex4coord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ADSAdvancedLitFoliage: 1
+    - _ADSAdvancedLitGrass: 1
+    - _ADSAdvancedLitPlant: 1
+    - _ADSMobileLitFoliage: 1
+    - _ADSQualityLitFoliage: 1
+    - _ADSSimpleLitFoliage: 1
+    - _ADSSimpleLitGrass: 1
+    - _ADSStandardLitFoliage: 1
+    - _ADSStandardLitGrass: 1
+    - _ADSStandardLitPlusFoliage: 1
+    - _ADS_Deprecated: 1
+    - _ADVANCEDD: 0
+    - _Advanced: 0
+    - _AlphaFade: 0
+    - _AlphaFrom: 0
+    - _BackFace: 0
+    - _BackLight: 1
+    - _BackType: 1
+    - _BatchingInfo: 0
+    - _BlackRemap: 0
+    - _BumpScale: 1
+    - _CullMode: 0
+    - _CullType: 0
+    - _Cutoff: 0.2
+    - _Cutout: 0
+    - _DEPRECATEDD: 0
+    - _Deprecated: 0
+    - _Deprecatedd: 0
+    - _DepthWrite: 1
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EnableDebug: 0
+    - _EnableGlobalMotion: 1
+    - _EnableLocalMotion: 0
+    - _EnableSize: 0
+    - _EnableSymbol: 0
+    - _EnableWind: 1
+    - _EnableWindMotion: 1
+    - _FOLIAGEE: 0
+    - _Float0: 0.11
+    - _Float3: 0
+    - _Float4: 0
+    - _Float6: 1.3
+    - _Float7: 1
+    - _Float8: 1
+    - _Float9: 2
+    - _FoliageSize: 1
+    - _FoliageTint: 1
+    - _GLOBALSS: 0
+    - _GRASSMOTIONN: 0
+    - _GlobalDetailSize: 1
+    - _GlobalDetailTint: 1
+    - _GlobalGrassSize: 1
+    - _GlobalGrassTint: 1
+    - _GlobalSettingsInstancing: 0
+    - _GlobalSize: 1
+    - _GlobalTint: 1
+    - _GlobalTurbulence: 1
+    - _GlobalWorldMotion: 1
+    - _GlobalWorldOccluder: 1
+    - _GlobalWorldSize: 1
+    - _GlobalWorldTint: 1
+    - _Globals: 0
+    - _Glosiness: 0.3
+    - _GlossMapScale: 1
+    - _Glossiness: 0.4
+    - _GlossyReflections: 1
+    - _GrassSize: 1
+    - _GrassTint: 1
+    - _Internal_ADS: 1
+    - _Internal_DebugMask: 1
+    - _Internal_DebugMask2: 1
+    - _Internal_DebugVariation: 1
+    - _Internal_Deprecated: 1
+    - _Internal_LitAdvanced: 1
+    - _Internal_LitMobile: 1
+    - _Internal_LitSimple: 1
+    - _Internal_LitStandard: 1
+    - _Internal_SetByScript: 0
+    - _Internal_TypeFoliage: 1
+    - _Internal_TypeGrass: 1
+    - _Internal_TypePlant: 1
+    - _Internal_UnityToADS: 0
+    - _Internal_UnityToBoxophobic: 1
+    - _Internal_Version: 220
+    - _InvertNormalOnBackFace: 1
+    - _LEAFMOTIONN: 0
+    - _LeafMotionParameters: 0
+    - _LocalAmplitude: 0.1
+    - _LocalFrequency: 30
+    - _LocalScale: 5
+    - _LocalSpeed: 10
+    - _MAINN: 0
+    - _MOTIONGRASS: 0
+    - _MOTIONGrass: 0
+    - _MOTIONLEAFF: 0
+    - _MOTIONN: 0
+    - _MOTIONPLANTT: 0
+    - _Main: 0
+    - _MaskAxis: 0
+    - _MaskMax: 1
+    - _MaskMin: 0.3
+    - _MaskType: 0
+    - _MaskTypee: 0
+    - _MaskTypeeEnd: 0
+    - _Metallic: 0
+    - _Mode: 1
+    - _Modee: 0
+    - _Motion: 0
+    - _MotionAmplitude: 0.15
+    - _MotionAmplitude2: 10
+    - _MotionAmplitude3: 0.02
+    - _MotionMask: 0
+    - _MotionNoise: 1
+    - _MotionScale: 1
+    - _MotionScale2: 10
+    - _MotionScale3: 5
+    - _MotionSpace: 0
+    - _MotionSpacee: 0
+    - _MotionSpaceeEnd: 0
+    - _MotionSpaceee: 0
+    - _MotionSpaceeeEnd: 0
+    - _MotionSpeed: 2
+    - _MotionSpeed2: 10
+    - _MotionSpeed3: 4
+    - _MotionTopDown: 0
+    - _MotionType: 0
+    - _MotionTypee: 0
+    - _MotionVariation: 1
+    - _MotionVariation2: 10
+    - _MotionVertical: 0
+    - _MotionVertical2: 0
+    - _NormalInvertBackFace: 0
+    - _NormalInvertOnBackface: 0
+    - _NormalOnBackFace: 0
+    - _NormalScale: 1
+    - _ObjectBounciness: 0
+    - _ObjectStiffness: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _PlantMotionParameters: 0
+    - _QuickMaskk: 0
+    - _RENDERINGG: 0
+    - _RenderFace: 0
+    - _RenderFaces: 0
+    - _Rotation: 0.348
+    - _RotationSpeed: 1
+    - _SETTINGS: 0
+    - _SUBSURFACEE: 0
+    - _SURFACEE: 0
+    - _Settings: 0
+    - _Shininess: 1
+    - _ShowMask: 0
+    - _ShowMotionDebug: 0
+    - _Show_ADSMask: 1
+    - _Show_GrassSize: 1
+    - _Show_GrassTint: 1
+    - _Show_MaskGeneric: 1
+    - _Show_MotionNoise: 1
+    - _Smoothn: 1
+    - _Smoothness: 0.751
+    - _SmoothnessTextureChannel: 0
+    - _Specular: 0.5
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _Surafce: 0
+    - _SymbolMode: 0
+    - _SymbolMultiplied: 0
+    - _SymbolRotation: 0
+    - _SymbolisSticker: 0
+    - _TransAmbient: 0.054
+    - _TransDirect: 1
+    - _TransNormalDistortion: 0
+    - _TransScattering: 36.3
+    - _TransShadow: 0.9
+    - _Translucency: 2.3
+    - _Transparency: 0.3
+    - _UVSec: 0
+    - _WhiteRemap: 1
+    - _WindMask: 0
+    - _WindMode: 2
+    - _WindMultiplier: 0.5
+    - _ZWrite: 1
+    - __dirty: 0
+    - _ang: 12.95
+    - _pow: -8.6
+    - _speed: 3
+    - _variation: 0
+    m_Colors:
+    - _AlphaUVs: {r: 1, g: 1, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color0: {r: 0, g: 0, b: 0, a: 0}
+    - _Color1: {r: 1, g: 0.93103456, b: 0, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _LocalDirection: {r: 1, g: 0, b: 1, a: 0}
+    - _MainUVs: {r: 1, g: 1, b: 0, a: 0}
+    - _MotionOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _SpecularColor: {r: 0.7476294, g: 0.7941176, b: 0.6364619, a: 0}
+    - _SubSurfaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Subsurface: {r: 1, g: 1, b: 1, a: 1}
+    - _SubsurfaceColor: {r: 1, g: 0.9310346, b: 0, a: 1}
+    - _SymbolColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SymbolUVs: {r: 40, g: 40, b: 0.0001, a: -6.04}
+    - _TransmissionColor: {r: 1, g: 0.91043586, b: 0.4044118, a: 1}
+    - _UVOne: {r: 1, g: 1, b: 0, a: 0}
+    - _Vector0: {r: 50, g: 50, b: 96.7, a: 4.2}
+    - _Vector1: {r: 0, g: 1, b: 1, a: 0}
+    - _Vector3: {r: 0, g: 0, b: 1, a: 0}
+    - _Vector4: {r: 0, g: 0, b: 0, a: 0}
+    - _axis: {r: 1, g: 1, b: 0, a: 0}
+    - _y: {r: 0, g: 1, b: 0, a: 1}
+    - _z: {r: 1, g: 0, b: 1, a: 1}

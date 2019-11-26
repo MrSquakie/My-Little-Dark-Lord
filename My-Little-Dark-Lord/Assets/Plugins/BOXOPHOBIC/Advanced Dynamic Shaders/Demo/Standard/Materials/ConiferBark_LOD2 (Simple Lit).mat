@@ -1,0 +1,403 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: ConiferBark_LOD2 (Simple Lit)
+  m_Shader: {fileID: 4800000, guid: aea5a65d2126d3b499a03cd767980b77, type: 3}
+  m_ShaderKeywords: EFFECT_BUMP EFFECT_HUE_VARIATION GEOM_TYPE_BRANCH _BARKVARIATION_ON
+    _BLENDING_OFF _EMISSION _ENABLEBASEBLENDING_ON _ENABLETRUNKBLENDING_ON _MOTIONNOISE_ON
+    _NORMALMAP _RENDERTYPEKEY_OPAQUE _RENDERTYPE_OPAQUE
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Albedo:
+        m_Texture: {fileID: 2800000, guid: 662d72b6ec210cf4cbeec2b4d3cb8b2a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlbedoTex:
+        m_Texture: {fileID: 2800000, guid: d86a56cb3f1d6ce43ab0b4b4095d320e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlbedoTex2:
+        m_Texture: {fileID: 2800000, guid: ae2e0479821ca284aa9dd039a1866695, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlbedoTex3:
+        m_Texture: {fileID: 2800000, guid: 1e7d80a08eb6709448d82ce587f4e263, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseNormal:
+        m_Texture: {fileID: 2800000, guid: f77f4f62f6ed0184494523a06daea026, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseTexture:
+        m_Texture: {fileID: 2800000, guid: 2060ca0af2eea274b9319c7d09d3937e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BlendNormal:
+        m_Texture: {fileID: 2800000, guid: f77f4f62f6ed0184494523a06daea026, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BlendTexture:
+        m_Texture: {fileID: 2800000, guid: 2060ca0af2eea274b9319c7d09d3937e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BranchAlbedo:
+        m_Texture: {fileID: 2800000, guid: 41bcf3124e6b8f34dbafd501b46fd7c6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BranchNormal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 7a5ec0b009ca51846a6344a67370f352, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DisplacementTex:
+        m_Texture: {fileID: 2800000, guid: 9789d23040cb1fb45ad60392430c3c15, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: d86a56cb3f1d6ce43ab0b4b4095d320e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: 7a5ec0b009ca51846a6344a67370f352, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex2:
+        m_Texture: {fileID: 2800000, guid: ef797f079c864f74983dca1102736283, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex3:
+        m_Texture: {fileID: 2800000, guid: f77f4f62f6ed0184494523a06daea026, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 2800000, guid: c5ea7a5ece4b58241bf122693e61ee26, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SurfaceTex:
+        m_Texture: {fileID: 2800000, guid: 5afbf44c2fe9fb845a77ba4078b8469c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SurfaceTex3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture0:
+        m_Texture: {fileID: 2800000, guid: c8b456e54f38e33438ba92741e9947e1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 2800000, guid: c7343300bb61689418dd52f7b1084ec3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TrunkBaseNormal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TrunkBaseTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TrunkBblendNormal:
+        m_Texture: {fileID: 2800000, guid: f77f4f62f6ed0184494523a06daea026, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TrunkBlendNormal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TrunkBlendTexture:
+        m_Texture: {fileID: 2800000, guid: 2060ca0af2eea274b9319c7d09d3937e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex3coord3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex4coord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex4coord2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex4coord3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex4coord4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ADSAdvancedLitTreeBark: 1
+    - _ADSSimpleLitTreeBark: 1
+    - _ADSStandardLitSpeedTree: 1
+    - _ADSStandardLitTree: 1
+    - _ADSStandardLitTreeBark: 1
+    - _ADSStandardLitTreeTrunk: 1
+    - _ADVANCEDD: 0
+    - _AmbientOcclusion: 1
+    - _BASEBLENDINGG: 0
+    - _BASEE: 0
+    - _BLENDINGG: 0
+    - _BRANCHH: 0
+    - _BRANCHMOTIONN: 0
+    - _BarkSurfaceAO: 0
+    - _BarkVariation: 1
+    - _BaseBlendAmount: 0.08
+    - _BaseBlendContrast: 0.9
+    - _BaseBlendNormals: 0
+    - _BaseBlendVariation: 0
+    - _BaseNormalScale: 2.03
+    - _BaseSurfaceAO: 0
+    - _BatchingInfo: 0
+    - _BlendContrast: 0.999
+    - _BlendNormalScale: 1.5
+    - _BlendingBasee: 0
+    - _BlendingBranchh: 0
+    - _BranchBlendAmount: 0.04
+    - _BranchBlendContrast: 0.9
+    - _BranchBlendOffset: 0.16
+    - _BranchMaskMax: 5
+    - _BranchMotionAmplitude: 0
+    - _BranchMotionParameters: 0
+    - _BranchMotionScale: 1
+    - _BranchMotionSpeed: 1
+    - _BranchNormalScale: 1
+    - _BranchStiffness: 50
+    - _BumpScale: 1
+    - _Cull: 2
+    - _CullMode: 0
+    - _Cutoff: 0.213
+    - _DetailNormalMapScale: 1
+    - _Displacement: 0.115
+    - _DstBlend: 0
+    - _EdgeLength: 2
+    - _EnableBase: 0
+    - _EnableBaseBlending: 1
+    - _EnableBaseaaaaaaaaaaaaa: 0
+    - _EnableBasee: 0
+    - _EnableBlending: 0
+    - _EnableBlendingg: 0
+    - _EnableBranch: 0
+    - _EnableBranchaaaaaaaaaaaaaaaaa: 0
+    - _EnableBranchh: 0
+    - _EnableTrunkBlending: 1
+    - _Float12: 1.6
+    - _Float14: 0
+    - _Float15: 20
+    - _Float16: -2.35
+    - _Float2: 1
+    - _Float7: 1.45
+    - _Float8: 1
+    - _Float9: 0.11
+    - _GLOBALSETTINGSS: 0
+    - _GLOBALSS: 0
+    - _GlobalTurbulence: 1
+    - _GlossMapScale: 1
+    - _Glossiness: 0.184
+    - _GlossyReflections: 1
+    - _Internal_ADS: 1
+    - _Internal_DebugMask: 1
+    - _Internal_DebugMask2: 1
+    - _Internal_DebugVariation: 1
+    - _Internal_LitAdvanced: 1
+    - _Internal_LitSimple: 1
+    - _Internal_LitStandard: 1
+    - _Internal_SetByScript: 0
+    - _Internal_TypeTree: 1
+    - _Internal_TypeTreeBark: 1
+    - _Internal_UnityToBoxophobic: 1
+    - _Internal_Version: 220
+    - _LeafMotionAmplitude: 0.2
+    - _LeafMotionScale: 50
+    - _LeafMotionSpeed: 10
+    - _LeafMtionParameters: 0
+    - _LeavesAmount: 1
+    - _LendingBranchh: 0
+    - _MAINN: 0
+    - _MOTIONBRANCHH: 0
+    - _MOTIONLEAFF: 0
+    - _MOTIONLEAVES: 0
+    - _MOTIONTRUNKK: 0
+    - _MaskContrast: 1
+    - _MaskHeight: 2.5
+    - _MaskMax: 1
+    - _MaskMax2: 1
+    - _MaskMin: -0
+    - _MaskMin2: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _MotionAmplitude: 0.6
+    - _MotionAmplitude2: 0.4
+    - _MotionAmplitude3: 0.2
+    - _MotionNoise: 1
+    - _MotionScale: 0.2
+    - _MotionScale2: 0.4
+    - _MotionScale3: 50
+    - _MotionSpacee: 0
+    - _MotionSpaceeEnd: 0
+    - _MotionSpaceee: 0
+    - _MotionSpaceeeEnd: 0
+    - _MotionSpeed: 1
+    - _MotionSpeed2: 2.5
+    - _MotionSpeed3: 9
+    - _MotionVariation2: 2
+    - _MotionVariation3: 0
+    - _MotionVertical2: 0.25
+    - _NormalScale: 1
+    - _NormalScale2: 0
+    - _NormalScale3: 1.2
+    - _Occlusion: 1
+    - _Occlusion3: 1
+    - _OcclusionStrength: 0
+    - _Parallax: 0.005
+    - _RENDERINGG: 0
+    - _Render: 0
+    - _RenderCutt: 0
+    - _SETTINGSS: 0
+    - _SURFACEE: 0
+    - _SetByScript: 0
+    - _Show_ADSMask: 1
+    - _Show_Mask: 1
+    - _Show_MaskSpeedTree: 1
+    - _Smoothness: 0.687
+    - _Smoothness3: 0.493
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _SurfaceAO: 0.5
+    - _TESSELLATIONN: 0
+    - _TRUNKBASEE: 0
+    - _TRUNKBLENDD: 0
+    - _TRUNKBLENDINGG: 0
+    - _TRUNKK: 0
+    - _TRUNKMOTIONN: 0
+    - _TessAmount: 3
+    - _TessCameraMax: 3
+    - _TessCameraMin: 0
+    - _TessDisplacement: 0.3
+    - _TessMax: 0.609
+    - _TessMin: 0.707
+    - _TessOffset: 0.5
+    - _TessPhongStrength: 1
+    - _TessValue: 32
+    - _TreeLeavesAmount: 0
+    - _TreeMotionSettings: 0
+    - _TreeRenderMode: 0
+    - _TreeTint: 1
+    - _TreeTypeLeaff: 0
+    - _TreeTypeLeafff: 0
+    - _TreeTypeLeaffff: 0
+    - _TreeTypeTrunkBlendd: 0
+    - _TrunkBlendAmount: 1
+    - _TrunkBlendContrast: 0.907
+    - _TrunkBlendNormalScale: 2
+    - _TrunkBlendVariation: 2
+    - _TrunkMaskMax: 100
+    - _TrunkMaskMin: 10
+    - _TrunkMotionAmplitude: 0.5
+    - _TrunkMotionParameters: 0
+    - _TrunkMotionScale: 0
+    - _TrunkMotionSpeed: 5
+    - _TrunkStiffness: 100
+    - _TrunkVariation: 1
+    - _UVSec: 0
+    - _VertexAO: 1
+    - _VertexOcclusion: 1
+    - _WindQuality: 4
+    - _ZWrite: 1
+    - __dirty: 0
+    - _amp: 0.1
+    - _branch_blending: 0
+    - _branch_wind: 0
+    - _leaf_wind: 0
+    - _scale: 0.2
+    - _speed: 5
+    - _trunck_blending: 0
+    - _var: 0.5
+    m_Colors:
+    - _BaseColor: {r: 0.74264705, g: 0.73556703, b: 0.48599696, a: 1}
+    - _BaseUVs: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _BlendColor: {r: 0.71446425, g: 0.7941176, b: 0.65981835, a: 1}
+    - _BlendUVs: {r: 0.5, g: 1, b: 0, a: 0}
+    - _BranchColor: {r: 1, g: 0, b: 0, a: 1}
+    - _BranchMotionOffset: {r: 0, g: 1, b: 0, a: 0}
+    - _BranchUVs: {r: 0.4, g: 0.4, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color2: {r: 1, g: 1, b: 1, a: 1}
+    - _Color3: {r: 0.6544118, g: 0.6325096, b: 0.51005626, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
+    - _MainUVs: {r: 1, g: 1, b: 0, a: 0}
+    - _MotionOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _TrunkBaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TrunkBaseUVs: {r: 1, g: 1, b: 0, a: 0}
+    - _TrunkBlendColor: {r: 0.63028276, g: 0.7058823, b: 0.45674738, a: 1}
+    - _TrunkBlendUVs: {r: 1, g: 1, b: 0, a: 0}
+    - _TrunkUVs: {r: 1, g: 1, b: 0, a: 0}
+    - _UVOne: {r: 1, g: 1, b: 0, a: 0}
+    - _UVOne2: {r: 1, g: 1, b: 0, a: 0}
+    - _UVOne3: {r: 0.3, g: 0.6, b: 0, a: 0}
+    - _UVZero: {r: 1, g: 1, b: 0, a: 0}
+    - _UVZero2: {r: 1, g: 1, b: 0, a: 0}
+    - _UVZero3: {r: 1, g: 1, b: 0, a: 0}
+    - _Vector0: {r: 0, g: 2, b: 0, a: 0}
+    - _Vector1: {r: 2, g: 1, b: 0, a: 0}
+    - _offset: {r: 0, g: 1, b: 0, a: 0}
