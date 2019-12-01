@@ -10,7 +10,7 @@ public class EnterCave : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player") || collision.gameObject.layer.Equals("Player"))
         {
-            SceneManager.LoadScene("Cave");
+            SceneManager.LoadScene("Dungeon");
         }
     }
 }

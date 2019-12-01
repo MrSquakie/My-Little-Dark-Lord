@@ -1435,7 +1435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 4
+  selectedToolbar: 3
   _isDead: 0
   _currentHealth: 0
   fillHealthOnStart: 1
@@ -1479,10 +1479,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   headDetect: 0.95
-  patrolSpeed: 0.5
-  wanderSpeed: 0.5
-  chaseSpeed: 1
-  strafeSpeed: 1
+  patrolSpeed: 0.7
+  wanderSpeed: 0.7
+  chaseSpeed: 1.5
+  strafeSpeed: 1.3
   strafeSideways: 1
   strafeBackward: 1
   strafeDistance: 3
@@ -1501,16 +1501,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   sortTargetFromDistance: 0
-  fieldOfView: 180
-  maxDetectDistance: 24
+  fieldOfView: 160
+  maxDetectDistance: 30
   minDetectDistance: 2
   distanceToLostTarget: 16
-  chaseStopDistance: 10
+  chaseStopDistance: 1
   drawAgentPath: 1
   displayGizmos: 1
   passiveToDamage: 1
   agressiveAtFirstSight: 1
-  attackRotationSpeed: 0.3
+  attackRotationSpeed: 0.35
   firstAttackDelay: 0
   minTimeToAttack: 1
   maxTimeToAttack: 4
