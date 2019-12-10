@@ -903,11 +903,13 @@ namespace GeNa
         /// Replace the prefab and handle recalculations for the Resource and its ancestors
         /// </summary>
         /// <param name="prefab"></param>
+#if UNITY_EDITOR
+
         public void ReplacePrefab(GameObject go)
         {
             ReplaceThePrefab(go);
         }
-
+#endif
         /// <summary>
         /// Reset the Instance counters for this resource and its descendants
         /// </summary>
