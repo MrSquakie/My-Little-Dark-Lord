@@ -755,6 +755,7 @@ Transform:
   - {fileID: 675079932023299829}
   - {fileID: 675079933100306709}
   - {fileID: 675079933447711922}
+  - {fileID: 2374168619699957510}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3408,6 +3409,36 @@ Transform:
   m_Father: {fileID: 675079931843616730}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7204857793469375288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2374168619699957510}
+  m_Layer: 0
+  m_Name: FollowTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2374168619699957510
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7204857793469375288}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.606, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 675079932098163734}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &675079932026035833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3465,8 +3496,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114000011566805108, guid: 5dc53aa14e78ec54fbf2281c1abb7f47,
         type: 3}
-      propertyPath: staminaCost
-      value: 10
+      propertyPath: damage.damageValue
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 114000011566805108, guid: 5dc53aa14e78ec54fbf2281c1abb7f47,
         type: 3}
@@ -3475,18 +3506,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114000011566805108, guid: 5dc53aa14e78ec54fbf2281c1abb7f47,
         type: 3}
-      propertyPath: useStrongAttack
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011566805108, guid: 5dc53aa14e78ec54fbf2281c1abb7f47,
-        type: 3}
-      propertyPath: damage.damageValue
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011827966156, guid: 5dc53aa14e78ec54fbf2281c1abb7f47,
-        type: 3}
-      propertyPath: openCloseWindow
-      value: 0
+      propertyPath: staminaCost
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5dc53aa14e78ec54fbf2281c1abb7f47, type: 3}
