@@ -8,6 +8,8 @@ public class SceneLoading : MonoBehaviour
 {
     [SerializeField]
     private Image _progressBar;
+    [SerializeField]
+    private int _levelToLoad;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,7 @@ public class SceneLoading : MonoBehaviour
     {
         //create async op
         
-        AsyncOperation gameLevel = SceneManager.LoadSceneAsync(2);
+        AsyncOperation gameLevel = SceneManager.LoadSceneAsync(_levelToLoad);
         //take progress bar fill = async operation progress.
         while (gameLevel.progress < 1)
         {
