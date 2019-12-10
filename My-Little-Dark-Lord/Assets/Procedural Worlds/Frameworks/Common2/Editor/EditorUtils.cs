@@ -84,12 +84,12 @@ namespace PWCommon2
             // Initialize news - Don't see a reason to allow AppConfig = null; Open a convo on Discord if you have a reason.
             //m_news = new PWNews(m_appConfig == null ? "" : m_appConfig.NewsURL);
             m_news = new PWNews(m_appConfig);
-            if (m_news.ExistOnDisc)
-            {
-                // Load
-                m_news = m_news.Load();
-            }
-            m_news.Update();
+            //if (m_news.ExistOnDisc)
+            //{
+            //    // Load
+            //    m_news = m_news.Load();
+            //}
+            //m_news.Update();
         }
 
         /// <summary>

@@ -1,0 +1,96 @@
+PWS_Water_ Ocean Pro HD 2019_03 7.1.2 readme
+
+PWS_Water_ Ocean Pro HD 2019_03 7.1.2 v2.4
+- High Definition RP Version 7.1.2
+- Amplify Shader Editor v1.7.1 rev 08 (10_31_2019 Patch template)
+
+This shader was developed using Amplify Shader Editor ASE software: 
+https://assetstore.unity.com/packages/tools/visual-scripting/amplify-shader-editor-68570
+
+DEFERRED RENDERING:
+This shader requires deferred rendering for the depth fade functions to work correctly and use of Unity's default depth buffer. Forward Rendering is only possible by manually enabling thru camera script in Forward if you required to use it.
+
+LINEAR COLOR SPACE:
+shader is built and tested in linear color space
+
+Shader Development and Contributors: 
+We would like to give a special thank you to every involved in the developing and testing of this shader:
+- Discord: Dawie3565 
+- Discord: Silent https://gitlab.com/s-ilent
+- Discord: Xulain 
+- Discord: Paulo.Depinho
+- Discord: The C.reator 
+- Discord: DMeville
+- Discord: Marcatore
+
+Waves: are developed thru CatLikeCoding Tutorial:
+https://catlikecoding.com/unity/tutorials/flow/waves/
+
+Refraction: are developed thru CatLikeCoding Tutorial:
+https://catlikecoding.com/unity/tutorials/flow/looking-through-water/
+
+
+Recommended Settings: 
+
+COLOR TINT: 
+Tint provides color is blended between shallow tint and the depth tint per the user’s preference. shallow tint provides adjustment for shoreline color and offset applied may be adjusted pushing and blending tint from shoreline into deeper water per the user’s preference. Depth Tint provides color tint into deeper water, Depth offset may be used to adjust per the user’s preference. Note if water has no terrain under to receive depth information the depth tint color will be stronger and user should adjust and blend as needed. If color tint is far away from the shallow tint color user may further adjust shore line blending thru refraction and or opacity. 
+
+OPACITY:
+Ocean and Beach Opacity can be faded per user’s preference.  
+
+GLOBAL SETTINGS:
+- OCCLUSION: Occlusion maybe used to darken the reflections
+- METALLIC: Metallic per users’ preference.
+- SMOOTHNESS: Provides a geometric roughness factor for specular AA 
+- SMOOTHNESS SCREEN SPACE VARIANCE: Used to set a strength of the geometric specular anti-aliasing effect between 0 and 1. Higher values produce a blurrier result with less aliasing
+- SMOOTHNESS THRESHOLD: Used to set a maximum value for the offset that HDRP subtracts from the smoothness value to reduce artifacts
+
+LIGHTING:   
+- LIGHT INDIRECT STRENGTH SPECULAR: retrieves the reflections from reflection probes
+- LIGHT INDIRECT STRENGTH DIFFUSE: retrieves the information of surrounding light probes
+Unity's light Color and shadow information from your directional, point and spot lights change accordingly to your Unity light settings
+- HIGHLIGHT DIRECTION: has 4 modes available based on user’s preference. Default is set with NdotL
+  - NdotL is the product between the normal and world space light direction
+  - N1 is the product halfway between the normal and world space light direction
+  - N1V is the product halfway between the genster normal and world space light direction
+  - N1A is the product halfway between the animated normal and world space light direction
+- HIGHLIGHT TINT / HIGHLIGHT OFFSET / HIGHLIGHT SHARPNESS: set per users’ preference
+
+REFRACTION:
+MSAA should be disabled because we rely on the depth buffer. if heavy waves are applied by user the overall effect may be reduced. If you limit the wave height so you don’t see through multiple waves at the same time this can add to the effect but is not required. final effect is based on user’s preference. 
+- REFRACTED DEPTH: provides depth applied into water
+- REFRACTION SCALE: the overall strength of refraction.  
+
+LIGHTING SHADOW:
+Shadows are primarily driven thru diffuse lighting that retrieves the information of surrounding light probes and world space light direction with normal sampling. Controls for Shadow Strength, Sharpness and Offset are provided however do to the nature of heavy fast moving waves the effect may be less depending on users settings  
+
+REFLECTION:
+For performance this is toggled off by default. When used the Mirror Reflection script must be attached to your water plane
+
+NORMAL MAP:
+- NORMAL MAP STRENGHT: based on the texture used  
+- NORMAL MAP TILING: based on the texture used 
+- NORMAL MAP SPEED: provides a panning speed of the normal texture and has some influence on panning deeper ocean foam
+- NORMAL MAP TIMESCALE: provides the elapsed time in seconds in constant scale of 1 
+Note The normal map color is influenced by Unity's directional light tint and Intensity
+
+TESSELLATION:
+- Tessellation Strength is subject to steepness and wavelength
+- Tessellation Max Distance is maximum distance in meters to the camera where the minimum tessellation should occur
+
+WAVES 001_002_003:
+- X & Y = Direction of wave travel  
+  Directions [0-1] will produce waves traveling across on edges 
+  Directions [1-1] will produce waves traveling across on corners 
+
+Z = STEEPNESS: 
+- Steepness values are subject to size and Quantity of Mesh quads. A measure of steepness, between 0 and 1 is easier to work with
+To prevent looping waves, you have to ensure that the sum of the steepness properties of all waves does not exceed 1
+
+W = WAVELENGHT:
+- Wavelength values are subject to size and Quantity of Mesh quads. A measure of wavelength between 64 and 16 is easier to work with. 
+
+WAVE SPEED: defines how fast the entire wave moves in units per second
+
+FOAM:
+Ocean and Beach foam controls tint, tiling, distance, strength, and speed that may be toggled on and off based on user preference.   

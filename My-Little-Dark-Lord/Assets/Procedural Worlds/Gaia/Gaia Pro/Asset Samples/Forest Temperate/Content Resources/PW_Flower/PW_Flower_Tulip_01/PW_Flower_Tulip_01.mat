@@ -1,0 +1,159 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PW_Flower_Tulip_01
+  m_Shader: {fileID: 4800000, guid: 63c6cfb0daf9fdf4cb11cf01b47ba711, type: 3}
+  m_ShaderKeywords: _ALPHATEST_ON _ENABLECOVERMAP_ON _ENABLEWINDDISTANCE_ON _ENABLEWINDVEGETATION_ON
+    _ENABLEWINDVERTICALMASK_ON _NORMALMAP
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 440409465eeefcd4c8330f2536127d31, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CoverNormalTexture:
+        m_Texture: {fileID: 2800000, guid: 5f00806f215844043a324a7613dd212d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CoverTexture:
+        m_Texture: {fileID: 2800000, guid: 1cff50f696e47004793933731f01ff8e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: e8d16b6b7f644964b99b7a361bc4eaa8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 2800000, guid: 080d72a0ba8e88445a9bbb9d126cc90b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RoughnessTexture:
+        m_Texture: {fileID: 2800000, guid: e24f7bf6e5618fe40a24838eda217b2e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SurfaceNormalTexture:
+        m_Texture: {fileID: 2800000, guid: 5f00806f215844043a324a7613dd212d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SurfaceTexture:
+        m_Texture: {fileID: 2800000, guid: 1cff50f696e47004793933731f01ff8e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlbedoDetailDistance: 4
+    - _AlbedoDetailIntensity: 0
+    - _AlbedoDetailScale: 0
+    - _AlphaCutoffBias: 0.49
+    - _BumpScale: 1
+    - _ColorMaskAutumnShift: 0
+    - _ColorMaskFuzziness: 0.03
+    - _ColorMaskRange: 0
+    - _CoverBias: 0.696
+    - _CoverIntensity: 0
+    - _CoverNormalStrength: 1
+    - _CrossfadeDistance: 64
+    - _CrossfadeDistanceExponent: 8
+    - _CrossfadeMode: 0
+    - _CrossfadeScale: 0
+    - _CullMode: 0
+    - _Cutoff: 0.5
+    - _DebugMode: 0
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EnableColorMask: 0
+    - _EnableCoverMap: 1
+    - _EnableDebug: 0
+    - _EnableSquareMask: 0
+    - _EnableSurfaceMap: 0
+    - _EnableWindDistance: 1
+    - _EnableWindVegetation: 1
+    - _EnableWindVerticalMask: 1
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _MaskClipValue: 1
+    - _Metallic: 0
+    - _Mode: 1
+    - _NormalDetailStrength: 0.25
+    - _NormalStrength: 1
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _RenderMode: 1
+    - _SSSDistortion: 1
+    - _SSSIntensity: 1
+    - _SSSMode: 0
+    - _SSSPower: 1
+    - _Smoothness: 0.5
+    - _SmoothnessMode: 0
+    - _SmoothnessTextureChannel: 0
+    - _SmoothnessThreshold: 0
+    - _SmoothnessVariance: 0.5
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _SurfaceBias: -0.25
+    - _SurfaceBlendStrength: 0
+    - _SurfaceDistanceLength: 0.75
+    - _SurfaceNormalStrength: 1
+    - _SurfaceSaturation: 1
+    - _SurfaceScatterScale: 1.5
+    - _UVSec: 0
+    - _WindDirection: 0.1
+    - _WindDistanceOffset: 2
+    - _WindDistanceRange: 64
+    - _WindFrequency: 3
+    - _WindFrequencyDetail: 2
+    - _WindIntensity: 0.06
+    - _WindMagnitude: 0.5
+    - _WindMagnitudeDetail: 0.7
+    - _WindVerticalMaskIntensity: 0.15
+    - _WindVerticalMaskOffset: 1
+    - _ZWrite: 1
+    - __dirty: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorMaskTint: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SSSColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SquareMaskTopXRightYBottomZLeftW: {r: 1, g: 1, b: 0, a: 0}
+    - _SurfaceTint: {r: 1, g: 1, b: 1, a: 0}

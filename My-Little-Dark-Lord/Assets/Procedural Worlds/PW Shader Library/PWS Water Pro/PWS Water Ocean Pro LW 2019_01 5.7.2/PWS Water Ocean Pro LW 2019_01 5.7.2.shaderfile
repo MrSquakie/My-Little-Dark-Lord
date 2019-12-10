@@ -1,0 +1,1830 @@
+// Made with Amplify Shader Editor
+// Available at the Unity Asset Store - http://u3d.as/y3X 
+Shader "PWS/Water/Ocean Pro LW 2019_01 5.7.2 v3.1"
+{
+    Properties
+    {
+		[Enum(UnityEngine.Rendering.CullMode)][Header (RENDERING OPTIONS)]_CullMode1("Cull Mode", Int) = 2
+		[Header (COLOR TINT)]_WaterTint("Water Tint", Color) = (0.08627451,0.2941177,0.3490196,1)
+		_ShallowTint("Shallow Tint", Color) = (0.003921569,0.7529412,0.7137255,1)
+		_ShallowDepth("Shallow Depth", Range( 0 , 100)) = 46.47059
+		_ShallowOffset("Shallow Offset", Range( -1 , 1)) = 0.2
+		_DepthTint("Depth Tint", Color) = (0.08627451,0.2941177,0.3490196,1)
+		_DepthOffset("Depth Offset", Range( 0 , 2)) = 0.5
+		[Enum(Smoothness Cull Off,0,Smoothness Cull Front,1,Smoothness Cull Back,2)][Header (SMOOTHNESS)]_SmoothnessMode("Smoothness Mode", Int) = 0
+		_Smoothness("Smoothness", Range( 0 , 1)) = 0.5
+		_SmoothnessVariance("Smoothness Variance", Range( 0 , 1)) = 0.5
+		_SmoothnessThreshold("Smoothness Threshold", Range( 0 , 1)) = 0
+		[Header (OPACITY)]_OpacityBeach("Opacity Beach", Range( 0 , 1)) = 0
+		_OpacityOcean("Opacity Ocean", Range( 0 , 1)) = 0
+		[Normal][Header (NORMAL MAP)]_NormalMap("Normal Map", 2D) = "bump" {}
+		_NormalMapTiling("Normal Map Tiling", Float) = 80
+		_NormalMapStrength("Normal Map Strength", Range( 0 , 1)) = 0.25
+		_NormalMapSpeed("Normal Map Speed", Range( 0 , 0.1)) = 0.02
+		_NormalMapTimescale("Normal Map Timescale", Range( 0 , 1)) = 0.25
+		[Header (GERSTNER WAVES)][Header (X_Y DIRECTION Z_ STEEPNESS W_ WAVELENGTH)]_Wave01("Wave 01", Vector) = (-1,0,0.2,40)
+		_Wave02("Wave 02", Vector) = (-1,1,0.25,35)
+		_Wave03("Wave 03", Vector) = (2,1,0.2,25)
+		_WaveHeight("Wave Height", Range( 0 , 1)) = 0.5
+		_WaveHeightValueXYZ("Wave Height Value X Y Z", Vector) = (3,3,3,0)
+		_WaveSpeed("Wave Speed", Range( 0 , 5)) = 1.1
+		[Header (Ocean Wave Controls)]_OceanIntensity("Ocean Intensity ", Range( 0 , 1)) = 0.8
+		_OceanRange("Ocean Range ", Range( 0 , 50)) = 5
+		_OceanPower("Ocean Power ", Range( 0 , 1)) = 1
+		_OceanOffset("Ocean Offset ", Range( 0 , 50)) = 3.3
+		[Header (Beach Wave Controls)]_BeachIntensity("Beach Intensity ", Range( 0 , 1)) = 0.8
+		_BeachRange("Beach Range ", Range( 0 , 50)) = 5
+		_BeachPower("Beach Power ", Range( 0 , 1)) = 1
+		_BeachOffset("Beach Offset ", Range( 0 , 50)) = 3.3
+		[Header (REFLECTION)][KeywordEnum(on,off)] _EnableReflection("Enable Reflection", Float) = 1
+		_ReflectionIntensity("Reflection Intensity", Range( 0 , 1)) = 0.7357025
+		_ReflectionWobble("Reflection Wobble", Range( 0 , 1)) = 0
+		_ReflectionFresnelScale("Reflection Fresnel Scale", Range( 0 , 1)) = 1
+		_ReflectionFresnelPower("Reflection Fresnel Power", Range( 0 , 10)) = 0
+		[Header (OCEAN FOAM)][KeywordEnum(on,off)] _EnableOceanFoam1("Enable Ocean Foam ", Float) = 0
+		_OceanFoamMap("Ocean Foam Map", 2D) = "white" {}
+		_OceanFoamTint("Ocean Foam Tint", Color) = (0.6039216,0.6039216,0.6039216,1)
+		_OceanFoamTiling("Ocean Foam Tiling", Float) = 50
+		[Gamma]_OceanFoamStrength("Ocean Foam Strength", Range( 0 , 1)) = 0.3983873
+		_foamMax2("Ocean Foam Distance", Range( 0.1 , 100)) = 18
+		_OceanFoamSpeed("Ocean Foam Speed", Range( 0 , 0.5)) = 0.02
+		[Header (BEACH FOAM)][KeywordEnum(on,off)] _EnableBeachFoam("Enable Beach Foam", Float) = 0
+		_BeachFoamMap("Beach Foam Map", 2D) = "black" {}
+		_BeachFoamTint("Beach Foam Tint", Color) = (0.8196079,0.8196079,0.8196079,1)
+		_BeachFoamTiling("Beach Foam Tiling", Float) = 0.6
+		_BeachFoamStrength("Beach Foam Strength", Range( 0.1 , 0.75)) = 0.35
+		_foamMax1("Beach Foam Distance", Range( 0.1 , 100)) = 35.62941
+		_BeachFoamSpeed("Beach Foam Speed", Range( 0 , 0.5)) = 0.09
+		[HideInInspector] _texcoord( "", 2D ) = "white" {}
+
+    }
+
+
+    SubShader
+    {
+		LOD 0
+
+		
+        Tags { "RenderPipeline"="LightweightPipeline" "RenderType"="Opaque" "Queue"="Transparent" }
+
+		Cull [_CullMode1]
+		HLSLINCLUDE
+		#pragma target 3.5
+		ENDHLSL
+		
+        Pass
+        {
+			
+        	Tags { "LightMode"="LightweightForward" }
+
+        	Name "Base"
+			Blend One Zero
+			ZWrite On
+			ZTest LEqual
+			Offset 0 , 0
+			ColorMask RGBA
+            
+        	HLSLPROGRAM
+            #pragma multi_compile _ LOD_FADE_CROSSFADE
+            #pragma multi_compile_fog
+            #define ASE_FOG 1
+            #define ASE_SRP_VERSION 50702
+            #define _NORMALMAP 1
+            #define REQUIRE_DEPTH_TEXTURE 1
+            #define REQUIRE_OPAQUE_TEXTURE 1
+
+            // Required to compile gles 2.0 with standard srp library
+            #pragma prefer_hlslcc gles
+            #pragma exclude_renderers d3d11_9x
+            
+
+        	// -------------------------------------
+            // Lightweight Pipeline keywords
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
+            #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+            #pragma multi_compile _ _ADDITIONAL_LIGHT_SHADOWS
+            #pragma multi_compile _ _SHADOWS_SOFT
+            #pragma multi_compile _ _MIXED_LIGHTING_SUBTRACTIVE
+            
+        	// -------------------------------------
+            // Unity defined keywords
+            #pragma multi_compile _ DIRLIGHTMAP_COMBINED
+            #pragma multi_compile _ LIGHTMAP_ON
+            #pragma multi_compile_fog
+
+            //--------------------------------------
+            // GPU Instancing
+            #pragma multi_compile_instancing
+
+            #pragma vertex vert
+        	#pragma fragment frag
+
+        	#include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/Core.hlsl"
+        	#include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/Lighting.hlsl"
+        	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
+        	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
+        	#include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/ShaderGraphFunctions.hlsl"
+		
+			#pragma multi_compile_local _ENABLEOCEANFOAM1_ON _ENABLEOCEANFOAM1_OFF
+			#pragma multi_compile_local _ENABLEBEACHFOAM_ON _ENABLEBEACHFOAM_OFF
+			#pragma multi_compile_local _ENABLEREFLECTION_ON _ENABLEREFLECTION_OFF
+
+
+			half PWSF_GlobalWindIntensityWater;
+			uniform float4 _CameraDepthTexture_TexelSize;
+			sampler2D _OceanFoamMap;
+			sampler2D _BeachFoamMap;
+			sampler2D _ReflectionTex;
+			sampler2D _NormalMap;
+			CBUFFER_START( UnityPerMaterial )
+			int _CullMode1;
+			float _BeachRange;
+			float _BeachPower;
+			float _BeachOffset;
+			float _BeachIntensity;
+			float _OceanRange;
+			float _OceanPower;
+			float _OceanOffset;
+			float _OceanIntensity;
+			float3 _WaveHeightValueXYZ;
+			float _WaveHeight;
+			float4 _Wave01;
+			float _WaveSpeed;
+			float4 _Wave02;
+			float4 _Wave03;
+			float4 _OceanFoamTint;
+			float _OceanFoamSpeed;
+			float _OceanFoamTiling;
+			float _foamMax2;
+			float _OceanFoamStrength;
+			float _BeachFoamSpeed;
+			float _BeachFoamTiling;
+			float4 _BeachFoamTint;
+			float _foamMax1;
+			float _BeachFoamStrength;
+			float4 _DepthTint;
+			float4 _ShallowTint;
+			float4 _WaterTint;
+			float _ShallowDepth;
+			float _ShallowOffset;
+			float _DepthOffset;
+			float4 _NormalMap_ST;
+			float _ReflectionWobble;
+			float _ReflectionFresnelScale;
+			float _ReflectionFresnelPower;
+			float _ReflectionIntensity;
+			float _NormalMapStrength;
+			float _NormalMapTimescale;
+			float _NormalMapSpeed;
+			float _NormalMapTiling;
+			float _OpacityOcean;
+			float _OpacityBeach;
+			float _Smoothness;
+			float _SmoothnessVariance;
+			float _SmoothnessThreshold;
+			int _SmoothnessMode;
+			CBUFFER_END
+
+
+            struct GraphVertexInput
+            {
+                float4 vertex : POSITION;
+                float3 ase_normal : NORMAL;
+                float4 ase_tangent : TANGENT;
+                float4 texcoord1 : TEXCOORD1;
+				float4 ase_texcoord : TEXCOORD0;
+				float4 ase_color : COLOR;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+            };
+
+        	struct GraphVertexOutput
+            {
+                float4 clipPos                : SV_POSITION;
+                float4 lightmapUVOrVertexSH	  : TEXCOORD0;
+        		half4 fogFactorAndVertexLight : TEXCOORD1; // x: fogFactor, yzw: vertex light
+            	float4 shadowCoord            : TEXCOORD2;
+				float4 tSpace0					: TEXCOORD3;
+				float4 tSpace1					: TEXCOORD4;
+				float4 tSpace2					: TEXCOORD5;
+				float4 ase_texcoord7 : TEXCOORD7;
+				float4 ase_texcoord8 : TEXCOORD8;
+				float4 ase_texcoord9 : TEXCOORD9;
+				float4 ase_color : COLOR;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+            	UNITY_VERTEX_OUTPUT_STEREO
+            };
+
+			float CorrectedLinearEyeDepth( float z , float correctionFactor )
+			{
+				return 1.f / (z / UNITY_MATRIX_P._34 + correctionFactor);
+			}
+			
+			float4 CalculateObliqueFrustumCorrection(  )
+			{
+				float x1 = -UNITY_MATRIX_P._31 / (UNITY_MATRIX_P._11 * UNITY_MATRIX_P._34);
+				float x2 = -UNITY_MATRIX_P._32 / (UNITY_MATRIX_P._22 * UNITY_MATRIX_P._34);
+				return float4(x1, x2, 0, UNITY_MATRIX_P._33 / UNITY_MATRIX_P._34 + x1 * UNITY_MATRIX_P._13 + x2 * UNITY_MATRIX_P._23);
+			}
+			
+			float GetGeometricNormalVariance( float perceptualSmoothness , float3 geometricNormalWS , float screenSpaceVariance , float threshold )
+			{
+				#define PerceptualSmoothnessToRoughness(perceptualSmoothness) (1.0 - perceptualSmoothness) * (1.0 - perceptualSmoothness)
+				#define RoughnessToPerceptualSmoothness(roughness) 1.0 - sqrt(roughness)
+				float3 deltaU = ddx(geometricNormalWS);
+				float3 deltaV = ddy(geometricNormalWS);
+				float variance = screenSpaceVariance * (dot(deltaU, deltaU) + dot(deltaV, deltaV));
+				float roughness = PerceptualSmoothnessToRoughness(perceptualSmoothness);
+				// Ref: Geometry into Shading - http://graphics.pixar.com/library/BumpRoughness/paper.pdf - equation (3)
+				float squaredRoughness = saturate(roughness * roughness + min(2.0 * variance, threshold * threshold)); // threshold can be really low, square the value for easier
+				return RoughnessToPerceptualSmoothness(sqrt(squaredRoughness));
+			}
+			
+			float3 PWSFGerstnerWavesSRP( float4 wave , float wspeed , float3 p , inout float3 tangent , inout float3 binormal )
+			{
+					float steepness = wave.z;
+					float wavelength = wave.w;
+					float k = 2 * PI / wavelength;
+					float c = sqrt(9.8 / k);
+					float2 d = normalize(wave.xy);
+					float s = _Time.y * wspeed;
+					float f = k * (dot(d, p.xz) - c * s);
+					float a = steepness / k;
+					float S, C;
+					sincos(f, /*out*/ S, /*out*/ C);
+					tangent += float3(
+						-d.x * d.x * (steepness * S),
+						d.x * (steepness * C),
+						-d.x * d.y * (steepness * S)
+						);
+					binormal += float3(
+						-d.x * d.y * (steepness * S),
+						d.y * (steepness * C),
+						-d.y * d.y * (steepness * S)
+						);
+					return float3(
+						d.x * (a * C),
+						a * S,
+						d.y * (a * C)
+						);
+			}
+			
+			inline float4 ASE_ComputeGrabScreenPos( float4 pos )
+			{
+				#if UNITY_UV_STARTS_AT_TOP
+				float scale = -1.0;
+				#else
+				float scale = 1.0;
+				#endif
+				float4 o = pos;
+				o.y = pos.w * 0.5f;
+				o.y = ( pos.y - o.y ) * _ProjectionParams.x * scale + o.y;
+				return o;
+			}
+			
+
+            GraphVertexOutput vert (GraphVertexInput v  )
+        	{
+        		GraphVertexOutput o = (GraphVertexOutput)0;
+                UNITY_SETUP_INSTANCE_ID(v);
+            	UNITY_TRANSFER_INSTANCE_ID(v, o);
+        		UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+
+				float3 ase_worldPos = mul(GetObjectToWorldMatrix(), v.vertex).xyz;
+				float temp_output_66_0_g1980 = distance( _WorldSpaceCameraPos , ase_worldPos );
+				float temp_output_82_0_g1980 = ( pow( ( temp_output_66_0_g1980 / _BeachRange ) , _BeachPower ) - _BeachOffset );
+				float temp_output_85_0_g1980 = saturate( temp_output_82_0_g1980 );
+				float temp_output_70_0_g1980 = ( pow( ( temp_output_66_0_g1980 / _OceanRange ) , _OceanPower ) - _OceanOffset );
+				float temp_output_71_0_g1980 = saturate( temp_output_70_0_g1980 );
+				float4 wave7_g1980 = _Wave01;
+				float temp_output_41_0_g1980 = ( _WaveSpeed + PWSF_GlobalWindIntensityWater );
+				float wspeed7_g1980 = temp_output_41_0_g1980;
+				float3 p7_g1980 = v.vertex.xyz;
+				float3 tangent7_g1980 = float3(1,0,0);
+				float3 binormal7_g1980 = float3(0,0,1);
+				float3 localPWSFGerstnerWavesSRP7_g1980 = PWSFGerstnerWavesSRP( wave7_g1980 , wspeed7_g1980 , p7_g1980 , tangent7_g1980 , binormal7_g1980 );
+				float4 wave44_g1980 = _Wave02;
+				float wspeed44_g1980 = temp_output_41_0_g1980;
+				float3 p44_g1980 = v.vertex.xyz;
+				float3 tangent44_g1980 = tangent7_g1980;
+				float3 binormal44_g1980 = binormal7_g1980;
+				float3 localPWSFGerstnerWavesSRP44_g1980 = PWSFGerstnerWavesSRP( wave44_g1980 , wspeed44_g1980 , p44_g1980 , tangent44_g1980 , binormal44_g1980 );
+				float4 wave45_g1980 = _Wave03;
+				float wspeed45_g1980 = temp_output_41_0_g1980;
+				float3 p45_g1980 = v.vertex.xyz;
+				float3 tangent45_g1980 = tangent44_g1980;
+				float3 binormal45_g1980 = binormal44_g1980;
+				float3 localPWSFGerstnerWavesSRP45_g1980 = PWSFGerstnerWavesSRP( wave45_g1980 , wspeed45_g1980 , p45_g1980 , tangent45_g1980 , binormal45_g1980 );
+				float3 PWSFGerstnerLocalVertOffset1382 = ( ( ( 1.0 - temp_output_85_0_g1980 ) * _BeachIntensity ) * ( ( temp_output_71_0_g1980 * _OceanIntensity ) * ( ( _WaveHeightValueXYZ * _WaveHeight ) * ( localPWSFGerstnerWavesSRP7_g1980 + localPWSFGerstnerWavesSRP44_g1980 + localPWSFGerstnerWavesSRP45_g1980 ) ) ) );
+				
+				float3 normalizeResult12_g1980 = normalize( cross( binormal45_g1980 , tangent45_g1980 ) );
+				float3 PWSFGerstnerLocalVertNormal1384 = saturate( normalizeResult12_g1980 );
+				
+				float4 ase_clipPos = TransformObjectToHClip((v.vertex).xyz);
+				float4 screenPos = ComputeScreenPos(ase_clipPos);
+				o.ase_texcoord7 = screenPos;
+				
+				o.ase_texcoord8 = v.vertex;
+				o.ase_texcoord9.xy = v.ase_texcoord.xy;
+				o.ase_color = v.ase_color;
+				
+				//setting value to unused interpolator channels and avoid initialization warnings
+				o.ase_texcoord9.zw = 0;
+				#ifdef ASE_ABSOLUTE_VERTEX_POS
+				float3 defaultVertexValue = v.vertex.xyz;
+				#else
+				float3 defaultVertexValue = float3(0, 0, 0);
+				#endif
+				float3 vertexValue = PWSFGerstnerLocalVertOffset1382;
+				#ifdef ASE_ABSOLUTE_VERTEX_POS
+				v.vertex.xyz = vertexValue;
+				#else
+				v.vertex.xyz += vertexValue;
+				#endif
+				v.ase_normal = PWSFGerstnerLocalVertNormal1384;
+
+        		// Vertex shader outputs defined by graph
+                float3 lwWNormal = TransformObjectToWorldNormal(v.ase_normal);
+				float3 lwWorldPos = TransformObjectToWorld(v.vertex.xyz);
+				float3 lwWTangent = TransformObjectToWorldDir(v.ase_tangent.xyz);
+				float3 lwWBinormal = normalize(cross(lwWNormal, lwWTangent) * v.ase_tangent.w);
+				o.tSpace0 = float4(lwWTangent.x, lwWBinormal.x, lwWNormal.x, lwWorldPos.x);
+				o.tSpace1 = float4(lwWTangent.y, lwWBinormal.y, lwWNormal.y, lwWorldPos.y);
+				o.tSpace2 = float4(lwWTangent.z, lwWBinormal.z, lwWNormal.z, lwWorldPos.z);
+
+                VertexPositionInputs vertexInput = GetVertexPositionInputs(v.vertex.xyz);
+                
+         		// We either sample GI from lightmap or SH.
+        	    // Lightmap UV and vertex SH coefficients use the same interpolator ("float2 lightmapUV" for lightmap or "half3 vertexSH" for SH)
+                // see DECLARE_LIGHTMAP_OR_SH macro.
+        	    // The following funcions initialize the correct variable with correct data
+        	    OUTPUT_LIGHTMAP_UV(v.texcoord1, unity_LightmapST, o.lightmapUVOrVertexSH.xy);
+        	    OUTPUT_SH(lwWNormal, o.lightmapUVOrVertexSH.xyz);
+
+        	    half3 vertexLight = VertexLighting(vertexInput.positionWS, lwWNormal);
+			#ifdef ASE_FOG
+        	    half fogFactor = ComputeFogFactor(vertexInput.positionCS.z);
+			#else
+				half fogFactor = 0;
+			#endif
+        	    o.fogFactorAndVertexLight = half4(fogFactor, vertexLight);
+        	    o.clipPos = vertexInput.positionCS;
+
+        	#ifdef _MAIN_LIGHT_SHADOWS
+        		o.shadowCoord = GetShadowCoord(vertexInput);
+        	#endif
+        		return o;
+        	}
+
+        	half4 frag (GraphVertexOutput IN , half ase_vface : VFACE ) : SV_Target
+            {
+            	UNITY_SETUP_INSTANCE_ID(IN);
+				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
+
+        		float3 WorldSpaceNormal = normalize(float3(IN.tSpace0.z,IN.tSpace1.z,IN.tSpace2.z));
+				float3 WorldSpaceTangent = float3(IN.tSpace0.x,IN.tSpace1.x,IN.tSpace2.x);
+				float3 WorldSpaceBiTangent = float3(IN.tSpace0.y,IN.tSpace1.y,IN.tSpace2.y);
+				float3 WorldSpacePosition = float3(IN.tSpace0.w,IN.tSpace1.w,IN.tSpace2.w);
+				float3 WorldSpaceViewDirection = SafeNormalize( _WorldSpaceCameraPos.xyz  - WorldSpacePosition );
+    
+				float4 screenPos = IN.ase_texcoord7;
+				float4 ase_screenPosNorm = screenPos / screenPos.w;
+				ase_screenPosNorm.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm.z : ase_screenPosNorm.z * 0.5 + 0.5;
+				float clampDepth3_g1972 = SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy );
+				float z6_g1972 = clampDepth3_g1972;
+				float4 localCalculateObliqueFrustumCorrection55_g1972 = CalculateObliqueFrustumCorrection();
+				float dotResult53_g1972 = dot( float4( IN.ase_texcoord8.xyz , 0.0 ) , localCalculateObliqueFrustumCorrection55_g1972 );
+				float correctionFactor6_g1972 = dotResult53_g1972;
+				float localCorrectedLinearEyeDepth6_g1972 = CorrectedLinearEyeDepth( z6_g1972 , correctionFactor6_g1972 );
+				float eyeDepth50_g1972 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+				float temp_output_47_0_g1972 = ( eyeDepth50_g1972 - screenPos.w );
+				float temp_output_7_0_g1972 = ( localCorrectedLinearEyeDepth6_g1972 - abs( temp_output_47_0_g1972 ) );
+				float temp_output_8_0_g1972 = saturate( temp_output_7_0_g1972 );
+				float Screen_depth_behind2369 = temp_output_8_0_g1972;
+				float2 temp_cast_1 = (_OceanFoamSpeed).xx;
+				float2 temp_cast_2 = (_OceanFoamTiling).xx;
+				float2 uv04_g1974 = IN.ase_texcoord9.xy * temp_cast_2 + float2( 0,0 );
+				float2 _Vector0 = float2(2,4);
+				float cos5_g1974 = cos( _Vector0.x );
+				float sin5_g1974 = sin( _Vector0.x );
+				float2 rotator5_g1974 = mul( uv04_g1974 - float2( 0,0 ) , float2x2( cos5_g1974 , -sin5_g1974 , sin5_g1974 , cos5_g1974 )) + float2( 0,0 );
+				float2 panner10_g1974 = ( 1.0 * _Time.y * temp_cast_1 + rotator5_g1974);
+				float2 temp_cast_3 = (_OceanFoamSpeed).xx;
+				float cos6_g1974 = cos( _Vector0.y );
+				float sin6_g1974 = sin( _Vector0.y );
+				float2 rotator6_g1974 = mul( uv04_g1974 - float2( 0,0 ) , float2x2( cos6_g1974 , -sin6_g1974 , sin6_g1974 , cos6_g1974 )) + float2( 0,0 );
+				float2 panner11_g1974 = ( 1.0 * _Time.y * temp_cast_3 + rotator6_g1974);
+				float2 temp_cast_4 = (_OceanFoamSpeed).xx;
+				float2 panner8_g1974 = ( 1.0 * _Time.y * temp_cast_4 + uv04_g1974);
+				float4 tex2DNode14_g1974 = tex2D( _OceanFoamMap, panner8_g1974 );
+				float3 unityObjectToViewPos38_g1974 = TransformWorldToView( TransformObjectToWorld( IN.ase_texcoord8.xyz) );
+				float Screen_depth2306 = localCorrectedLinearEyeDepth6_g1972;
+				float temp_output_39_0_g1974 = ( unityObjectToViewPos38_g1974.z + Screen_depth2306 );
+				float temp_output_16_0_g1972 = saturate( ( 1.0 / distance( _WorldSpaceCameraPos , WorldSpacePosition ) ) );
+				float Screen_closeness2373 = temp_output_16_0_g1972;
+				float temp_output_44_0_g1974 = Screen_closeness2373;
+				float4 lerpResult49_g1974 = lerp( float4( 0,0,0,0 ) , ( _OceanFoamTint * Screen_depth_behind2369 * ( ( tex2D( _OceanFoamMap, panner10_g1974 ) + tex2D( _OceanFoamMap, panner11_g1974 ) + tex2DNode14_g1974 ) / 3.0 ) ) , saturate( ( ( ( temp_output_39_0_g1974 - 0.001 ) * temp_output_44_0_g1974 ) / ( ( _foamMax2 - 0.001 ) * temp_output_44_0_g1974 ) ) ));
+				float4 lerpResult25_g1974 = lerp( float4( 0,0,0,0 ) , lerpResult49_g1974 , _OceanFoamStrength);
+				float4 temp_cast_5 = (0.0).xxxx;
+				#if defined(_ENABLEOCEANFOAM1_ON)
+				float4 staticSwitch33_g1974 = lerpResult25_g1974;
+				#elif defined(_ENABLEOCEANFOAM1_OFF)
+				float4 staticSwitch33_g1974 = temp_cast_5;
+				#else
+				float4 staticSwitch33_g1974 = lerpResult25_g1974;
+				#endif
+				float4 PWSFOceanFoam302 = staticSwitch33_g1974;
+				float4 appendResult3_g1973 = (float4(WorldSpacePosition.x , WorldSpacePosition.z , 0.0 , 0.0));
+				float4 temp_output_8_0_g1973 = ( ( appendResult3_g1973 / 10.0 ) * _BeachFoamTiling );
+				float2 _Vector3 = float2(2,1);
+				float cos18_g1973 = cos( _Vector3.x );
+				float sin18_g1973 = sin( _Vector3.x );
+				float2 rotator18_g1973 = mul( temp_output_8_0_g1973.xy - float2( 0,0 ) , float2x2( cos18_g1973 , -sin18_g1973 , sin18_g1973 , cos18_g1973 )) + float2( 0,0 );
+				float2 panner24_g1973 = ( 1.0 * _Time.y * ( float2( 1,0 ) * _BeachFoamSpeed ) + rotator18_g1973);
+				float cos17_g1973 = cos( _Vector3.y );
+				float sin17_g1973 = sin( _Vector3.y );
+				float2 rotator17_g1973 = mul( ( temp_output_8_0_g1973 * ( _BeachFoamTiling * 5.0 ) ).xy - float2( 0,0 ) , float2x2( cos17_g1973 , -sin17_g1973 , sin17_g1973 , cos17_g1973 )) + float2( 0,0 );
+				float2 panner22_g1973 = ( 1.0 * _Time.y * ( float2( 1,0 ) * _BeachFoamSpeed ) + rotator17_g1973);
+				float4 tex2DNode28_g1973 = tex2D( _BeachFoamMap, panner22_g1973 );
+				float4 lerpResult36_g1973 = lerp( float4( 0,0,0,0 ) , ( tex2D( _BeachFoamMap, panner24_g1973 ) * tex2DNode28_g1973 * tex2DNode28_g1973.a * Screen_depth_behind2369 ) , _BeachFoamTint);
+				float3 unityObjectToViewPos21_g1973 = TransformWorldToView( TransformObjectToWorld( IN.ase_texcoord8.xyz) );
+				float temp_output_25_0_g1973 = ( unityObjectToViewPos21_g1973.z + Screen_depth2306 );
+				float temp_output_51_0_g1973 = Screen_closeness2373;
+				float4 lerpResult43_g1973 = lerp( abs( ( lerpResult36_g1973 - float4( 0,0,0,0 ) ) ) , float4( 0,0,0,0 ) , saturate( ( ( ( temp_output_25_0_g1973 - 0.001 ) * temp_output_51_0_g1973 ) / ( ( _foamMax1 - 0.001 ) * temp_output_51_0_g1973 ) ) ));
+				float4 clampResult44_g1973 = clamp( lerpResult43_g1973 , float4( 0,0,0,0 ) , float4( 0.8602941,0.8602941,0.8602941,0 ) );
+				float4 temp_cast_8 = (( 1.0 - _BeachFoamStrength )).xxxx;
+				float4 temp_cast_9 = (0.0).xxxx;
+				#if defined(_ENABLEBEACHFOAM_ON)
+				float4 staticSwitch59_g1973 = pow( clampResult44_g1973 , temp_cast_8 );
+				#elif defined(_ENABLEBEACHFOAM_OFF)
+				float4 staticSwitch59_g1973 = temp_cast_9;
+				#else
+				float4 staticSwitch59_g1973 = pow( clampResult44_g1973 , temp_cast_8 );
+				#endif
+				float4 PWSFBeachFoam834 = staticSwitch59_g1973;
+				float screenDepth2739 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+				float distanceDepth2739 = saturate( abs( ( screenDepth2739 - LinearEyeDepth( ase_screenPosNorm.z,_ZBufferParams ) ) / ( _ShallowDepth ) ) );
+				float4 lerpResult2752 = lerp( _ShallowTint , _WaterTint , saturate( (distanceDepth2739*1.0 + _ShallowOffset) ));
+				float4 lerpResult3015 = lerp( _DepthTint , lerpResult2752 , saturate( (distanceDepth2739*-1.0 + _DepthOffset) ));
+				float4 temp_cast_10 = (0.0).xxxx;
+				#ifdef UNITY_PASS_FORWARDADD
+				float4 staticSwitch2469 = temp_cast_10;
+				#else
+				float4 staticSwitch2469 = lerpResult3015;
+				#endif
+				float4 ColorTintFinal444 = staticSwitch2469;
+				float4 temp_cast_11 = (0.0).xxxx;
+				float2 uv_NormalMap = IN.ase_texcoord9.xy * _NormalMap_ST.xy + _NormalMap_ST.zw;
+				float3 tanToWorld0 = float3( WorldSpaceTangent.x, WorldSpaceBiTangent.x, WorldSpaceNormal.x );
+				float3 tanToWorld1 = float3( WorldSpaceTangent.y, WorldSpaceBiTangent.y, WorldSpaceNormal.y );
+				float3 tanToWorld2 = float3( WorldSpaceTangent.z, WorldSpaceBiTangent.z, WorldSpaceNormal.z );
+				float3 tanNormal20_g1968 = UnpackNormalScale( tex2D( _NormalMap, uv_NormalMap ), 1.0f );
+				float3 worldNormal20_g1968 = normalize( float3(dot(tanToWorld0,tanNormal20_g1968), dot(tanToWorld1,tanNormal20_g1968), dot(tanToWorld2,tanNormal20_g1968)) );
+				float3 normalizeResult15_g1968 = normalize( worldNormal20_g1968 );
+				float3 _NormalMapWorld1987 = normalizeResult15_g1968;
+				float3 temp_cast_13 = (_NormalMapWorld1987.x).xxx;
+				float dotResult3_g1971 = dot( temp_cast_13 , SafeNormalize(_MainLightPosition.xyz) );
+				float _PWSFNdotL2044 = dotResult3_g1971;
+				float fresnelNdotV3778 = dot( WorldSpaceNormal, WorldSpaceViewDirection );
+				float fresnelNode3778 = ( 0.0 + _ReflectionFresnelScale * pow( 1.0 - fresnelNdotV3778, _ReflectionFresnelPower ) );
+				float4 lerpResult3783 = lerp( float4( 0,0,0,0 ) , tex2D( _ReflectionTex, ( ase_screenPosNorm + ( _PWSFNdotL2044 * _ReflectionWobble ) ).xy ) , ( fresnelNode3778 * _ReflectionIntensity ));
+				float4 temp_cast_15 = (0.0).xxxx;
+				#if defined(_ENABLEREFLECTION_ON)
+				float4 staticSwitch3821 = lerpResult3783;
+				#elif defined(_ENABLEREFLECTION_OFF)
+				float4 staticSwitch3821 = temp_cast_11;
+				#else
+				float4 staticSwitch3821 = temp_cast_11;
+				#endif
+				float4 temp_cast_16 = (0.0).xxxx;
+				#ifdef UNITY_PASS_FORWARDADD
+				float4 staticSwitch3787 = temp_cast_16;
+				#else
+				float4 staticSwitch3787 = staticSwitch3821;
+				#endif
+				float4 Reflection3788 = staticSwitch3787;
+				float mulTime6_g1968 = _Time.y * _NormalMapTimescale;
+				float2 temp_cast_17 = (_NormalMapSpeed).xx;
+				float2 temp_cast_18 = (_NormalMapTiling).xx;
+				float2 uv01_g1968 = IN.ase_texcoord9.xy * temp_cast_18 + float2( 0,0 );
+				float2 _Vector1 = float2(2,4);
+				float cos4_g1968 = cos( _Vector1.x );
+				float sin4_g1968 = sin( _Vector1.x );
+				float2 rotator4_g1968 = mul( uv01_g1968 - float2( 0,0 ) , float2x2( cos4_g1968 , -sin4_g1968 , sin4_g1968 , cos4_g1968 )) + float2( 0,0 );
+				float2 panner7_g1968 = ( mulTime6_g1968 * temp_cast_17 + rotator4_g1968);
+				float2 temp_cast_19 = (_NormalMapSpeed).xx;
+				float cos3_g1968 = cos( _Vector1.y );
+				float sin3_g1968 = sin( _Vector1.y );
+				float2 rotator3_g1968 = mul( uv01_g1968 - float2( 0,0 ) , float2x2( cos3_g1968 , -sin3_g1968 , sin3_g1968 , cos3_g1968 )) + float2( 0,0 );
+				float2 panner8_g1968 = ( mulTime6_g1968 * temp_cast_19 + rotator3_g1968);
+				float2 temp_cast_20 = (_NormalMapSpeed).xx;
+				float2 panner11_g1968 = ( mulTime6_g1968 * temp_cast_20 + uv01_g1968);
+				float4 color22_g1968 = IsGammaSpace() ? float4(0,0,0,0.5607843) : float4(0,0,0,0.5607843);
+				float3 lerpResult32_g1968 = lerp( BlendNormal( BlendNormal( UnpackNormalScale( tex2D( _NormalMap, panner7_g1968 ), _NormalMapStrength ) , UnpackNormalScale( tex2D( _NormalMap, panner8_g1968 ), _NormalMapStrength ) ) , UnpackNormalScale( tex2D( _NormalMap, panner11_g1968 ), _NormalMapStrength ) ) , float3( 0,0,0 ) , color22_g1968.rgb);
+				float3 normalizeResult25_g1968 = normalize( lerpResult32_g1968 );
+				float3 _NormalMapAnimated982 = normalizeResult25_g1968;
+				float Opacity2371 = ( IN.ase_color.a * ( 1.0 - _OpacityOcean ) );
+				float fresnelNdotV19_g1972 = dot( WorldSpaceNormal, WorldSpaceViewDirection );
+				float fresnelNode19_g1972 = ( 0.0 + 1.0 * pow( 1.0 - fresnelNdotV19_g1972, 5.0 ) );
+				float lerpResult26_g1972 = lerp( 0.0 , _NormalMapAnimated982.x , ( Opacity2371 * 0.0 * temp_output_16_0_g1972 * ( 1.0 - fresnelNode19_g1972 ) * temp_output_8_0_g1972 ));
+				float4 ase_grabScreenPos = ASE_ComputeGrabScreenPos( screenPos );
+				float4 ase_grabScreenPosNorm = ase_grabScreenPos / ase_grabScreenPos.w;
+				float4 temp_output_28_0_g1972 = ( lerpResult26_g1972 + ase_grabScreenPosNorm );
+				float4 fetchOpaqueVal30_g1972 = float4( SHADERGRAPH_SAMPLE_SCENE_COLOR( temp_output_28_0_g1972.xy ), 1.0 );
+				float4 temp_cast_24 = (0.0).xxxx;
+				#ifdef UNITY_PASS_FORWARDADD
+				float4 staticSwitch31_g1972 = temp_cast_24;
+				#else
+				float4 staticSwitch31_g1972 = fetchOpaqueVal30_g1972;
+				#endif
+				float4 Grab_screen_color2433 = staticSwitch31_g1972;
+				float DepthTintAlpha3003 = ( saturate( (distanceDepth2739*-5.0 + 1.0) ) * _OpacityBeach );
+				#ifdef UNITY_PASS_FORWARDADD
+				float staticSwitch3180 = 0.0;
+				#else
+				float staticSwitch3180 = ( 1.0 - ( ( 1.0 - DepthTintAlpha3003 ) * Opacity2371 ) );
+				#endif
+				float4 lerpResult3006 = lerp( ( ( ( PWSFOceanFoam302 + PWSFBeachFoam834 ) + ColorTintFinal444 ) + Reflection3788 ) , Grab_screen_color2433 , staticSwitch3180);
+				
+				float perceptualSmoothness9_g1982 = _Smoothness;
+				float3 geometricNormalWS9_g1982 = WorldSpaceNormal;
+				float screenSpaceVariance9_g1982 = _SmoothnessVariance;
+				float threshold9_g1982 = _SmoothnessThreshold;
+				float localGetGeometricNormalVariance9_g1982 = GetGeometricNormalVariance( perceptualSmoothness9_g1982 , geometricNormalWS9_g1982 , screenSpaceVariance9_g1982 , threshold9_g1982 );
+				float _176_g1981 = localGetGeometricNormalVariance9_g1982;
+				float switchResult16_g1982 = (((ase_vface>0)?(1.0):(localGetGeometricNormalVariance9_g1982)));
+				float _1171_g1981 = switchResult16_g1982;
+				float ENUM173_g1981 = (float)_SmoothnessMode;
+				float lerpResult275_g1981 = lerp( _176_g1981 , _1171_g1981 , saturate( ENUM173_g1981 ));
+				float switchResult7_g1982 = (((ase_vface>0)?(localGetGeometricNormalVariance9_g1982):(0.0)));
+				float _2170_g1981 = switchResult7_g1982;
+				float lerpResult271_g1981 = lerp( lerpResult275_g1981 , _2170_g1981 , saturate( ( ENUM173_g1981 - 1.0 ) ));
+				half THREE27_g1981 = lerpResult271_g1981;
+				float PWSFSmoothnessGeometricSpecular2432 = THREE27_g1981;
+				
+				
+		        float3 Albedo = lerpResult3006.rgb;
+				float3 Normal = saturate( _NormalMapAnimated982 );
+				float3 Emission = 0;
+				float3 Specular = float3(0.5, 0.5, 0.5);
+				float Metallic = 0;
+				float Smoothness = PWSFSmoothnessGeometricSpecular2432;
+				float Occlusion = 1;
+				float Alpha = 1;
+				float AlphaClipThreshold = 0;
+
+        		InputData inputData;
+        		inputData.positionWS = WorldSpacePosition;
+
+        #ifdef _NORMALMAP
+        	    inputData.normalWS = normalize(TransformTangentToWorld(Normal, half3x3(WorldSpaceTangent, WorldSpaceBiTangent, WorldSpaceNormal)));
+        #else
+            #if !SHADER_HINT_NICE_QUALITY
+                inputData.normalWS = WorldSpaceNormal;
+            #else
+        	    inputData.normalWS = normalize(WorldSpaceNormal);
+            #endif
+        #endif
+
+			#if !SHADER_HINT_NICE_QUALITY
+        	    // viewDirection should be normalized here, but we avoid doing it as it's close enough and we save some ALU.
+        	    inputData.viewDirectionWS = WorldSpaceViewDirection;
+			#else
+        	    inputData.viewDirectionWS = normalize(WorldSpaceViewDirection);
+			#endif
+
+        	    inputData.shadowCoord = IN.shadowCoord;
+			#ifdef ASE_FOG
+        	    inputData.fogCoord = IN.fogFactorAndVertexLight.x;
+			#endif
+        	    inputData.vertexLighting = IN.fogFactorAndVertexLight.yzw;
+        	    inputData.bakedGI = SAMPLE_GI(IN.lightmapUVOrVertexSH.xy, IN.lightmapUVOrVertexSH.xyz, inputData.normalWS);
+
+        		half4 color = LightweightFragmentPBR(
+        			inputData, 
+        			Albedo, 
+        			Metallic, 
+        			Specular, 
+        			Smoothness, 
+        			Occlusion, 
+        			Emission, 
+        			Alpha);
+
+		#ifdef ASE_FOG
+			#ifdef TERRAIN_SPLAT_ADDPASS
+				color.rgb = MixFogColor(color.rgb, half3( 0, 0, 0 ), IN.fogFactorAndVertexLight.x );
+			#else
+				color.rgb = MixFog(color.rgb, IN.fogFactorAndVertexLight.x);
+			#endif
+		#endif
+
+        #if _AlphaClip
+        		clip(Alpha - AlphaClipThreshold);
+        #endif
+
+		#if ASE_LW_FINAL_COLOR_ALPHA_MULTIPLY
+				color.rgb *= color.a;
+		#endif
+		
+		#ifdef LOD_FADE_CROSSFADE
+				LODDitheringTransition (IN.clipPos.xyz, unity_LODFade.x);
+		#endif
+        		return color;
+            }
+
+        	ENDHLSL
+        }
+
+		
+        Pass
+        {
+			
+        	Name "ShadowCaster"
+            Tags { "LightMode"="ShadowCaster" }
+
+			ZWrite On
+			ZTest LEqual
+
+            HLSLPROGRAM
+            #pragma multi_compile _ LOD_FADE_CROSSFADE
+            #pragma multi_compile_fog
+            #define ASE_FOG 1
+            #define ASE_SRP_VERSION 50702
+            #define _NORMALMAP 1
+
+            // Required to compile gles 2.0 with standard srp library
+            #pragma prefer_hlslcc gles
+            #pragma exclude_renderers d3d11_9x
+            
+
+            //--------------------------------------
+            // GPU Instancing
+            #pragma multi_compile_instancing
+
+            #pragma vertex ShadowPassVertex
+            #pragma fragment ShadowPassFragment
+
+
+            #include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/Lighting.hlsl"
+            #include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/ShaderGraphFunctions.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
+
+            
+
+            struct GraphVertexInput
+            {
+                float4 vertex : POSITION;
+                float3 ase_normal : NORMAL;
+				
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+            };
+
+			half PWSF_GlobalWindIntensityWater;
+			CBUFFER_START( UnityPerMaterial )
+			int _CullMode1;
+			float _BeachRange;
+			float _BeachPower;
+			float _BeachOffset;
+			float _BeachIntensity;
+			float _OceanRange;
+			float _OceanPower;
+			float _OceanOffset;
+			float _OceanIntensity;
+			float3 _WaveHeightValueXYZ;
+			float _WaveHeight;
+			float4 _Wave01;
+			float _WaveSpeed;
+			float4 _Wave02;
+			float4 _Wave03;
+			float4 _OceanFoamTint;
+			float _OceanFoamSpeed;
+			float _OceanFoamTiling;
+			float _foamMax2;
+			float _OceanFoamStrength;
+			float _BeachFoamSpeed;
+			float _BeachFoamTiling;
+			float4 _BeachFoamTint;
+			float _foamMax1;
+			float _BeachFoamStrength;
+			float4 _DepthTint;
+			float4 _ShallowTint;
+			float4 _WaterTint;
+			float _ShallowDepth;
+			float _ShallowOffset;
+			float _DepthOffset;
+			float4 _NormalMap_ST;
+			float _ReflectionWobble;
+			float _ReflectionFresnelScale;
+			float _ReflectionFresnelPower;
+			float _ReflectionIntensity;
+			float _NormalMapStrength;
+			float _NormalMapTimescale;
+			float _NormalMapSpeed;
+			float _NormalMapTiling;
+			float _OpacityOcean;
+			float _OpacityBeach;
+			float _Smoothness;
+			float _SmoothnessVariance;
+			float _SmoothnessThreshold;
+			int _SmoothnessMode;
+			CBUFFER_END
+
+
+        	struct VertexOutput
+        	{
+        	    float4 clipPos      : SV_POSITION;
+                
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+				UNITY_VERTEX_OUTPUT_STEREO
+        	};
+
+			float CorrectedLinearEyeDepth( float z , float correctionFactor )
+			{
+				return 1.f / (z / UNITY_MATRIX_P._34 + correctionFactor);
+			}
+			
+			float4 CalculateObliqueFrustumCorrection(  )
+			{
+				float x1 = -UNITY_MATRIX_P._31 / (UNITY_MATRIX_P._11 * UNITY_MATRIX_P._34);
+				float x2 = -UNITY_MATRIX_P._32 / (UNITY_MATRIX_P._22 * UNITY_MATRIX_P._34);
+				return float4(x1, x2, 0, UNITY_MATRIX_P._33 / UNITY_MATRIX_P._34 + x1 * UNITY_MATRIX_P._13 + x2 * UNITY_MATRIX_P._23);
+			}
+			
+			float GetGeometricNormalVariance( float perceptualSmoothness , float3 geometricNormalWS , float screenSpaceVariance , float threshold )
+			{
+				#define PerceptualSmoothnessToRoughness(perceptualSmoothness) (1.0 - perceptualSmoothness) * (1.0 - perceptualSmoothness)
+				#define RoughnessToPerceptualSmoothness(roughness) 1.0 - sqrt(roughness)
+				float3 deltaU = ddx(geometricNormalWS);
+				float3 deltaV = ddy(geometricNormalWS);
+				float variance = screenSpaceVariance * (dot(deltaU, deltaU) + dot(deltaV, deltaV));
+				float roughness = PerceptualSmoothnessToRoughness(perceptualSmoothness);
+				// Ref: Geometry into Shading - http://graphics.pixar.com/library/BumpRoughness/paper.pdf - equation (3)
+				float squaredRoughness = saturate(roughness * roughness + min(2.0 * variance, threshold * threshold)); // threshold can be really low, square the value for easier
+				return RoughnessToPerceptualSmoothness(sqrt(squaredRoughness));
+			}
+			
+			float3 PWSFGerstnerWavesSRP( float4 wave , float wspeed , float3 p , inout float3 tangent , inout float3 binormal )
+			{
+					float steepness = wave.z;
+					float wavelength = wave.w;
+					float k = 2 * PI / wavelength;
+					float c = sqrt(9.8 / k);
+					float2 d = normalize(wave.xy);
+					float s = _Time.y * wspeed;
+					float f = k * (dot(d, p.xz) - c * s);
+					float a = steepness / k;
+					float S, C;
+					sincos(f, /*out*/ S, /*out*/ C);
+					tangent += float3(
+						-d.x * d.x * (steepness * S),
+						d.x * (steepness * C),
+						-d.x * d.y * (steepness * S)
+						);
+					binormal += float3(
+						-d.x * d.y * (steepness * S),
+						d.y * (steepness * C),
+						-d.y * d.y * (steepness * S)
+						);
+					return float3(
+						d.x * (a * C),
+						a * S,
+						d.y * (a * C)
+						);
+			}
+			
+
+            // x: global clip space bias, y: normal world space bias
+            float3 _LightDirection;
+
+            VertexOutput ShadowPassVertex(GraphVertexInput v )
+        	{
+        	    VertexOutput o;
+        	    UNITY_SETUP_INSTANCE_ID(v);
+                UNITY_TRANSFER_INSTANCE_ID(v, o);
+				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO (o);
+
+				float3 ase_worldPos = mul(GetObjectToWorldMatrix(), v.vertex).xyz;
+				float temp_output_66_0_g1980 = distance( _WorldSpaceCameraPos , ase_worldPos );
+				float temp_output_82_0_g1980 = ( pow( ( temp_output_66_0_g1980 / _BeachRange ) , _BeachPower ) - _BeachOffset );
+				float temp_output_85_0_g1980 = saturate( temp_output_82_0_g1980 );
+				float temp_output_70_0_g1980 = ( pow( ( temp_output_66_0_g1980 / _OceanRange ) , _OceanPower ) - _OceanOffset );
+				float temp_output_71_0_g1980 = saturate( temp_output_70_0_g1980 );
+				float4 wave7_g1980 = _Wave01;
+				float temp_output_41_0_g1980 = ( _WaveSpeed + PWSF_GlobalWindIntensityWater );
+				float wspeed7_g1980 = temp_output_41_0_g1980;
+				float3 p7_g1980 = v.vertex.xyz;
+				float3 tangent7_g1980 = float3(1,0,0);
+				float3 binormal7_g1980 = float3(0,0,1);
+				float3 localPWSFGerstnerWavesSRP7_g1980 = PWSFGerstnerWavesSRP( wave7_g1980 , wspeed7_g1980 , p7_g1980 , tangent7_g1980 , binormal7_g1980 );
+				float4 wave44_g1980 = _Wave02;
+				float wspeed44_g1980 = temp_output_41_0_g1980;
+				float3 p44_g1980 = v.vertex.xyz;
+				float3 tangent44_g1980 = tangent7_g1980;
+				float3 binormal44_g1980 = binormal7_g1980;
+				float3 localPWSFGerstnerWavesSRP44_g1980 = PWSFGerstnerWavesSRP( wave44_g1980 , wspeed44_g1980 , p44_g1980 , tangent44_g1980 , binormal44_g1980 );
+				float4 wave45_g1980 = _Wave03;
+				float wspeed45_g1980 = temp_output_41_0_g1980;
+				float3 p45_g1980 = v.vertex.xyz;
+				float3 tangent45_g1980 = tangent44_g1980;
+				float3 binormal45_g1980 = binormal44_g1980;
+				float3 localPWSFGerstnerWavesSRP45_g1980 = PWSFGerstnerWavesSRP( wave45_g1980 , wspeed45_g1980 , p45_g1980 , tangent45_g1980 , binormal45_g1980 );
+				float3 PWSFGerstnerLocalVertOffset1382 = ( ( ( 1.0 - temp_output_85_0_g1980 ) * _BeachIntensity ) * ( ( temp_output_71_0_g1980 * _OceanIntensity ) * ( ( _WaveHeightValueXYZ * _WaveHeight ) * ( localPWSFGerstnerWavesSRP7_g1980 + localPWSFGerstnerWavesSRP44_g1980 + localPWSFGerstnerWavesSRP45_g1980 ) ) ) );
+				
+				float3 normalizeResult12_g1980 = normalize( cross( binormal45_g1980 , tangent45_g1980 ) );
+				float3 PWSFGerstnerLocalVertNormal1384 = saturate( normalizeResult12_g1980 );
+				
+				#ifdef ASE_ABSOLUTE_VERTEX_POS
+				float3 defaultVertexValue = v.vertex.xyz;
+				#else
+				float3 defaultVertexValue = float3(0, 0, 0);
+				#endif
+				float3 vertexValue = PWSFGerstnerLocalVertOffset1382;
+				#ifdef ASE_ABSOLUTE_VERTEX_POS
+				v.vertex.xyz = vertexValue;
+				#else
+				v.vertex.xyz += vertexValue;
+				#endif
+
+				v.ase_normal = PWSFGerstnerLocalVertNormal1384;
+
+        	    float3 positionWS = TransformObjectToWorld(v.vertex.xyz);
+                float3 normalWS = TransformObjectToWorldDir(v.ase_normal);
+
+                float invNdotL = 1.0 - saturate(dot(_LightDirection, normalWS));
+                float scale = invNdotL * _ShadowBias.y;
+
+                // normal bias is negative since we want to apply an inset normal offset
+                positionWS = _LightDirection * _ShadowBias.xxx + positionWS;
+				positionWS = normalWS * scale.xxx + positionWS;
+                float4 clipPos = TransformWorldToHClip(positionWS);
+
+                // _ShadowBias.x sign depens on if platform has reversed z buffer
+                //clipPos.z += _ShadowBias.x;
+
+        	#if UNITY_REVERSED_Z
+        	    clipPos.z = min(clipPos.z, clipPos.w * UNITY_NEAR_CLIP_VALUE);
+        	#else
+        	    clipPos.z = max(clipPos.z, clipPos.w * UNITY_NEAR_CLIP_VALUE);
+        	#endif
+                o.clipPos = clipPos;
+
+        	    return o;
+        	}
+
+            half4 ShadowPassFragment(VertexOutput IN  ) : SV_TARGET
+            {
+                UNITY_SETUP_INSTANCE_ID(IN);
+				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
+
+               
+
+				float Alpha = 1;
+				float AlphaClipThreshold = AlphaClipThreshold;
+
+         #if _AlphaClip
+        		clip(Alpha - AlphaClipThreshold);
+        #endif
+
+		#ifdef LOD_FADE_CROSSFADE
+				LODDitheringTransition (IN.clipPos.xyz, unity_LODFade.x);
+		#endif
+				return 0;
+            }
+
+            ENDHLSL
+        }
+
+		
+        Pass
+        {
+			
+        	Name "DepthOnly"
+            Tags { "LightMode"="DepthOnly" }
+
+            ZWrite On
+			ColorMask 0
+
+            HLSLPROGRAM
+            #pragma multi_compile _ LOD_FADE_CROSSFADE
+            #pragma multi_compile_fog
+            #define ASE_FOG 1
+            #define ASE_SRP_VERSION 50702
+            #define _NORMALMAP 1
+
+            // Required to compile gles 2.0 with standard srp library
+            #pragma prefer_hlslcc gles
+            #pragma exclude_renderers d3d11_9x
+
+            //--------------------------------------
+            // GPU Instancing
+            #pragma multi_compile_instancing
+
+            #pragma vertex vert
+            #pragma fragment frag
+
+
+            #include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/Lighting.hlsl"
+            #include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/ShaderGraphFunctions.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
+
+            
+
+			half PWSF_GlobalWindIntensityWater;
+			CBUFFER_START( UnityPerMaterial )
+			int _CullMode1;
+			float _BeachRange;
+			float _BeachPower;
+			float _BeachOffset;
+			float _BeachIntensity;
+			float _OceanRange;
+			float _OceanPower;
+			float _OceanOffset;
+			float _OceanIntensity;
+			float3 _WaveHeightValueXYZ;
+			float _WaveHeight;
+			float4 _Wave01;
+			float _WaveSpeed;
+			float4 _Wave02;
+			float4 _Wave03;
+			float4 _OceanFoamTint;
+			float _OceanFoamSpeed;
+			float _OceanFoamTiling;
+			float _foamMax2;
+			float _OceanFoamStrength;
+			float _BeachFoamSpeed;
+			float _BeachFoamTiling;
+			float4 _BeachFoamTint;
+			float _foamMax1;
+			float _BeachFoamStrength;
+			float4 _DepthTint;
+			float4 _ShallowTint;
+			float4 _WaterTint;
+			float _ShallowDepth;
+			float _ShallowOffset;
+			float _DepthOffset;
+			float4 _NormalMap_ST;
+			float _ReflectionWobble;
+			float _ReflectionFresnelScale;
+			float _ReflectionFresnelPower;
+			float _ReflectionIntensity;
+			float _NormalMapStrength;
+			float _NormalMapTimescale;
+			float _NormalMapSpeed;
+			float _NormalMapTiling;
+			float _OpacityOcean;
+			float _OpacityBeach;
+			float _Smoothness;
+			float _SmoothnessVariance;
+			float _SmoothnessThreshold;
+			int _SmoothnessMode;
+			CBUFFER_END
+
+
+            struct GraphVertexInput
+            {
+                float4 vertex : POSITION;
+				float3 ase_normal : NORMAL;
+				
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+            };
+
+        	struct VertexOutput
+        	{
+        	    float4 clipPos      : SV_POSITION;
+                
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+                UNITY_VERTEX_OUTPUT_STEREO
+        	};
+
+			float CorrectedLinearEyeDepth( float z , float correctionFactor )
+			{
+				return 1.f / (z / UNITY_MATRIX_P._34 + correctionFactor);
+			}
+			
+			float4 CalculateObliqueFrustumCorrection(  )
+			{
+				float x1 = -UNITY_MATRIX_P._31 / (UNITY_MATRIX_P._11 * UNITY_MATRIX_P._34);
+				float x2 = -UNITY_MATRIX_P._32 / (UNITY_MATRIX_P._22 * UNITY_MATRIX_P._34);
+				return float4(x1, x2, 0, UNITY_MATRIX_P._33 / UNITY_MATRIX_P._34 + x1 * UNITY_MATRIX_P._13 + x2 * UNITY_MATRIX_P._23);
+			}
+			
+			float GetGeometricNormalVariance( float perceptualSmoothness , float3 geometricNormalWS , float screenSpaceVariance , float threshold )
+			{
+				#define PerceptualSmoothnessToRoughness(perceptualSmoothness) (1.0 - perceptualSmoothness) * (1.0 - perceptualSmoothness)
+				#define RoughnessToPerceptualSmoothness(roughness) 1.0 - sqrt(roughness)
+				float3 deltaU = ddx(geometricNormalWS);
+				float3 deltaV = ddy(geometricNormalWS);
+				float variance = screenSpaceVariance * (dot(deltaU, deltaU) + dot(deltaV, deltaV));
+				float roughness = PerceptualSmoothnessToRoughness(perceptualSmoothness);
+				// Ref: Geometry into Shading - http://graphics.pixar.com/library/BumpRoughness/paper.pdf - equation (3)
+				float squaredRoughness = saturate(roughness * roughness + min(2.0 * variance, threshold * threshold)); // threshold can be really low, square the value for easier
+				return RoughnessToPerceptualSmoothness(sqrt(squaredRoughness));
+			}
+			
+			float3 PWSFGerstnerWavesSRP( float4 wave , float wspeed , float3 p , inout float3 tangent , inout float3 binormal )
+			{
+					float steepness = wave.z;
+					float wavelength = wave.w;
+					float k = 2 * PI / wavelength;
+					float c = sqrt(9.8 / k);
+					float2 d = normalize(wave.xy);
+					float s = _Time.y * wspeed;
+					float f = k * (dot(d, p.xz) - c * s);
+					float a = steepness / k;
+					float S, C;
+					sincos(f, /*out*/ S, /*out*/ C);
+					tangent += float3(
+						-d.x * d.x * (steepness * S),
+						d.x * (steepness * C),
+						-d.x * d.y * (steepness * S)
+						);
+					binormal += float3(
+						-d.x * d.y * (steepness * S),
+						d.y * (steepness * C),
+						-d.y * d.y * (steepness * S)
+						);
+					return float3(
+						d.x * (a * C),
+						a * S,
+						d.y * (a * C)
+						);
+			}
+			
+           
+
+            VertexOutput vert(GraphVertexInput v  )
+            {
+                VertexOutput o = (VertexOutput)0;
+        	    UNITY_SETUP_INSTANCE_ID(v);
+                UNITY_TRANSFER_INSTANCE_ID(v, o);
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+
+				float3 ase_worldPos = mul(GetObjectToWorldMatrix(), v.vertex).xyz;
+				float temp_output_66_0_g1980 = distance( _WorldSpaceCameraPos , ase_worldPos );
+				float temp_output_82_0_g1980 = ( pow( ( temp_output_66_0_g1980 / _BeachRange ) , _BeachPower ) - _BeachOffset );
+				float temp_output_85_0_g1980 = saturate( temp_output_82_0_g1980 );
+				float temp_output_70_0_g1980 = ( pow( ( temp_output_66_0_g1980 / _OceanRange ) , _OceanPower ) - _OceanOffset );
+				float temp_output_71_0_g1980 = saturate( temp_output_70_0_g1980 );
+				float4 wave7_g1980 = _Wave01;
+				float temp_output_41_0_g1980 = ( _WaveSpeed + PWSF_GlobalWindIntensityWater );
+				float wspeed7_g1980 = temp_output_41_0_g1980;
+				float3 p7_g1980 = v.vertex.xyz;
+				float3 tangent7_g1980 = float3(1,0,0);
+				float3 binormal7_g1980 = float3(0,0,1);
+				float3 localPWSFGerstnerWavesSRP7_g1980 = PWSFGerstnerWavesSRP( wave7_g1980 , wspeed7_g1980 , p7_g1980 , tangent7_g1980 , binormal7_g1980 );
+				float4 wave44_g1980 = _Wave02;
+				float wspeed44_g1980 = temp_output_41_0_g1980;
+				float3 p44_g1980 = v.vertex.xyz;
+				float3 tangent44_g1980 = tangent7_g1980;
+				float3 binormal44_g1980 = binormal7_g1980;
+				float3 localPWSFGerstnerWavesSRP44_g1980 = PWSFGerstnerWavesSRP( wave44_g1980 , wspeed44_g1980 , p44_g1980 , tangent44_g1980 , binormal44_g1980 );
+				float4 wave45_g1980 = _Wave03;
+				float wspeed45_g1980 = temp_output_41_0_g1980;
+				float3 p45_g1980 = v.vertex.xyz;
+				float3 tangent45_g1980 = tangent44_g1980;
+				float3 binormal45_g1980 = binormal44_g1980;
+				float3 localPWSFGerstnerWavesSRP45_g1980 = PWSFGerstnerWavesSRP( wave45_g1980 , wspeed45_g1980 , p45_g1980 , tangent45_g1980 , binormal45_g1980 );
+				float3 PWSFGerstnerLocalVertOffset1382 = ( ( ( 1.0 - temp_output_85_0_g1980 ) * _BeachIntensity ) * ( ( temp_output_71_0_g1980 * _OceanIntensity ) * ( ( _WaveHeightValueXYZ * _WaveHeight ) * ( localPWSFGerstnerWavesSRP7_g1980 + localPWSFGerstnerWavesSRP44_g1980 + localPWSFGerstnerWavesSRP45_g1980 ) ) ) );
+				
+				float3 normalizeResult12_g1980 = normalize( cross( binormal45_g1980 , tangent45_g1980 ) );
+				float3 PWSFGerstnerLocalVertNormal1384 = saturate( normalizeResult12_g1980 );
+				
+				#ifdef ASE_ABSOLUTE_VERTEX_POS
+				float3 defaultVertexValue = v.vertex.xyz;
+				#else
+				float3 defaultVertexValue = float3(0, 0, 0);
+				#endif
+				float3 vertexValue = PWSFGerstnerLocalVertOffset1382;
+				#ifdef ASE_ABSOLUTE_VERTEX_POS
+				v.vertex.xyz = vertexValue;
+				#else
+				v.vertex.xyz += vertexValue;
+				#endif
+
+				v.ase_normal = PWSFGerstnerLocalVertNormal1384;
+
+        	    o.clipPos = TransformObjectToHClip(v.vertex.xyz);
+        	    return o;
+            }
+
+            half4 frag(VertexOutput IN  ) : SV_TARGET
+            {
+                UNITY_SETUP_INSTANCE_ID(IN);
+
+				
+
+				float Alpha = 1;
+				float AlphaClipThreshold = AlphaClipThreshold;
+
+         #if _AlphaClip
+        		clip(Alpha - AlphaClipThreshold);
+        #endif
+		#ifdef LOD_FADE_CROSSFADE
+				LODDitheringTransition (IN.clipPos.xyz, unity_LODFade.x);
+		#endif
+				return 0;
+            }
+            ENDHLSL
+        }
+
+        // This pass it not used during regular rendering, only for lightmap baking.
+		
+        Pass
+        {
+			
+        	Name "Meta"
+            Tags { "LightMode"="Meta" }
+
+            Cull Off
+
+            HLSLPROGRAM
+            #pragma multi_compile _ LOD_FADE_CROSSFADE
+            #pragma multi_compile_fog
+            #define ASE_FOG 1
+            #define ASE_SRP_VERSION 50702
+            #define _NORMALMAP 1
+            #define REQUIRE_DEPTH_TEXTURE 1
+            #define REQUIRE_OPAQUE_TEXTURE 1
+
+            // Required to compile gles 2.0 with standard srp library
+            #pragma prefer_hlslcc gles
+            #pragma exclude_renderers d3d11_9x
+
+            #pragma vertex vert
+            #pragma fragment frag
+
+			
+            #include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/MetaInput.hlsl"
+            #include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/ShaderGraphFunctions.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
+
+            #pragma multi_compile_local _ENABLEOCEANFOAM1_ON _ENABLEOCEANFOAM1_OFF
+            #pragma multi_compile_local _ENABLEBEACHFOAM_ON _ENABLEBEACHFOAM_OFF
+            #pragma multi_compile_local _ENABLEREFLECTION_ON _ENABLEREFLECTION_OFF
+
+
+			half PWSF_GlobalWindIntensityWater;
+			uniform float4 _CameraDepthTexture_TexelSize;
+			sampler2D _OceanFoamMap;
+			sampler2D _BeachFoamMap;
+			sampler2D _ReflectionTex;
+			sampler2D _NormalMap;
+			CBUFFER_START( UnityPerMaterial )
+			int _CullMode1;
+			float _BeachRange;
+			float _BeachPower;
+			float _BeachOffset;
+			float _BeachIntensity;
+			float _OceanRange;
+			float _OceanPower;
+			float _OceanOffset;
+			float _OceanIntensity;
+			float3 _WaveHeightValueXYZ;
+			float _WaveHeight;
+			float4 _Wave01;
+			float _WaveSpeed;
+			float4 _Wave02;
+			float4 _Wave03;
+			float4 _OceanFoamTint;
+			float _OceanFoamSpeed;
+			float _OceanFoamTiling;
+			float _foamMax2;
+			float _OceanFoamStrength;
+			float _BeachFoamSpeed;
+			float _BeachFoamTiling;
+			float4 _BeachFoamTint;
+			float _foamMax1;
+			float _BeachFoamStrength;
+			float4 _DepthTint;
+			float4 _ShallowTint;
+			float4 _WaterTint;
+			float _ShallowDepth;
+			float _ShallowOffset;
+			float _DepthOffset;
+			float4 _NormalMap_ST;
+			float _ReflectionWobble;
+			float _ReflectionFresnelScale;
+			float _ReflectionFresnelPower;
+			float _ReflectionIntensity;
+			float _NormalMapStrength;
+			float _NormalMapTimescale;
+			float _NormalMapSpeed;
+			float _NormalMapTiling;
+			float _OpacityOcean;
+			float _OpacityBeach;
+			float _Smoothness;
+			float _SmoothnessVariance;
+			float _SmoothnessThreshold;
+			int _SmoothnessMode;
+			CBUFFER_END
+
+
+            #pragma shader_feature _ _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+            
+            struct GraphVertexInput
+            {
+                float4 vertex : POSITION;
+				float3 ase_normal : NORMAL;
+				float4 texcoord1 : TEXCOORD1;
+				float4 texcoord2 : TEXCOORD2;
+				float4 ase_texcoord : TEXCOORD0;
+				float4 ase_tangent : TANGENT;
+				float4 ase_color : COLOR;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+            };
+
+        	struct VertexOutput
+        	{
+        	    float4 clipPos      : SV_POSITION;
+                float4 ase_texcoord : TEXCOORD0;
+                float4 ase_texcoord1 : TEXCOORD1;
+                float4 ase_texcoord2 : TEXCOORD2;
+                float4 ase_texcoord3 : TEXCOORD3;
+                float4 ase_texcoord4 : TEXCOORD4;
+                float4 ase_texcoord5 : TEXCOORD5;
+                float4 ase_texcoord6 : TEXCOORD6;
+                float4 ase_color : COLOR;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+                UNITY_VERTEX_OUTPUT_STEREO
+        	};
+
+			float CorrectedLinearEyeDepth( float z , float correctionFactor )
+			{
+				return 1.f / (z / UNITY_MATRIX_P._34 + correctionFactor);
+			}
+			
+			float4 CalculateObliqueFrustumCorrection(  )
+			{
+				float x1 = -UNITY_MATRIX_P._31 / (UNITY_MATRIX_P._11 * UNITY_MATRIX_P._34);
+				float x2 = -UNITY_MATRIX_P._32 / (UNITY_MATRIX_P._22 * UNITY_MATRIX_P._34);
+				return float4(x1, x2, 0, UNITY_MATRIX_P._33 / UNITY_MATRIX_P._34 + x1 * UNITY_MATRIX_P._13 + x2 * UNITY_MATRIX_P._23);
+			}
+			
+			float GetGeometricNormalVariance( float perceptualSmoothness , float3 geometricNormalWS , float screenSpaceVariance , float threshold )
+			{
+				#define PerceptualSmoothnessToRoughness(perceptualSmoothness) (1.0 - perceptualSmoothness) * (1.0 - perceptualSmoothness)
+				#define RoughnessToPerceptualSmoothness(roughness) 1.0 - sqrt(roughness)
+				float3 deltaU = ddx(geometricNormalWS);
+				float3 deltaV = ddy(geometricNormalWS);
+				float variance = screenSpaceVariance * (dot(deltaU, deltaU) + dot(deltaV, deltaV));
+				float roughness = PerceptualSmoothnessToRoughness(perceptualSmoothness);
+				// Ref: Geometry into Shading - http://graphics.pixar.com/library/BumpRoughness/paper.pdf - equation (3)
+				float squaredRoughness = saturate(roughness * roughness + min(2.0 * variance, threshold * threshold)); // threshold can be really low, square the value for easier
+				return RoughnessToPerceptualSmoothness(sqrt(squaredRoughness));
+			}
+			
+			float3 PWSFGerstnerWavesSRP( float4 wave , float wspeed , float3 p , inout float3 tangent , inout float3 binormal )
+			{
+					float steepness = wave.z;
+					float wavelength = wave.w;
+					float k = 2 * PI / wavelength;
+					float c = sqrt(9.8 / k);
+					float2 d = normalize(wave.xy);
+					float s = _Time.y * wspeed;
+					float f = k * (dot(d, p.xz) - c * s);
+					float a = steepness / k;
+					float S, C;
+					sincos(f, /*out*/ S, /*out*/ C);
+					tangent += float3(
+						-d.x * d.x * (steepness * S),
+						d.x * (steepness * C),
+						-d.x * d.y * (steepness * S)
+						);
+					binormal += float3(
+						-d.x * d.y * (steepness * S),
+						d.y * (steepness * C),
+						-d.y * d.y * (steepness * S)
+						);
+					return float3(
+						d.x * (a * C),
+						a * S,
+						d.y * (a * C)
+						);
+			}
+			
+			inline float4 ASE_ComputeGrabScreenPos( float4 pos )
+			{
+				#if UNITY_UV_STARTS_AT_TOP
+				float scale = -1.0;
+				#else
+				float scale = 1.0;
+				#endif
+				float4 o = pos;
+				o.y = pos.w * 0.5f;
+				o.y = ( pos.y - o.y ) * _ProjectionParams.x * scale + o.y;
+				return o;
+			}
+			
+
+            VertexOutput vert(GraphVertexInput v  )
+            {
+                VertexOutput o = (VertexOutput)0;
+        	    UNITY_SETUP_INSTANCE_ID(v);
+                UNITY_TRANSFER_INSTANCE_ID(v, o);
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+				float3 ase_worldPos = mul(GetObjectToWorldMatrix(), v.vertex).xyz;
+				float temp_output_66_0_g1980 = distance( _WorldSpaceCameraPos , ase_worldPos );
+				float temp_output_82_0_g1980 = ( pow( ( temp_output_66_0_g1980 / _BeachRange ) , _BeachPower ) - _BeachOffset );
+				float temp_output_85_0_g1980 = saturate( temp_output_82_0_g1980 );
+				float temp_output_70_0_g1980 = ( pow( ( temp_output_66_0_g1980 / _OceanRange ) , _OceanPower ) - _OceanOffset );
+				float temp_output_71_0_g1980 = saturate( temp_output_70_0_g1980 );
+				float4 wave7_g1980 = _Wave01;
+				float temp_output_41_0_g1980 = ( _WaveSpeed + PWSF_GlobalWindIntensityWater );
+				float wspeed7_g1980 = temp_output_41_0_g1980;
+				float3 p7_g1980 = v.vertex.xyz;
+				float3 tangent7_g1980 = float3(1,0,0);
+				float3 binormal7_g1980 = float3(0,0,1);
+				float3 localPWSFGerstnerWavesSRP7_g1980 = PWSFGerstnerWavesSRP( wave7_g1980 , wspeed7_g1980 , p7_g1980 , tangent7_g1980 , binormal7_g1980 );
+				float4 wave44_g1980 = _Wave02;
+				float wspeed44_g1980 = temp_output_41_0_g1980;
+				float3 p44_g1980 = v.vertex.xyz;
+				float3 tangent44_g1980 = tangent7_g1980;
+				float3 binormal44_g1980 = binormal7_g1980;
+				float3 localPWSFGerstnerWavesSRP44_g1980 = PWSFGerstnerWavesSRP( wave44_g1980 , wspeed44_g1980 , p44_g1980 , tangent44_g1980 , binormal44_g1980 );
+				float4 wave45_g1980 = _Wave03;
+				float wspeed45_g1980 = temp_output_41_0_g1980;
+				float3 p45_g1980 = v.vertex.xyz;
+				float3 tangent45_g1980 = tangent44_g1980;
+				float3 binormal45_g1980 = binormal44_g1980;
+				float3 localPWSFGerstnerWavesSRP45_g1980 = PWSFGerstnerWavesSRP( wave45_g1980 , wspeed45_g1980 , p45_g1980 , tangent45_g1980 , binormal45_g1980 );
+				float3 PWSFGerstnerLocalVertOffset1382 = ( ( ( 1.0 - temp_output_85_0_g1980 ) * _BeachIntensity ) * ( ( temp_output_71_0_g1980 * _OceanIntensity ) * ( ( _WaveHeightValueXYZ * _WaveHeight ) * ( localPWSFGerstnerWavesSRP7_g1980 + localPWSFGerstnerWavesSRP44_g1980 + localPWSFGerstnerWavesSRP45_g1980 ) ) ) );
+				
+				float3 normalizeResult12_g1980 = normalize( cross( binormal45_g1980 , tangent45_g1980 ) );
+				float3 PWSFGerstnerLocalVertNormal1384 = saturate( normalizeResult12_g1980 );
+				
+				float4 ase_clipPos = TransformObjectToHClip((v.vertex).xyz);
+				float4 screenPos = ComputeScreenPos(ase_clipPos);
+				o.ase_texcoord = screenPos;
+				o.ase_texcoord3.xyz = ase_worldPos;
+				float3 ase_worldTangent = TransformObjectToWorldDir(v.ase_tangent.xyz);
+				o.ase_texcoord4.xyz = ase_worldTangent;
+				float3 ase_worldNormal = TransformObjectToWorldNormal(v.ase_normal);
+				o.ase_texcoord5.xyz = ase_worldNormal;
+				float ase_vertexTangentSign = v.ase_tangent.w * unity_WorldTransformParams.w;
+				float3 ase_worldBitangent = cross( ase_worldNormal, ase_worldTangent ) * ase_vertexTangentSign;
+				o.ase_texcoord6.xyz = ase_worldBitangent;
+				
+				o.ase_texcoord1 = v.vertex;
+				o.ase_texcoord2.xy = v.ase_texcoord.xy;
+				o.ase_color = v.ase_color;
+				
+				//setting value to unused interpolator channels and avoid initialization warnings
+				o.ase_texcoord2.zw = 0;
+				o.ase_texcoord3.w = 0;
+				o.ase_texcoord4.w = 0;
+				o.ase_texcoord5.w = 0;
+				o.ase_texcoord6.w = 0;
+				#ifdef ASE_ABSOLUTE_VERTEX_POS
+				float3 defaultVertexValue = v.vertex.xyz;
+				#else
+				float3 defaultVertexValue = float3(0, 0, 0);
+				#endif
+				float3 vertexValue = PWSFGerstnerLocalVertOffset1382;
+				#ifdef ASE_ABSOLUTE_VERTEX_POS
+				v.vertex.xyz = vertexValue;
+				#else
+				v.vertex.xyz += vertexValue;
+				#endif
+
+				v.ase_normal = PWSFGerstnerLocalVertNormal1384;
+#if !defined( ASE_SRP_VERSION ) || ASE_SRP_VERSION  > 51300				
+                o.clipPos = MetaVertexPosition(v.vertex, v.texcoord1.xy, v.texcoord1.xy, unity_LightmapST, unity_DynamicLightmapST);
+#else
+				o.clipPos = MetaVertexPosition (v.vertex, v.texcoord1.xy, v.texcoord2.xy, unity_LightmapST);
+#endif
+        	    return o;
+            }
+
+            half4 frag(VertexOutput IN  ) : SV_TARGET
+            {
+                UNITY_SETUP_INSTANCE_ID(IN);
+
+           		float4 screenPos = IN.ase_texcoord;
+           		float4 ase_screenPosNorm = screenPos / screenPos.w;
+           		ase_screenPosNorm.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm.z : ase_screenPosNorm.z * 0.5 + 0.5;
+           		float clampDepth3_g1972 = SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy );
+           		float z6_g1972 = clampDepth3_g1972;
+           		float4 localCalculateObliqueFrustumCorrection55_g1972 = CalculateObliqueFrustumCorrection();
+           		float dotResult53_g1972 = dot( float4( IN.ase_texcoord1.xyz , 0.0 ) , localCalculateObliqueFrustumCorrection55_g1972 );
+           		float correctionFactor6_g1972 = dotResult53_g1972;
+           		float localCorrectedLinearEyeDepth6_g1972 = CorrectedLinearEyeDepth( z6_g1972 , correctionFactor6_g1972 );
+           		float eyeDepth50_g1972 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+           		float temp_output_47_0_g1972 = ( eyeDepth50_g1972 - screenPos.w );
+           		float temp_output_7_0_g1972 = ( localCorrectedLinearEyeDepth6_g1972 - abs( temp_output_47_0_g1972 ) );
+           		float temp_output_8_0_g1972 = saturate( temp_output_7_0_g1972 );
+           		float Screen_depth_behind2369 = temp_output_8_0_g1972;
+           		float2 temp_cast_1 = (_OceanFoamSpeed).xx;
+           		float2 temp_cast_2 = (_OceanFoamTiling).xx;
+           		float2 uv04_g1974 = IN.ase_texcoord2.xy * temp_cast_2 + float2( 0,0 );
+           		float2 _Vector0 = float2(2,4);
+           		float cos5_g1974 = cos( _Vector0.x );
+           		float sin5_g1974 = sin( _Vector0.x );
+           		float2 rotator5_g1974 = mul( uv04_g1974 - float2( 0,0 ) , float2x2( cos5_g1974 , -sin5_g1974 , sin5_g1974 , cos5_g1974 )) + float2( 0,0 );
+           		float2 panner10_g1974 = ( 1.0 * _Time.y * temp_cast_1 + rotator5_g1974);
+           		float2 temp_cast_3 = (_OceanFoamSpeed).xx;
+           		float cos6_g1974 = cos( _Vector0.y );
+           		float sin6_g1974 = sin( _Vector0.y );
+           		float2 rotator6_g1974 = mul( uv04_g1974 - float2( 0,0 ) , float2x2( cos6_g1974 , -sin6_g1974 , sin6_g1974 , cos6_g1974 )) + float2( 0,0 );
+           		float2 panner11_g1974 = ( 1.0 * _Time.y * temp_cast_3 + rotator6_g1974);
+           		float2 temp_cast_4 = (_OceanFoamSpeed).xx;
+           		float2 panner8_g1974 = ( 1.0 * _Time.y * temp_cast_4 + uv04_g1974);
+           		float4 tex2DNode14_g1974 = tex2D( _OceanFoamMap, panner8_g1974 );
+           		float3 unityObjectToViewPos38_g1974 = TransformWorldToView( TransformObjectToWorld( IN.ase_texcoord1.xyz) );
+           		float Screen_depth2306 = localCorrectedLinearEyeDepth6_g1972;
+           		float temp_output_39_0_g1974 = ( unityObjectToViewPos38_g1974.z + Screen_depth2306 );
+           		float3 ase_worldPos = IN.ase_texcoord3.xyz;
+           		float temp_output_16_0_g1972 = saturate( ( 1.0 / distance( _WorldSpaceCameraPos , ase_worldPos ) ) );
+           		float Screen_closeness2373 = temp_output_16_0_g1972;
+           		float temp_output_44_0_g1974 = Screen_closeness2373;
+           		float4 lerpResult49_g1974 = lerp( float4( 0,0,0,0 ) , ( _OceanFoamTint * Screen_depth_behind2369 * ( ( tex2D( _OceanFoamMap, panner10_g1974 ) + tex2D( _OceanFoamMap, panner11_g1974 ) + tex2DNode14_g1974 ) / 3.0 ) ) , saturate( ( ( ( temp_output_39_0_g1974 - 0.001 ) * temp_output_44_0_g1974 ) / ( ( _foamMax2 - 0.001 ) * temp_output_44_0_g1974 ) ) ));
+           		float4 lerpResult25_g1974 = lerp( float4( 0,0,0,0 ) , lerpResult49_g1974 , _OceanFoamStrength);
+           		float4 temp_cast_5 = (0.0).xxxx;
+           		#if defined(_ENABLEOCEANFOAM1_ON)
+           		float4 staticSwitch33_g1974 = lerpResult25_g1974;
+           		#elif defined(_ENABLEOCEANFOAM1_OFF)
+           		float4 staticSwitch33_g1974 = temp_cast_5;
+           		#else
+           		float4 staticSwitch33_g1974 = lerpResult25_g1974;
+           		#endif
+           		float4 PWSFOceanFoam302 = staticSwitch33_g1974;
+           		float4 appendResult3_g1973 = (float4(ase_worldPos.x , ase_worldPos.z , 0.0 , 0.0));
+           		float4 temp_output_8_0_g1973 = ( ( appendResult3_g1973 / 10.0 ) * _BeachFoamTiling );
+           		float2 _Vector3 = float2(2,1);
+           		float cos18_g1973 = cos( _Vector3.x );
+           		float sin18_g1973 = sin( _Vector3.x );
+           		float2 rotator18_g1973 = mul( temp_output_8_0_g1973.xy - float2( 0,0 ) , float2x2( cos18_g1973 , -sin18_g1973 , sin18_g1973 , cos18_g1973 )) + float2( 0,0 );
+           		float2 panner24_g1973 = ( 1.0 * _Time.y * ( float2( 1,0 ) * _BeachFoamSpeed ) + rotator18_g1973);
+           		float cos17_g1973 = cos( _Vector3.y );
+           		float sin17_g1973 = sin( _Vector3.y );
+           		float2 rotator17_g1973 = mul( ( temp_output_8_0_g1973 * ( _BeachFoamTiling * 5.0 ) ).xy - float2( 0,0 ) , float2x2( cos17_g1973 , -sin17_g1973 , sin17_g1973 , cos17_g1973 )) + float2( 0,0 );
+           		float2 panner22_g1973 = ( 1.0 * _Time.y * ( float2( 1,0 ) * _BeachFoamSpeed ) + rotator17_g1973);
+           		float4 tex2DNode28_g1973 = tex2D( _BeachFoamMap, panner22_g1973 );
+           		float4 lerpResult36_g1973 = lerp( float4( 0,0,0,0 ) , ( tex2D( _BeachFoamMap, panner24_g1973 ) * tex2DNode28_g1973 * tex2DNode28_g1973.a * Screen_depth_behind2369 ) , _BeachFoamTint);
+           		float3 unityObjectToViewPos21_g1973 = TransformWorldToView( TransformObjectToWorld( IN.ase_texcoord1.xyz) );
+           		float temp_output_25_0_g1973 = ( unityObjectToViewPos21_g1973.z + Screen_depth2306 );
+           		float temp_output_51_0_g1973 = Screen_closeness2373;
+           		float4 lerpResult43_g1973 = lerp( abs( ( lerpResult36_g1973 - float4( 0,0,0,0 ) ) ) , float4( 0,0,0,0 ) , saturate( ( ( ( temp_output_25_0_g1973 - 0.001 ) * temp_output_51_0_g1973 ) / ( ( _foamMax1 - 0.001 ) * temp_output_51_0_g1973 ) ) ));
+           		float4 clampResult44_g1973 = clamp( lerpResult43_g1973 , float4( 0,0,0,0 ) , float4( 0.8602941,0.8602941,0.8602941,0 ) );
+           		float4 temp_cast_8 = (( 1.0 - _BeachFoamStrength )).xxxx;
+           		float4 temp_cast_9 = (0.0).xxxx;
+           		#if defined(_ENABLEBEACHFOAM_ON)
+           		float4 staticSwitch59_g1973 = pow( clampResult44_g1973 , temp_cast_8 );
+           		#elif defined(_ENABLEBEACHFOAM_OFF)
+           		float4 staticSwitch59_g1973 = temp_cast_9;
+           		#else
+           		float4 staticSwitch59_g1973 = pow( clampResult44_g1973 , temp_cast_8 );
+           		#endif
+           		float4 PWSFBeachFoam834 = staticSwitch59_g1973;
+           		float screenDepth2739 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+           		float distanceDepth2739 = saturate( abs( ( screenDepth2739 - LinearEyeDepth( ase_screenPosNorm.z,_ZBufferParams ) ) / ( _ShallowDepth ) ) );
+           		float4 lerpResult2752 = lerp( _ShallowTint , _WaterTint , saturate( (distanceDepth2739*1.0 + _ShallowOffset) ));
+           		float4 lerpResult3015 = lerp( _DepthTint , lerpResult2752 , saturate( (distanceDepth2739*-1.0 + _DepthOffset) ));
+           		float4 temp_cast_10 = (0.0).xxxx;
+           		#ifdef UNITY_PASS_FORWARDADD
+           		float4 staticSwitch2469 = temp_cast_10;
+           		#else
+           		float4 staticSwitch2469 = lerpResult3015;
+           		#endif
+           		float4 ColorTintFinal444 = staticSwitch2469;
+           		float4 temp_cast_11 = (0.0).xxxx;
+           		float2 uv_NormalMap = IN.ase_texcoord2.xy * _NormalMap_ST.xy + _NormalMap_ST.zw;
+           		float3 ase_worldTangent = IN.ase_texcoord4.xyz;
+           		float3 ase_worldNormal = IN.ase_texcoord5.xyz;
+           		float3 ase_worldBitangent = IN.ase_texcoord6.xyz;
+           		float3 tanToWorld0 = float3( ase_worldTangent.x, ase_worldBitangent.x, ase_worldNormal.x );
+           		float3 tanToWorld1 = float3( ase_worldTangent.y, ase_worldBitangent.y, ase_worldNormal.y );
+           		float3 tanToWorld2 = float3( ase_worldTangent.z, ase_worldBitangent.z, ase_worldNormal.z );
+           		float3 tanNormal20_g1968 = UnpackNormalScale( tex2D( _NormalMap, uv_NormalMap ), 1.0f );
+           		float3 worldNormal20_g1968 = normalize( float3(dot(tanToWorld0,tanNormal20_g1968), dot(tanToWorld1,tanNormal20_g1968), dot(tanToWorld2,tanNormal20_g1968)) );
+           		float3 normalizeResult15_g1968 = normalize( worldNormal20_g1968 );
+           		float3 _NormalMapWorld1987 = normalizeResult15_g1968;
+           		float3 temp_cast_13 = (_NormalMapWorld1987.x).xxx;
+           		float dotResult3_g1971 = dot( temp_cast_13 , SafeNormalize(_MainLightPosition.xyz) );
+           		float _PWSFNdotL2044 = dotResult3_g1971;
+           		float3 ase_worldViewDir = ( _WorldSpaceCameraPos.xyz - ase_worldPos );
+           		ase_worldViewDir = normalize(ase_worldViewDir);
+           		float fresnelNdotV3778 = dot( ase_worldNormal, ase_worldViewDir );
+           		float fresnelNode3778 = ( 0.0 + _ReflectionFresnelScale * pow( 1.0 - fresnelNdotV3778, _ReflectionFresnelPower ) );
+           		float4 lerpResult3783 = lerp( float4( 0,0,0,0 ) , tex2D( _ReflectionTex, ( ase_screenPosNorm + ( _PWSFNdotL2044 * _ReflectionWobble ) ).xy ) , ( fresnelNode3778 * _ReflectionIntensity ));
+           		float4 temp_cast_15 = (0.0).xxxx;
+           		#if defined(_ENABLEREFLECTION_ON)
+           		float4 staticSwitch3821 = lerpResult3783;
+           		#elif defined(_ENABLEREFLECTION_OFF)
+           		float4 staticSwitch3821 = temp_cast_11;
+           		#else
+           		float4 staticSwitch3821 = temp_cast_11;
+           		#endif
+           		float4 temp_cast_16 = (0.0).xxxx;
+           		#ifdef UNITY_PASS_FORWARDADD
+           		float4 staticSwitch3787 = temp_cast_16;
+           		#else
+           		float4 staticSwitch3787 = staticSwitch3821;
+           		#endif
+           		float4 Reflection3788 = staticSwitch3787;
+           		float mulTime6_g1968 = _Time.y * _NormalMapTimescale;
+           		float2 temp_cast_17 = (_NormalMapSpeed).xx;
+           		float2 temp_cast_18 = (_NormalMapTiling).xx;
+           		float2 uv01_g1968 = IN.ase_texcoord2.xy * temp_cast_18 + float2( 0,0 );
+           		float2 _Vector1 = float2(2,4);
+           		float cos4_g1968 = cos( _Vector1.x );
+           		float sin4_g1968 = sin( _Vector1.x );
+           		float2 rotator4_g1968 = mul( uv01_g1968 - float2( 0,0 ) , float2x2( cos4_g1968 , -sin4_g1968 , sin4_g1968 , cos4_g1968 )) + float2( 0,0 );
+           		float2 panner7_g1968 = ( mulTime6_g1968 * temp_cast_17 + rotator4_g1968);
+           		float2 temp_cast_19 = (_NormalMapSpeed).xx;
+           		float cos3_g1968 = cos( _Vector1.y );
+           		float sin3_g1968 = sin( _Vector1.y );
+           		float2 rotator3_g1968 = mul( uv01_g1968 - float2( 0,0 ) , float2x2( cos3_g1968 , -sin3_g1968 , sin3_g1968 , cos3_g1968 )) + float2( 0,0 );
+           		float2 panner8_g1968 = ( mulTime6_g1968 * temp_cast_19 + rotator3_g1968);
+           		float2 temp_cast_20 = (_NormalMapSpeed).xx;
+           		float2 panner11_g1968 = ( mulTime6_g1968 * temp_cast_20 + uv01_g1968);
+           		float4 color22_g1968 = IsGammaSpace() ? float4(0,0,0,0.5607843) : float4(0,0,0,0.5607843);
+           		float3 lerpResult32_g1968 = lerp( BlendNormal( BlendNormal( UnpackNormalScale( tex2D( _NormalMap, panner7_g1968 ), _NormalMapStrength ) , UnpackNormalScale( tex2D( _NormalMap, panner8_g1968 ), _NormalMapStrength ) ) , UnpackNormalScale( tex2D( _NormalMap, panner11_g1968 ), _NormalMapStrength ) ) , float3( 0,0,0 ) , color22_g1968.rgb);
+           		float3 normalizeResult25_g1968 = normalize( lerpResult32_g1968 );
+           		float3 _NormalMapAnimated982 = normalizeResult25_g1968;
+           		float Opacity2371 = ( IN.ase_color.a * ( 1.0 - _OpacityOcean ) );
+           		float fresnelNdotV19_g1972 = dot( ase_worldNormal, ase_worldViewDir );
+           		float fresnelNode19_g1972 = ( 0.0 + 1.0 * pow( 1.0 - fresnelNdotV19_g1972, 5.0 ) );
+           		float lerpResult26_g1972 = lerp( 0.0 , _NormalMapAnimated982.x , ( Opacity2371 * 0.0 * temp_output_16_0_g1972 * ( 1.0 - fresnelNode19_g1972 ) * temp_output_8_0_g1972 ));
+           		float4 ase_grabScreenPos = ASE_ComputeGrabScreenPos( screenPos );
+           		float4 ase_grabScreenPosNorm = ase_grabScreenPos / ase_grabScreenPos.w;
+           		float4 temp_output_28_0_g1972 = ( lerpResult26_g1972 + ase_grabScreenPosNorm );
+           		float4 fetchOpaqueVal30_g1972 = float4( SHADERGRAPH_SAMPLE_SCENE_COLOR( temp_output_28_0_g1972.xy ), 1.0 );
+           		float4 temp_cast_24 = (0.0).xxxx;
+           		#ifdef UNITY_PASS_FORWARDADD
+           		float4 staticSwitch31_g1972 = temp_cast_24;
+           		#else
+           		float4 staticSwitch31_g1972 = fetchOpaqueVal30_g1972;
+           		#endif
+           		float4 Grab_screen_color2433 = staticSwitch31_g1972;
+           		float DepthTintAlpha3003 = ( saturate( (distanceDepth2739*-5.0 + 1.0) ) * _OpacityBeach );
+           		#ifdef UNITY_PASS_FORWARDADD
+           		float staticSwitch3180 = 0.0;
+           		#else
+           		float staticSwitch3180 = ( 1.0 - ( ( 1.0 - DepthTintAlpha3003 ) * Opacity2371 ) );
+           		#endif
+           		float4 lerpResult3006 = lerp( ( ( ( PWSFOceanFoam302 + PWSFBeachFoam834 ) + ColorTintFinal444 ) + Reflection3788 ) , Grab_screen_color2433 , staticSwitch3180);
+           		
+				
+		        float3 Albedo = lerpResult3006.rgb;
+				float3 Emission = 0;
+				float Alpha = 1;
+				float AlphaClipThreshold = 0;
+
+         #if _AlphaClip
+        		clip(Alpha - AlphaClipThreshold);
+        #endif
+
+                MetaInput metaInput = (MetaInput)0;
+                metaInput.Albedo = Albedo;
+                metaInput.Emission = Emission;
+                
+                return MetaFragment(metaInput);
+            }
+            ENDHLSL
+        }
+		
+    }
+    
+	
+	
+}
+/*ASEBEGIN
+Version=17300
+1920;146;1664;826;3575.646;5602.688;1.829469;True;True
+Node;AmplifyShaderEditor.CommentaryNode;2525;-5499.566,-5789.413;Inherit;False;2346.933;1077.252;hex code 4E83A9FF;26;444;2469;3015;2467;3169;442;2752;3003;2746;3171;3157;954;345;3168;3170;2548;2999;2743;2744;3000;2745;2739;3002;3001;3193;2325;Color Tint;0,0.3020356,1,1;0;0
+Node;AmplifyShaderEditor.CommentaryNode;3392;-5507.21,-4134.791;Inherit;False;1079.105;251.1047;Comment;3;982;1987;3945;PWSF Water Normal Map Swirling v3.0;0.7372549,0,1,1;0;0
+Node;AmplifyShaderEditor.CommentaryNode;2325;-4162.377,-5048.362;Inherit;False;901.978;311.5114;;5;3172;2549;2371;3159;2870;Opacity;0,0.9529412,0.05987054,1;0;0
+Node;AmplifyShaderEditor.FunctionNode;3945;-5417.597,-4063.96;Inherit;False;PWSF Water Normal Map Swirling v3.0;15;;1968;8bd66db3a2fecb442bb5604a4a41c553;0;0;2;FLOAT3;29;FLOAT3;0
+Node;AmplifyShaderEditor.CommentaryNode;2040;-4324.202,-3162.987;Inherit;False;1121.825;144.6242;Comment;3;2044;3614;3942;PWSF NdotL v3.0;0.9843137,1,0,1;0;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;1987;-4979.753,-3999.952;Float;False;_NormalMapWorld;-1;True;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.RangedFloatNode;2549;-4122.245,-4829.731;Float;False;Property;_OpacityOcean;Opacity Ocean;14;0;Create;True;0;0;False;0;0;0.017;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.GetLocalVarNode;3614;-4289.74,-3105.49;Inherit;False;1987;_NormalMapWorld;1;0;OBJECT;0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.OneMinusNode;3172;-3837.69,-4826.873;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.VertexColorNode;2870;-4084.228,-5004.24;Inherit;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;3159;-3657.012,-4912.387;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.FunctionNode;3942;-4011.715,-3115.688;Inherit;False;PWSF NdotL v3.0;-1;;1971;6f4e02b9e119b5744971c0b68e8eed5b;0;1;7;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;2044;-3589.439,-3110.64;Float;False;_PWSFNdotL;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.CommentaryNode;3396;-4330.904,-4064.333;Inherit;False;1161.378;399.116;;7;2306;2369;2373;2433;2374;2379;3941;PWSF Water Custom Grab Pass v3.0;0,0.9529412,0.05882353,1;0;0
+Node;AmplifyShaderEditor.CommentaryNode;3808;-5488.234,-2952.09;Inherit;False;2390.976;726.7626;Comment;18;3824;3911;3788;3787;3821;3785;3783;3822;3782;3781;3778;3779;3776;3774;3809;3775;3773;3772;Reflection;0.9837489,1,0,1;0;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;2371;-3483.169,-4917.875;Float;False;Opacity;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3193;-5474.215,-5327.39;Inherit;False;Property;_ShallowDepth;Shallow Depth;3;0;Create;True;0;0;False;0;46.47059;55.8;0;100;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;982;-4986.015,-4084.444;Float;False;_NormalMapAnimated;-1;True;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.RangedFloatNode;2745;-5207.785,-4798.557;Float;False;Property;_ShallowOffset;Shallow Offset;4;0;Create;True;0;0;False;0;0.2;0.195;-1;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3773;-5404.179,-2514.022;Float;False;Property;_ReflectionWobble;Reflection Wobble;39;0;Create;True;0;0;False;0;0;0.536;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3002;-5131.296,-5625.646;Float;False;Constant;_Float1;Float 1;8;0;Create;True;0;0;False;0;1;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.GetLocalVarNode;2374;-4253.939,-3895.268;Inherit;False;2371;Opacity;1;0;OBJECT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3001;-5135.437,-5728.77;Float;False;Constant;_Float10;Float 10;8;0;Create;True;0;0;False;0;-5;-5;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.GetLocalVarNode;3772;-5332.172,-2616.861;Inherit;False;2044;_PWSFNdotL;1;0;OBJECT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.DepthFade;2739;-5187.934,-5371.483;Inherit;False;True;True;True;2;1;FLOAT3;0,0,0;False;0;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.GetLocalVarNode;2379;-4308.247,-3984.609;Inherit;False;982;_NormalMapAnimated;1;0;OBJECT;0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.RangedFloatNode;2744;-5143.938,-4891.588;Float;False;Constant;_WaveColorScale;Wave Color Scale;3;0;Create;True;0;0;False;0;1;1;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.ScaleAndOffsetNode;2743;-4896.888,-4882.547;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;1;False;2;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3774;-5148.685,-2421.93;Float;False;Property;_ReflectionFresnelScale;Reflection Fresnel Scale;40;0;Create;True;0;0;False;0;1;0.352;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.ScreenPosInputsNode;3809;-5305.048,-2813.545;Float;False;0;False;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.FunctionNode;3941;-4038.719,-3968.432;Inherit;False;PWSF Water Custom Grab Pass v3.0;-1;;1972;84db7f407c2735b4986e5ebfc2f85480;0;2;45;FLOAT;0;False;46;FLOAT;0;False;8;FLOAT;0;COLOR;38;FLOAT;39;FLOAT;40;FLOAT;41;FLOAT;42;FLOAT;43;FLOAT;44
+Node;AmplifyShaderEditor.ScaleAndOffsetNode;3000;-4930.401,-5728.787;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;1;False;2;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;3776;-5116.59,-2608.231;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3170;-4765.805,-5496.417;Float;False;Constant;_DepthScale;Depth Scale;3;0;Create;True;0;0;False;0;-1;1;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3775;-5137.903,-2340.076;Float;False;Property;_ReflectionFresnelPower;Reflection Fresnel Power;41;0;Create;True;0;0;False;0;0;0.78;0;10;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3168;-4864.482,-5417.216;Float;False;Property;_DepthOffset;Depth Offset;6;0;Create;True;0;0;False;0;0.5;0.495;0;2;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;2369;-3504.438,-3849.519;Float;False;Screen_depth_behind;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.CommentaryNode;3387;-5503.359,-4668.273;Inherit;False;1102.011;254.1616;Comment;5;834;2435;2400;3870;3943;PWSF Water Foam Beach v3.0;1,0.654902,0.3019608,1;0;0
+Node;AmplifyShaderEditor.ScaleAndOffsetNode;3171;-4511.444,-5373.934;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;1;False;2;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;2548;-4777.718,-5608.749;Float;False;Property;_OpacityBeach;Opacity Beach;13;0;Create;True;0;0;False;1;Header (OPACITY);0;0.287;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SaturateNode;2999;-4707.271,-5731.357;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;2306;-3513.262,-3764.807;Float;False;Screen_depth;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;3824;-4966.868,-2703.606;Inherit;False;2;2;0;FLOAT4;0,0,0,0;False;1;FLOAT;0;False;1;FLOAT4;0
+Node;AmplifyShaderEditor.FresnelNode;3778;-4777.131,-2518.093;Inherit;False;Standard;WorldNormal;ViewDir;False;5;0;FLOAT3;0,0,1;False;4;FLOAT3;0,0,0;False;1;FLOAT;0;False;2;FLOAT;1;False;3;FLOAT;5;False;1;FLOAT;0
+Node;AmplifyShaderEditor.ColorNode;345;-4881.408,-5262.869;Float;False;Property;_ShallowTint;Shallow Tint;2;0;Create;True;0;0;False;0;0.003921569,0.7529412,0.7137255,1;0.2463948,0.4562678,0.462264,1;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.RangedFloatNode;3779;-4793.684,-2341.986;Float;False;Property;_ReflectionIntensity;Reflection Intensity;38;0;Create;True;0;0;False;0;0.7357025;0.214;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SaturateNode;2746;-4637.637,-4886.516;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.TexturePropertyNode;3911;-4970.158,-2901.642;Inherit;True;Global;_ReflectionTex;_ReflectionTex;27;0;Create;True;0;0;False;0;None;None;False;white;Auto;Texture2D;-1;0;1;SAMPLER2D;0
+Node;AmplifyShaderEditor.ColorNode;954;-4879.881,-5079.939;Float;False;Property;_WaterTint;Water Tint;1;0;Create;True;0;0;False;1;Header (COLOR TINT);0.08627451,0.2941177,0.3490196,1;0.1882347,0.6287979,0.8196079,1;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.RegisterLocalVarNode;2373;-3513.892,-3927.02;Float;False;Screen_closeness;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.CommentaryNode;1743;-5502.708,-4370.462;Inherit;False;1107.159;194.9096;Comment;4;302;1779;3869;3944;PWSF Water Foam Ocean v3.0;1,0.654902,0.3019608,1;0;0
+Node;AmplifyShaderEditor.LerpOp;2752;-4443.22,-5102.051;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.GetLocalVarNode;2435;-5483.526,-4596.131;Inherit;False;2373;Screen_closeness;1;0;OBJECT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SaturateNode;3169;-4289.019,-5381.794;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;3782;-4516.829,-2524.979;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.ColorNode;442;-4292.992,-5564.309;Float;False;Property;_DepthTint;Depth Tint;5;0;Create;True;0;0;False;0;0.08627451,0.2941177,0.3490196,1;0.1800901,0.3868916,0.518,1;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;3157;-4481.139,-5734.498;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.GetLocalVarNode;1779;-5490.424,-4312;Inherit;False;2369;Screen_depth_behind;1;0;OBJECT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SamplerNode;3781;-4707.472,-2740.521;Inherit;True;Property;;;36;0;Create;True;0;0;False;0;-1;None;None;True;0;False;gray;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.GetLocalVarNode;2400;-5468.956,-4504.525;Inherit;False;2306;Screen_depth;1;0;OBJECT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;2467;-3888.534,-5187.184;Float;False;Constant;_Float11;Float 11;31;0;Create;True;0;0;False;0;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.LerpOp;3015;-3991.538,-5428.373;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.FunctionNode;3943;-5205.442,-4587.129;Inherit;False;PWSF Water Foam Beach v3.0;50;;1973;4ddef9c0ccfa2604e9a2a38dcaf12896;0;3;51;FLOAT;0;False;52;FLOAT;0;False;53;FLOAT;0;False;2;COLOR;0;FLOAT;60
+Node;AmplifyShaderEditor.FunctionNode;3944;-5206.646,-4302.642;Inherit;False;PWSF Water Foam Ocean v3.0;42;;1974;3bf6834ee5afdac4b9545ba41b4dcdad;0;3;30;FLOAT;0;False;44;FLOAT;0;False;36;FLOAT;0;False;2;COLOR;0;FLOAT;50
+Node;AmplifyShaderEditor.RangedFloatNode;3822;-4238.013,-2875.529;Inherit;False;Constant;_Float0;Float 0;7;0;Create;True;0;0;False;0;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;3003;-4243.042,-5739.639;Float;False;DepthTintAlpha;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.LerpOp;3783;-4361.849,-2757.721;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RangedFloatNode;3785;-3906.61,-2564.356;Float;False;Constant;_Float2;Float 2;31;0;Create;True;0;0;False;0;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.StaticSwitch;3821;-4040.936,-2761.771;Float;False;Property;_EnableReflection;Enable Reflection;37;0;Create;True;0;0;False;1;Header (REFLECTION);1;1;0;True;;KeywordEnum;2;on;off;Create;True;9;1;COLOR;0,0,0,0;False;0;COLOR;0,0,0,0;False;2;COLOR;0,0,0,0;False;3;COLOR;0,0,0,0;False;4;COLOR;0,0,0,0;False;5;COLOR;0,0,0,0;False;6;COLOR;0,0,0,0;False;7;COLOR;0,0,0,0;False;8;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;302;-4727.311,-4330.375;Float;False;PWSFOceanFoam;-1;True;1;0;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.StaticSwitch;2469;-3719.125,-5427.77;Float;False;Property;_Keyword1;Keyword 1;31;0;Create;True;0;0;True;0;0;0;0;False;UNITY_PASS_FORWARDADD;Toggle;2;Key0;Key1;Fetch;False;9;1;COLOR;0,0,0,0;False;0;COLOR;0,0,0,0;False;2;COLOR;0,0,0,0;False;3;COLOR;0,0,0,0;False;4;COLOR;0,0,0,0;False;5;COLOR;0,0,0,0;False;6;COLOR;0,0,0,0;False;7;COLOR;0,0,0,0;False;8;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;834;-4697.318,-4618.486;Float;False;PWSFBeachFoam;-1;True;1;0;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.GetLocalVarNode;3005;-2755.076,-4979.241;Inherit;False;3003;DepthTintAlpha;1;0;OBJECT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.OneMinusNode;3166;-2526.863,-4973.869;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.CommentaryNode;1387;-5553.954,-3831.753;Inherit;False;1182.586;833.1803;https://catlikecoding.com/unity/tutorials/flow/waves/;13;3961;1384;1382;3751;3753;3524;3919;3754;3921;3918;3285;3752;3920;PWSF Water Gerstner Waves v3.0;0.7372549,0,1,1;0;0
+Node;AmplifyShaderEditor.GetLocalVarNode;3164;-2562.91,-4858.606;Inherit;False;2371;Opacity;1;0;OBJECT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.GetLocalVarNode;303;-3000.064,-5455.407;Inherit;False;302;PWSFOceanFoam;1;0;OBJECT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.GetLocalVarNode;835;-2963.877,-5292.962;Inherit;False;834;PWSFBeachFoam;1;0;OBJECT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.StaticSwitch;3787;-3749.357,-2768.127;Float;False;Property;_Keyword3;Keyword 3;31;0;Create;True;0;0;True;0;0;0;0;False;UNITY_PASS_FORWARDADD;Toggle;2;Key0;Key1;Fetch;False;9;1;COLOR;0,0,0,0;False;0;COLOR;0,0,0,0;False;2;COLOR;0,0,0,0;False;3;COLOR;0,0,0,0;False;4;COLOR;0,0,0,0;False;5;COLOR;0,0,0,0;False;6;COLOR;0,0,0,0;False;7;COLOR;0,0,0,0;False;8;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;444;-3379.952,-5428.463;Float;False;ColorTintFinal;-1;True;1;0;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;3788;-3453.37,-2770.115;Float;False;Reflection;-1;True;1;0;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RangedFloatNode;3918;-5523.276,-3561.621;Float;False;Property;_BeachRange;Beach Range ;34;0;Create;True;0;0;False;0;5;15.1;0;50;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3285;-5521.374,-3790.048;Float;False;Property;_WaveSpeed;Wave Speed;28;0;Create;True;0;0;True;0;1.1;1.1;0;5;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3920;-5500.431,-3249.975;Float;False;Property;_BeachOffset;Beach Offset ;36;0;Create;True;0;0;False;0;3.3;7.2;0;50;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3751;-5517.553,-3485.653;Float;False;Property;_OceanPower;Ocean Power ;31;0;Create;True;0;0;False;0;1;0.333;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3754;-5521.424,-3637.474;Float;False;Property;_OceanRange;Ocean Range ;30;0;Create;True;0;0;False;0;5;23.1;0;50;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3753;-5509.886,-3175.826;Inherit;False;Property;_OceanIntensity;Ocean Intensity ;29;0;Create;True;0;0;False;1;Header (Ocean Wave Controls);0.8;0.947;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3919;-5505.776,-3406.079;Float;False;Property;_BeachPower;Beach Power ;35;0;Create;True;0;0;False;0;1;0.603;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3524;-5517.183,-3713.998;Half;False;Global;PWSF_GlobalWindIntensityWater;PWSF_GlobalWindIntensityWater;27;0;Create;True;0;0;False;0;1;0;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;3165;-2365.887,-4973.854;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3921;-5506.845,-3092.803;Inherit;False;Property;_BeachIntensity;Beach Intensity ;33;0;Create;True;0;0;False;1;Header (Beach Wave Controls);0.8;0.528;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.GetLocalVarNode;3079;-2766.558,-5200.462;Inherit;False;444;ColorTintFinal;1;0;OBJECT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RangedFloatNode;3752;-5503.33,-3327.405;Float;False;Property;_OceanOffset;Ocean Offset ;32;0;Create;True;0;0;False;0;3.3;1.3;0;50;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;3560;-2710.563,-5336.66;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RangedFloatNode;3181;-2217.543,-4856.289;Float;False;Constant;_Float8;Float 8;31;0;Create;True;0;0;False;0;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;693;-2533.685,-5249.915;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.OneMinusNode;3167;-2228.983,-4973.177;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.GetLocalVarNode;3806;-2388.284,-5147.174;Inherit;False;3788;Reflection;1;0;OBJECT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.FunctionNode;3961;-5191.557,-3739.753;Inherit;False;PWSF Water Gerstner Waves v3.0;21;;1980;585a30073f35dcf49a4c71e2afebc7b0;2,88,2,73,1;10;26;FLOAT;0;False;42;FLOAT;0;False;60;FLOAT;32;False;76;FLOAT;32;False;61;FLOAT;1;False;89;FLOAT;1;False;63;FLOAT;0;False;81;FLOAT;0;False;67;FLOAT;1;False;83;FLOAT;1;False;3;FLOAT3;23;FLOAT;24;FLOAT3;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;2433;-3512.637,-4010.315;Float;False;Grab_screen_color;-1;True;1;0;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.GetLocalVarNode;3004;-2060.196,-5129.995;Inherit;False;2433;Grab_screen_color;1;0;OBJECT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.CommentaryNode;3359;-4324.964,-4543.086;Inherit;False;1332.293;330.1035;http://graphics.pixar.com/library/BumpRoughness/paper.pdf - equation (3);4;3892;3538;2432;3896;PWSF Smoothness Geometric Specular v3.0;0,0.4024811,1,1;0;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;1382;-4703.089,-3617.743;Float;False;PWSFGerstnerLocalVertOffset;-1;True;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.StaticSwitch;3180;-2062.182,-4977.874;Float;False;Property;_Keyword6;Keyword 6;31;0;Create;True;0;0;True;0;0;0;0;False;UNITY_PASS_FORWARDADD;Toggle;2;Key0;Key1;Fetch;False;9;1;FLOAT;0;False;0;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT;0;False;7;FLOAT;0;False;8;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;1384;-4708.972,-3716.069;Float;False;PWSFGerstnerLocalVertNormal;-1;True;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;3823;-2196.638,-5250.209;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.BlendNormalsNode;2732;-1661.942,-5361.28;Inherit;False;0;3;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.IntNode;3538;-4088.491,-4487.983;Float;False;Property;_SmoothnessMode;Smoothness Mode;8;1;[Enum];Create;True;3;Smoothness Cull Off;0;Smoothness Cull Front;1;Smoothness Cull Back;2;0;False;1;Header (SMOOTHNESS);0;0;0;1;INT;0
+Node;AmplifyShaderEditor.GetLocalVarNode;727;-2016.682,-5463.65;Inherit;False;982;_NormalMapAnimated;1;0;OBJECT;0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.IntNode;3958;-1145.722,-5340.246;Float;False;Property;_CullMode1;Cull Mode;0;1;[Enum];Create;True;0;1;UnityEngine.Rendering.CullMode;True;1;Header (RENDERING OPTIONS);2;0;0;1;INT;0
+Node;AmplifyShaderEditor.GetLocalVarNode;1261;-1528.25,-4956.387;Inherit;False;1382;PWSFGerstnerLocalVertOffset;1;0;OBJECT;0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.GetLocalVarNode;2731;-2041.849,-5358.258;Inherit;False;1384;PWSFGerstnerLocalVertNormal;1;0;OBJECT;0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.LerpOp;3006;-1768.768,-5250.782;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;3870;-4704.241,-4532.67;Inherit;False;PWSFBeachFoamAlpha;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.GetLocalVarNode;1388;-1527.301,-4864.33;Inherit;False;1384;PWSFGerstnerLocalVertNormal;1;0;OBJECT;0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.RangedFloatNode;3962;-1569.863,-5128.755;Float;False;Property;_Metallic1;Metallic;7;0;Create;True;0;0;False;0;0.25;0.082;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SaturateNode;3561;-1534.475,-5459.135;Inherit;False;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;2432;-3413.94,-4470.025;Float;False;PWSFSmoothnessGeometricSpecular;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.FunctionNode;3892;-4275.265,-4401.059;Inherit;False;PWSF Smoothness Geometric Specular v3.0;9;;1982;a8725258ef2c7e74eb99f69c5574a053;0;1;25;FLOAT;0;False;3;FLOAT;17;FLOAT;20;FLOAT;21
+Node;AmplifyShaderEditor.GetLocalVarNode;2143;-1559.991,-5037.806;Inherit;False;2432;PWSFSmoothnessGeometricSpecular;1;0;OBJECT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.FunctionNode;3896;-3694.688,-4446.435;Inherit;False;PWSF Enum Switch;-1;;1981;3e9cc2aefa7c15f46bb8ad0edeb00b30;1,34,1;9;134;FLOAT;0;False;146;FLOAT;0;False;133;FLOAT;0;False;144;FLOAT;0;False;143;FLOAT;0;False;155;FLOAT;0;False;156;FLOAT;0;False;150;FLOAT;0;False;158;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;3869;-4729.9,-4249.287;Inherit;False;PWSFOceanFoamAlpha;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3954;-1158.296,-5251.434;Float;False;True;-1;2;;0;2;PWS/Water/Ocean Pro LW 2019_01 5.7.2 v3.1;1976390536c6c564abb90fe41f6ee334;True;Base;0;0;Base;11;False;False;False;True;0;True;3958;False;False;False;False;False;True;3;RenderPipeline=LightweightPipeline;RenderType=Opaque=RenderType;Queue=Transparent=Queue=0;True;3;0;True;1;1;False;-1;0;False;-1;0;1;False;-1;0;False;-1;False;False;False;True;True;True;True;True;0;False;-1;True;False;255;False;-1;255;False;-1;255;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;1;False;-1;True;3;False;-1;True;True;0;False;-1;0;False;-1;True;1;LightMode=LightweightForward;False;0;;0;0;Standard;4;Vertex Position,InvertActionOnDeselection;1;Receive Shadows;1;LOD CrossFade;1;Built-in Fog;1;1;_FinalColorxAlpha;0;4;True;True;True;True;False;;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3955;-1158.296,-5251.434;Float;False;False;-1;2;ASEMaterialInspector;0;1;New Amplify Shader;1976390536c6c564abb90fe41f6ee334;True;ShadowCaster;0;1;ShadowCaster;0;False;False;False;True;0;False;-1;False;False;False;False;False;True;3;RenderPipeline=LightweightPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;2;0;False;False;False;False;False;False;True;1;False;-1;True;3;False;-1;False;True;1;LightMode=ShadowCaster;False;0;Hidden/InternalErrorShader;0;0;Standard;0;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3957;-1158.296,-5251.434;Float;False;False;-1;2;ASEMaterialInspector;0;1;New Amplify Shader;1976390536c6c564abb90fe41f6ee334;True;Meta;0;3;Meta;0;False;False;False;True;0;False;-1;False;False;False;False;False;True;3;RenderPipeline=LightweightPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;2;0;False;False;False;True;2;False;-1;False;False;False;False;False;True;1;LightMode=Meta;False;0;Hidden/InternalErrorShader;0;0;Standard;0;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3956;-1158.296,-5251.434;Float;False;False;-1;2;ASEMaterialInspector;0;1;New Amplify Shader;1976390536c6c564abb90fe41f6ee334;True;DepthOnly;0;2;DepthOnly;0;False;False;False;True;0;False;-1;False;False;False;False;False;True;3;RenderPipeline=LightweightPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;2;0;False;False;False;False;True;False;False;False;False;0;False;-1;False;True;1;False;-1;False;False;True;1;LightMode=DepthOnly;False;0;Hidden/InternalErrorShader;0;0;Standard;0;0
+WireConnection;1987;0;3945;0
+WireConnection;3172;0;2549;0
+WireConnection;3159;0;2870;4
+WireConnection;3159;1;3172;0
+WireConnection;3942;7;3614;0
+WireConnection;2044;0;3942;0
+WireConnection;2371;0;3159;0
+WireConnection;982;0;3945;29
+WireConnection;2739;0;3193;0
+WireConnection;2743;0;2739;0
+WireConnection;2743;1;2744;0
+WireConnection;2743;2;2745;0
+WireConnection;3941;45;2379;0
+WireConnection;3941;46;2374;0
+WireConnection;3000;0;2739;0
+WireConnection;3000;1;3001;0
+WireConnection;3000;2;3002;0
+WireConnection;3776;0;3772;0
+WireConnection;3776;1;3773;0
+WireConnection;2369;0;3941;40
+WireConnection;3171;0;2739;0
+WireConnection;3171;1;3170;0
+WireConnection;3171;2;3168;0
+WireConnection;2999;0;3000;0
+WireConnection;2306;0;3941;43
+WireConnection;3824;0;3809;0
+WireConnection;3824;1;3776;0
+WireConnection;3778;2;3774;0
+WireConnection;3778;3;3775;0
+WireConnection;2746;0;2743;0
+WireConnection;2373;0;3941;39
+WireConnection;2752;0;345;0
+WireConnection;2752;1;954;0
+WireConnection;2752;2;2746;0
+WireConnection;3169;0;3171;0
+WireConnection;3782;0;3778;0
+WireConnection;3782;1;3779;0
+WireConnection;3157;0;2999;0
+WireConnection;3157;1;2548;0
+WireConnection;3781;0;3911;0
+WireConnection;3781;1;3824;0
+WireConnection;3015;0;442;0
+WireConnection;3015;1;2752;0
+WireConnection;3015;2;3169;0
+WireConnection;3943;51;2435;0
+WireConnection;3943;52;2400;0
+WireConnection;3943;53;1779;0
+WireConnection;3944;30;1779;0
+WireConnection;3944;44;2435;0
+WireConnection;3944;36;2400;0
+WireConnection;3003;0;3157;0
+WireConnection;3783;1;3781;0
+WireConnection;3783;2;3782;0
+WireConnection;3821;1;3783;0
+WireConnection;3821;0;3822;0
+WireConnection;302;0;3944;0
+WireConnection;2469;1;3015;0
+WireConnection;2469;0;2467;0
+WireConnection;834;0;3943;0
+WireConnection;3166;0;3005;0
+WireConnection;3787;1;3821;0
+WireConnection;3787;0;3785;0
+WireConnection;444;0;2469;0
+WireConnection;3788;0;3787;0
+WireConnection;3165;0;3166;0
+WireConnection;3165;1;3164;0
+WireConnection;3560;0;303;0
+WireConnection;3560;1;835;0
+WireConnection;693;0;3560;0
+WireConnection;693;1;3079;0
+WireConnection;3167;0;3165;0
+WireConnection;3961;26;3285;0
+WireConnection;3961;42;3524;0
+WireConnection;3961;60;3754;0
+WireConnection;3961;76;3918;0
+WireConnection;3961;61;3751;0
+WireConnection;3961;89;3919;0
+WireConnection;3961;63;3752;0
+WireConnection;3961;81;3920;0
+WireConnection;3961;67;3753;0
+WireConnection;3961;83;3921;0
+WireConnection;2433;0;3941;38
+WireConnection;1382;0;3961;0
+WireConnection;3180;1;3167;0
+WireConnection;3180;0;3181;0
+WireConnection;1384;0;3961;23
+WireConnection;3823;0;693;0
+WireConnection;3823;1;3806;0
+WireConnection;2732;0;727;0
+WireConnection;2732;1;2731;0
+WireConnection;3006;0;3823;0
+WireConnection;3006;1;3004;0
+WireConnection;3006;2;3180;0
+WireConnection;3870;0;3943;60
+WireConnection;3561;0;727;0
+WireConnection;2432;0;3896;0
+WireConnection;3896;134;3538;0
+WireConnection;3896;146;3892;17
+WireConnection;3896;133;3892;20
+WireConnection;3896;144;3892;21
+WireConnection;3869;0;3944;50
+WireConnection;3954;0;3006;0
+WireConnection;3954;1;3561;0
+WireConnection;3954;4;2143;0
+WireConnection;3954;8;1261;0
+WireConnection;3954;10;1388;0
+ASEEND*/
+//CHKSM=777E06250D6C82351B0A92BB0935FD4AFD0CBDAA

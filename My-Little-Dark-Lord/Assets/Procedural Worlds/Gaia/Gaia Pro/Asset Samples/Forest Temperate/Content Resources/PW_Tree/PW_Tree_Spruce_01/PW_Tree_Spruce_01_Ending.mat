@@ -1,0 +1,184 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PW_Tree_Spruce_01_Ending
+  m_Shader: {fileID: 4800000, guid: 63c6cfb0daf9fdf4cb11cf01b47ba711, type: 3}
+  m_ShaderKeywords: _ENABLECOLORMASK_ON _NORMALMAP
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AmbientOcclusionTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: decc1ae096ab4e343925625443a19b29, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CoverNormalTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CoverTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: e65731acc469f304c857ff8932ec3812, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTexture:
+        m_Texture: {fileID: 2800000, guid: 4dd4fcb708478ad44b7c6f924c816705, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 2800000, guid: d740e344e4845764085e3c394d8a350e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RoughnessTexture:
+        m_Texture: {fileID: 2800000, guid: f397dc0a7bb572c4c881843d7ad41b6c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SurfaceNormalTexture:
+        m_Texture: {fileID: 2800000, guid: 7846e5395617468478c51986293d0ba8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SurfaceTexture:
+        m_Texture: {fileID: 2800000, guid: 7b04138059bd00148a25ceb5ca4c5e2c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlbedoDetailDistance: 4
+    - _AlbedoDetailIntensity: 0.068
+    - _AlbedoDetailScale: 0
+    - _AlphaCutoffBias: 0.49
+    - _AmbientOcclusion: 1
+    - _BumpScale: 1
+    - _ColorMaskAutumnShift: 0
+    - _ColorMaskFuzziness: 1.62
+    - _ColorMaskRange: 0.392
+    - _CoverBias: 0
+    - _CoverIntensity: 2
+    - _CoverMapTilling: 1
+    - _CoverNormalStrength: 1
+    - _CrossfadeDistance: 64
+    - _CrossfadeDistanceExponent: 15.74425
+    - _CrossfadeMode: 0
+    - _CrossfadeScale: 0.8
+    - _CullMode: 2
+    - _Cutoff: 0.5
+    - _DebugMode: 0
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EnableColorMask: 1
+    - _EnableCoverMap: 0
+    - _EnableDebug: 0
+    - _EnableSquareMask: 0
+    - _EnableSurfaceMap: 0
+    - _EnableWind: 0
+    - _EnableWindDistance: 0
+    - _EnableWindVegetation: 0
+    - _EnableWindVerticalMask: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0
+    - _GlossyReflections: 1
+    - _MaskClipValue: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _NormalDetailStrength: 0.25
+    - _NormalStrength: 1
+    - _OcclusionStrength: 0.746
+    - _PWSFGlobalControllerSnow1: 0
+    - _PWSFGlobalControllerWind: 0
+    - _Parallax: 0.02
+    - _RenderMode: 0
+    - _SSSDistortion: 1
+    - _SSSIntensity: 1
+    - _SSSMode: 0
+    - _SSSPower: 1
+    - _Smoothness: 0.5
+    - _Smoothness1: 1
+    - _SmoothnessMode: 0
+    - _SmoothnessTextureChannel: 0
+    - _SmoothnessThreshold: 0
+    - _SmoothnessThreshold1: 0
+    - _SmoothnessVariance: 0.5
+    - _SmoothnessVariance1: 0.5
+    - _SpecularHighlights: 1
+    - _SquareMaskInvert: 0
+    - _SrcBlend: 1
+    - _SurfaceBias: -0.175
+    - _SurfaceBlendStrength: 0
+    - _SurfaceDistanceLength: 0.75
+    - _SurfaceMapTilling: 1
+    - _SurfaceNormalStrength: 1
+    - _SurfaceSaturation: 0.5
+    - _SurfaceScatterScale: 1.5
+    - _UVSec: 0
+    - _WindBlendRange: 6.6
+    - _WindBoxFalloff: 0.05
+    - _WindDirection: 0.062
+    - _WindDistanceOffset: 0
+    - _WindDistanceRange: 8.1
+    - _WindFrequency: 2.49
+    - _WindFrequencyDetail: 2.3
+    - _WindIntensity: 0.0094
+    - _WindMagnitude: 0.216
+    - _WindMagnitudeDetail: 0.314
+    - _WindPulseFrequency: 8
+    - _WindPulseFrequencyDetail: 0.5
+    - _WindPulseMagnitude: 1
+    - _WindPulseMagnitudeDetail: 1
+    - _WindVerticalMaskIntensity: 0.004
+    - _WindVerticalMaskOffset: -0.682
+    - _ZWrite: 1
+    - __dirty: 1
+    m_Colors:
+    - _Color: {r: 0.6792453, g: 0.6440014, b: 0.6440014, a: 1}
+    - _ColorMaskTint: {r: 1, g: 1, b: 1, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SSSColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SquareMaskTopXRightYBottomZLeftW: {r: 1, g: 1, b: 0, a: 0}
+    - _SurfaceTint: {r: 1, g: 1, b: 1, a: 0}
+    - _WindBoxPosition: {r: 0, g: 0, b: 0, a: 0}
+    - _WindBoxSize: {r: 0, g: 0, b: 0, a: 0}
