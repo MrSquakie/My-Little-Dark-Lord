@@ -1181,7 +1181,7 @@ GameObject:
   - component: {fileID: 8439520543283413848}
   - component: {fileID: 8439520543283413850}
   - component: {fileID: 8439520543283413849}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: hitBox
   m_TagString: Ignore Ragdoll
   m_Icon: {fileID: 0}
@@ -1306,7 +1306,7 @@ GameObject:
   - component: {fileID: 8439520543389827782}
   - component: {fileID: 8439520543389827776}
   - component: {fileID: 8439520543389827783}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: hitBox
   m_TagString: Ignore Ragdoll
   m_Icon: {fileID: 0}
@@ -1370,7 +1370,7 @@ GameObject:
   - component: {fileID: 8439520543420965785}
   - component: {fileID: 8439520543420965787}
   - component: {fileID: 8439520543420965786}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: hitBox
   m_TagString: Ignore Ragdoll
   m_Icon: {fileID: 0}
@@ -1637,7 +1637,7 @@ GameObject:
   - component: {fileID: 8439520543815306758}
   - component: {fileID: 8439520543815306752}
   - component: {fileID: 8439520543815306759}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: hitBox
   m_TagString: Ignore Ragdoll
   m_Icon: {fileID: 0}
@@ -2190,7 +2190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 5
+  selectedToolbar: 4
   _isDead: 0
   _currentHealth: 0
   fillHealthOnStart: 1
