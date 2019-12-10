@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -23,14 +24,22 @@ public class DialogueManager : MonoBehaviour
         animator.SetBool("IsOpen", true);
         nameText.text = dialogue.name;
 
-        sentences.Clear();
-
-        foreach (string sentence in dialogue.sentences)
+        try
         {
-            sentences.Enqueue(sentence);
-        }
+            sentences.Clear();
 
-        DisplayNextSentence();
+            foreach (string sentence in dialogue.sentences)
+            {
+                sentences.Enqueue(sentence);
+            }
+
+            DisplayNextSentence();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Empty sentences.");
+        }
+       
     }
 
     public void DisplayNextSentence()
@@ -62,4 +71,6 @@ public class DialogueManager : MonoBehaviour
 
         Debug.Log("End of conversation.");
     }
+
+
 }
