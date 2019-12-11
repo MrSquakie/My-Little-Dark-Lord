@@ -116,7 +116,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _MotionAmplitude: 0
-    - _MotionAmplitude2: 0.04
+    - _MotionAmplitude2: 0
     - _MotionNoise: 1
     - _MotionScale: 0
     - _MotionScale2: 1

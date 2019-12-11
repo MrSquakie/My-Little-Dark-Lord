@@ -10,4 +10,13 @@ public class DialogueTrigger : MonoBehaviour
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
+
+    public void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.GetComponent<LockCharacterControl>().Lock();
+            TriggerDialogue();
+        }
+    }
 }

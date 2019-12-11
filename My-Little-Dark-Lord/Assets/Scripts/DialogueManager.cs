@@ -69,6 +69,8 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetBool("IsOpen", false);
 
+        GameObject.FindGameObjectWithTag("Player").GetComponent<LockCharacterControl>().unLock();
+
         Debug.Log("End of conversation.");
     }
 
